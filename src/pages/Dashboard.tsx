@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './Dashboard.module.css';
 
 const Dashboard: React.FC = () => {
-  const { state, setShuffleEnabled } = useQuizContext();
+  const { state, setShuffleEnabled, resetExclusions } = useQuizContext();
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -66,17 +66,41 @@ const Dashboard: React.FC = () => {
   };
 
   const pageTitle = getSafeTitle(selectedSubject);
+  const isKirbyTheme = selectedSubject === 'koreanGrammer';
+
+  // Pool of all Kirby assets for randomization
+  const kirbyHeroPool = [
+    "/assets/kirby_hero.png",
+    "/assets/kirby_classic.png",
+    "/assets/kirby_flat.jpg",
+    "/assets/kirby_inhale.jpg",
+    "/assets/kirby_eat.jpg",
+    "/assets/kirby_agree.png",
+    "/assets/kirby_yep.png",
+    "/assets/kirby_car.png",
+    "/assets/kirby_round.png",
+    "/assets/kirby_knife.png",
+    "/assets/waddle_dee_jump.png"
+  ];
+
+  const randomKirbyHero = React.useMemo(() => {
+    return kirbyHeroPool[Math.floor(Math.random() * kirbyHeroPool.length)];
+  }, [isKirbyTheme]);
 
   return (
     <div className="fade-in">
       <div className={styles.heroSection}>
         <div className={styles.heroContent}>
-          <div className={styles.badge}>GyoDong과 함께 준비해요!</div>
+          <div className={styles.badge}>
+            {isKirbyTheme ? "💖 Kirby's Dream Land" : "🦖 Hangyo's Learning Lab"}
+          </div>
           <h1 className={styles.title}>{pageTitle}</h1>
           <p className={styles.subtitle}>
-            {selectedSubject 
-              ? `${selectedSubject} 과목도 한교동이랑 같이하면 문제 없어요!`
-              : "한교동과 함께 모든 과목을 완벽하게 마스터해봐요!"}
+            {isKirbyTheme 
+              ? "커비와 함께 꿈의 샘에서 즐겁게 한글 문법을 배워보아요! 뾰로롱~✨"
+              : (selectedSubject === 'cloud'
+                ? "구름 위를 걷는 듯 가벼운 마음으로 클라우드 컴퓨팅을 마스터해볼까요? ☁️"
+                : "한교동과 함께라면 어떤 과목이든 문제없어요! 지금 바로 시작하세요!")}
           </p>
           <div className={styles.heroActions}>
             <button className="btn-primary" onClick={() => navigate(`/study?${selectedSubject ? `subject=${selectedSubject}&` : ''}random=${isRandom}`)}>
@@ -86,6 +110,11 @@ const Dashboard: React.FC = () => {
               실전 테스트
             </button>
             <button className={`${styles.btnSpecial}`} onClick={() => navigate(`/exam?${selectedSubject ? `subject=${selectedSubject}&` : ''}random=true&limit=20`)}>
+              {isKirbyTheme ? (
+                <img src="/assets/kirby_car.png" alt="car" style={{ width: '24px', marginRight: '8px', verticalAlign: 'middle' }} />
+              ) : (
+                <span style={{ marginRight: '8px' }}>🚀</span>
+              )}
               20문제 벼락치기
             </button>
             <label className={styles.shuffleToggle}>
@@ -96,9 +125,36 @@ const Dashboard: React.FC = () => {
               />
               <span className={styles.shuffleText}>랜덤 섞기</span>
             </label>
+            {state.excludedQuestionIds.length > 0 && (
+              <button 
+                className={styles.resetExclusionsBtn} 
+                onClick={() => {
+                  if (window.confirm(`${state.excludedQuestionIds.length}개의 제외된 문제를 다시 포함하시겠습니까?`)) {
+                    resetExclusions();
+                  }
+                }}
+                style={{
+                  background: 'rgba(59, 130, 246, 0.1)',
+                  color: 'var(--primary-color)',
+                  border: '1px solid rgba(59, 130, 246, 0.2)',
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  fontSize: '13px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  marginLeft: '10px'
+                }}
+              >
+                제외 설정 초기화 ({state.excludedQuestionIds.length})
+              </button>
+            )}
           </div>
         </div>
-        <img src={heroEmoji} alt="hero" className={styles.heroCharacter} />
+        <img 
+          src={isKirbyTheme ? randomKirbyHero : heroEmoji} 
+          alt="hero" 
+          className={styles.heroCharacter} 
+        />
       </div>
 
       <div className={styles.statsGrid}>
@@ -107,26 +163,29 @@ const Dashboard: React.FC = () => {
             <span className={styles.statNumber}>{totalQuestions}</span>
             <span className={styles.statLabel}>전체 문제 수</span>
           </div>
-          <img src={statEmoji1} alt="stat" />
+          <img src={isKirbyTheme ? "/assets/kirby_inhale.jpg" : statEmoji1} alt="stat" />
         </div>
         <div className={styles.statCard}>
           <div className={styles.statInfo}>
             <span className={styles.statNumber}>{incorrectCount}</span>
             <span className={styles.statLabel}>오답 노트 개수</span>
           </div>
-          <img src={statEmoji2} alt="stat" />
+          <img src={isKirbyTheme ? "/assets/enemy_waddle.png" : statEmoji2} alt="stat" />
         </div>
         <div className={styles.statCard}>
           <div className={styles.statInfo}>
             <span className={styles.statNumber}>{state.examResults.length}</span>
             <span className={styles.statLabel}>완료한 테스트</span>
           </div>
-          <img src={statEmoji3} alt="stat" />
+          <img src={isKirbyTheme ? "/assets/kirby_eat.jpg" : statEmoji3} alt="stat" />
         </div>
       </div>
 
       <div className={styles.tocSection}>
-        <h2 className={styles.tocTitle}>목차</h2>
+        <h2 className={styles.tocTitle}>
+          {isKirbyTheme && <img src="/assets/waddle_dee_jump.png" alt="jump" style={{ width: '32px', marginRight: '10px', verticalAlign: 'middle' }} />}
+          목차
+        </h2>
         <div className={styles.chapterList}>
           {chapters.map((chapter, idx) => (
             <div key={chapter.id || `chapter-${idx}`} className={styles.chapterItem}>
@@ -153,7 +212,14 @@ const Dashboard: React.FC = () => {
           ))}
           {chapters.length === 0 && (
             <div className={styles.emptyContent}>
-              <Database size={40} />
+              {isKirbyTheme ? (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <img src="/assets/waddle_dee_group.png" alt="empty" style={{ width: '180px', marginBottom: '16px', borderRadius: '12px' }} />
+                  <p style={{ fontWeight: '600' }}>와들디들이 공부할 준비를 마쳤어요!</p>
+                </div>
+              ) : (
+                <Database size={40} />
+              )}
               <p>해당 과목에 등록된 챕터가 없습니다.</p>
               <button className="btn-primary" onClick={() => navigate('/input')}>문제 등록하기</button>
             </div>

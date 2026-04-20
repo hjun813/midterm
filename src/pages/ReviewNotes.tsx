@@ -17,12 +17,18 @@ const ReviewNotes: React.FC = () => {
     ? incorrectQuestions.filter(q => q.isStarred)
     : incorrectQuestions;
 
+  const hasKirbyQuestions = state.questions.some(q => q.subject === 'koreanGrammer' && state.incorrectNotes.includes(q.id));
+
   if (state.incorrectNotes.length === 0) {
     return (
       <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '60vh', color: 'var(--text-secondary)' }}>
-        <Star size={48} className="mb-4" />
+        {hasKirbyQuestions ? (
+          <img src="/assets/kirby_knife.png" alt="knife" style={{ width: '120px', marginBottom: '20px', borderRadius: '16px' }} />
+        ) : (
+          <Star size={48} className="mb-4" />
+        )}
         <h2>오답 노트가 비어있습니다!</h2>
-        <p>학습을 진행하고 틀린 문제를 채워보세요.</p>
+        <p>{hasKirbyQuestions ? "안 틀리면 커비가 서운해(?) 할지도 몰라요!" : "학습을 진행하고 틀린 문제를 채워보세요."}</p>
       </div>
     );
   }

@@ -2,9 +2,9 @@ import React, { useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useQuizContext } from '../context/QuizContext';
 import QuestionCard from '../components/QuestionCard';
-import { ArrowLeft, ArrowRight, BookOpen, AlertCircle, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, AlertCircle, Sparkles, EyeOff } from 'lucide-react';
 import { shuffleArray } from '../utils/jsonParser';
-import styles from './Mode.module.css'; // Will share styles for Modes
+import styles from './Mode.module.css';
 
 const EMOJIS = [
   '/assets/emoji_1.png',
@@ -36,7 +36,7 @@ const SUCCESS_MESSAGES = [
 ];
 
 const StudyMode: React.FC = () => {
-  const { state, addToIncorrectNotes } = useQuizContext();
+  const { state, addToIncorrectNotes, toggleExcludeQuestion } = useQuizContext();
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -51,10 +51,13 @@ const StudyMode: React.FC = () => {
   const [randomEmoji, setRandomEmoji] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
+  
+  const currentSubject = subjectFilter || (fileFilter ? state.questions.find(q => q.sourceFile === fileFilter)?.subject : null);
+  const isKirbyTheme = currentSubject === 'koreanGrammer';
 
   // Filter and optionally shuffle questions
   const questions = useMemo(() => {
-    let list = state.questions;
+    let list = state.questions.filter(q => !state.excludedQuestionIds.includes(q.id));
     if (fileFilter) list = list.filter(q => q.sourceFile === fileFilter);
     else if (subjectFilter) list = list.filter(q => q.subject === subjectFilter);
     
@@ -62,19 +65,24 @@ const StudyMode: React.FC = () => {
     if (limit) list = list.slice(0, limit);
     
     return list;
-  }, [state.questions, fileFilter, subjectFilter, isRandom, limit]);
+  }, [state.questions, state.excludedQuestionIds, fileFilter, subjectFilter, isRandom, limit]);
 
   if (questions.length === 0) {
     return (
       <div className={styles.emptyState}>
         <AlertCircle size={48} className="mb-4 text-secondary" />
-        <h2>저장된 문제가 없습니다</h2>
-        <p>문제 관리 페이지에서 JSON으로 문제를 추가해주세요.</p>
+        <h2>저장된 문제가 없거나 모두 제외되었습니다</h2>
+        <p>문제 관리 페이지에서 JSON으로 문제를 추가하거나, 제외된 설정을 확인해주세요.</p>
         <button className="btn-primary mt-6" onClick={() => navigate('/input')}>
           문제 추가하러 가기
         </button>
       </div>
     );
+  }
+
+  // Adjust currentIndex if it's out of bounds after filtering
+  if (currentIndex >= questions.length && questions.length > 0) {
+    setCurrentIndex(questions.length - 1);
   }
 
   const currentQuestion = questions[currentIndex];
@@ -105,9 +113,39 @@ const StudyMode: React.FC = () => {
     
     if (!isCorrect && currentQuestion.type !== 'essay') {
       addToIncorrectNotes(currentQuestion.id);
+      
+      if (isKirbyTheme) {
+        setRandomEmoji('/assets/kirby_sick.jpg');
+        setSuccessMessage("앗! 다시 한번 생각해보세요.");
+        setShowEmoji(true);
+        setTimeout(() => setShowEmoji(false), 1500);
+      }
     } else if (isCorrect) {
-      const emoji = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
-      const msg = SUCCESS_MESSAGES[Math.floor(Math.random() * SUCCESS_MESSAGES.length)];
+      const kirbyEmojis = [
+        '/assets/kirby_classic.png', 
+        '/assets/kirby_flat.jpg', 
+        '/assets/kirby_inhale.jpg', 
+        '/assets/kirby_eat.jpg',
+        '/assets/kirby_agree.png',
+        '/assets/kirby_yep.png',
+        '/assets/kirby_round.png',
+        '/assets/kirby_car.png',
+        '/assets/kirby_hero.png',
+        '/assets/waddle_dee_1.png',
+        '/assets/waddle_dee_2.png',
+        '/assets/waddle_dee_jump.png',
+        '/assets/waddle_dee_group.png'
+      ];
+      const kirbyMessages = ["커비가 칭찬해요!", "뾰로롱! 정답이에요!", "정말 대단해!", "커비처럼 완벽해요!", "꿈의 샘의 기운이 느껴져요!", "커비도 동의해요!", "Yep! Yep! 최고예요!", "와들디와 함께 정답!", "와들디가 박수를 보내요!"];
+      
+      const emoji = isKirbyTheme 
+        ? kirbyEmojis[Math.floor(Math.random() * kirbyEmojis.length)]
+        : EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+      
+      const msg = isKirbyTheme
+        ? kirbyMessages[Math.floor(Math.random() * kirbyMessages.length)]
+        : SUCCESS_MESSAGES[Math.floor(Math.random() * SUCCESS_MESSAGES.length)];
+        
       setRandomEmoji(emoji);
       setSuccessMessage(msg);
       setShowEmoji(true);
@@ -132,6 +170,17 @@ const StudyMode: React.FC = () => {
     }
   };
 
+  const handleExclude = () => {
+    if (window.confirm('이 문제를 시험 범위에서 제외하시겠습니까? (학습 및 시험 과정에서 제외됩니다)')) {
+      toggleExcludeQuestion(currentQuestion.id);
+      // currentIndex will remain same, but the 'currentQuestion' will be the next one in the updated list
+      // If we are at the last question, we should go back one.
+      if (currentIndex >= questions.length - 1 && currentIndex > 0) {
+        setCurrentIndex(prev => prev - 1);
+      }
+    }
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -141,9 +190,31 @@ const StudyMode: React.FC = () => {
         <div className={styles.progress}>
           문제 {currentIndex + 1} / {questions.length}
         </div>
-        <button className={styles.exitBtn} onClick={() => navigate('/')}>
-          종료
-        </button>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <button 
+            className={styles.excludeBtn} 
+            onClick={handleExclude}
+            title="범위에서 제외"
+            style={{ 
+              background: 'rgba(239, 68, 68, 0.1)', 
+              color: 'var(--error-color)',
+              border: 'none',
+              padding: '8px 12px',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              cursor: 'pointer',
+              fontWeight: '500',
+              fontSize: '14px'
+            }}
+          >
+            <EyeOff size={16} /> 제외
+          </button>
+          <button className={styles.exitBtn} onClick={() => navigate('/')}>
+            종료
+          </button>
+        </div>
       </header>
       
       <div className={styles.progressBarContainer}>

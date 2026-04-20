@@ -34,6 +34,49 @@
   --radius-sm: 12px;
   --radius-md: 20px;
   --radius-lg: 32px;
+
+  /* Default Theme (Hangyodong / Cloud) */
+  --hero-bg: linear-gradient(135deg, #e0f4f9 0%, #ffffff 100%);
+  --hero-shadow: rgba(77, 196, 216, 0.4);
+  --stat-number-color: #3eb0c2;
+  --peek-character: url('/assets/hangyodong_peek.png');
+  --card-bg-gradient: radial-gradient(circle at top right, rgba(77, 196, 216, 0.05) 0%, transparent 40%);
+}
+
+/* Kirby Theme Overrides */
+.theme-kirby {
+  --bg-color: #fff0f6; /* Very light Kirby Pink */
+  --bg-white: #ffffff;
+  
+  --primary-color: #ffafd4; /* Kirby Body Pink */
+  --primary-hover: #ff92c3;
+  --primary-light: #fff5f8;
+  --primary-gradient: linear-gradient(135deg, #ffafd4 0%, #ff83b9 100%);
+  
+  --secondary-color: #ffe45e; /* Kirby Star Yellow */
+  
+  --success-color: #ffafd4;
+  --border-color: #ffdce8;
+  --border-light: #fff0f6;
+  
+  --hero-bg: linear-gradient(135deg, #fff0f6 0%, #fffef0 100%);
+  --hero-shadow: rgba(255, 175, 212, 0.4);
+  --stat-number-color: #ff83b9;
+  --peek-character: url('/assets/kirby_flat.jpg');
+  --bg-sidebar: #fffafd; /* Very light pink/white for sidebar */
+  --card-bg-gradient: radial-gradient(circle at top right, rgba(255, 175, 212, 0.08) 0%, transparent 40%);
+
+  --shadow-sm: 0 2px 4px rgba(255, 175, 212, 0.1);
+  --shadow-md: 0 4px 20px rgba(255, 175, 212, 0.15);
+  --shadow-lg: 0 12px 30px rgba(255, 175, 212, 0.2);
+  --shadow-premium: 0 20px 40px rgba(255, 175, 212, 0.25);
+}
+
+body.theme-kirby {
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(255, 175, 212, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(255, 228, 94, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5) 0%, transparent 100%);
 }
 
 * {

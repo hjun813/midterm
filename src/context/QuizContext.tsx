@@ -12,12 +12,15 @@ interface QuizContextType {
   removeFromIncorrectNotes: (id: string) => void;
   deleteQuestion: (id: string) => void;
   setShuffleEnabled: (enabled: boolean) => void;
+  toggleExcludeQuestion: (id: string) => void;
+  resetExclusions: () => void;
 }
 
 const defaultState: AppState = {
   questions: [],
   examResults: [],
   incorrectNotes: [],
+  excludedQuestionIds: [],
   isShuffleEnabled: false
 };
 
@@ -133,11 +136,27 @@ export const QuizProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setState(prev => ({ ...prev, isShuffleEnabled: enabled }));
   };
 
+  const toggleExcludeQuestion = (id: string) => {
+    setState(prev => {
+      const isExcluded = prev.excludedQuestionIds.includes(id);
+      return {
+        ...prev,
+        excludedQuestionIds: isExcluded
+          ? prev.excludedQuestionIds.filter(excludedId => excludedId !== id)
+          : [...prev.excludedQuestionIds, id]
+      };
+    });
+  };
+
+  const resetExclusions = () => {
+    setState(prev => ({ ...prev, excludedQuestionIds: [] }));
+  };
+
   return (
     <QuizContext.Provider value={{ 
         state, addQuestions, clearQuestions, saveExamResult, 
         toggleStar, addToIncorrectNotes, removeFromIncorrectNotes, deleteQuestion,
-        setShuffleEnabled
+        setShuffleEnabled, toggleExcludeQuestion, resetExclusions
     }}>
       {children}
     </QuizContext.Provider>

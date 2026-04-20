@@ -13,15 +13,34 @@ const Layout: React.FC = () => {
   // Extract unique subjects from questions
   const subjects = Array.from(new Set(state.questions.map((q: Question) => q.subject))).sort();
 
+  const searchParams = new URLSearchParams(location.search);
+  const subjectFilter = searchParams.get('subject');
+  const fileFilter = searchParams.get('file');
+  
+  const currentSubject = subjectFilter || (fileFilter ? state.questions.find(q => q.sourceFile === fileFilter)?.subject : null);
+  const isKirbyTheme = currentSubject === 'koreanGrammer';
+
+  // Apply theme class to body for global consistency
+  React.useEffect(() => {
+    if (isKirbyTheme) {
+      document.body.classList.add('theme-kirby');
+    } else {
+      document.body.classList.remove('theme-kirby');
+    }
+  }, [isKirbyTheme]);
+
   return (
-    <div className={styles.container}>
+    <div 
+      className={styles.container}
+      data-subject={currentSubject || 'default'}
+    >
       {!isFocusMode && (
         <aside className={styles.sidebar}>
           <div className={styles.logo}>
             <div className={styles.logoCircle}>
-              <img src="/assets/octopus.png" alt="logo" className={styles.logoImg} />
+              <img src={isKirbyTheme ? "/assets/kirby_classic.png" : "/assets/octopus.png"} alt="logo" className={styles.logoImg} />
             </div>
-            <h2>GyoDong Prep</h2>
+            <h2>{isKirbyTheme ? "Kirby Prep" : "GyoDong Prep"}</h2>
           </div>
           
           <nav className={styles.nav}>
@@ -57,7 +76,11 @@ const Layout: React.FC = () => {
                     to={`/?subject=${subjectStr}`} 
                     className={() => `${styles.subNavItem} ${location.search.includes(`subject=${subjectStr}`) ? styles.active : ''}`}
                   >
-                    <div className={styles.dot}></div>
+                    {isKirbyTheme && subjectStr === 'koreanGrammer' ? (
+                      <img src="/assets/kirby_round.png" alt="dot" style={{ width: '16px', height: '16px', marginRight: '10px' }} />
+                    ) : (
+                      <div className={styles.dot}></div>
+                    )}
                     <span>{subjectStr ? subjectStr.charAt(0).toUpperCase() + subjectStr.slice(1) : 'Uncategorized'}</span>
                   </NavLink>
                 );
@@ -69,7 +92,11 @@ const Layout: React.FC = () => {
           </nav>
 
           <div className={styles.sidebarFooter}>
-            <img src="/assets/hangyodong_full.png" alt="hangyodong" className={styles.hangyoFull} />
+            <img 
+              src={isKirbyTheme ? "/assets/kirby_hero.png" : "/assets/hangyodong_full.png"} 
+              alt="character" 
+              className={styles.hangyoFull} 
+            />
           </div>
         </aside>
       )}

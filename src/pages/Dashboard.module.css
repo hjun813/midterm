@@ -1,5 +1,5 @@
 .heroSection {
-  background: linear-gradient(135deg, #e0f4f9 0%, #ffffff 100%);
+  background: var(--hero-bg);
   border-radius: var(--radius-lg);
   padding: 80px 60px;
   margin-bottom: 40px;
@@ -10,6 +10,7 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: var(--shadow-premium);
+  transition: background 0.5s ease;
 }
 
 .heroCharacter {
@@ -17,15 +18,31 @@
   top: -60px;
   right: 60px;
   width: 280px;
-  filter: drop-shadow(0 20px 40px rgba(77, 196, 216, 0.4));
+  filter: drop-shadow(0 20px 40px var(--hero-shadow));
   animation: float 4s ease-in-out infinite;
   z-index: 5;
 }
 
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* Kirby Specific Animation Background */
+:global(.theme-kirby) .heroSection::after {
+  content: '✨';
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  animation: sparkle 3s infinite;
+  opacity: 0.6;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.6; transform: scale(1.2); }
 }
 
 .heroContent {
@@ -135,8 +152,7 @@
   align-items: center;
   box-shadow: var(--shadow-md);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background-image: 
-    radial-gradient(circle at top right, rgba(77, 196, 216, 0.03) 0%, transparent 40%);
+  background-image: var(--card-bg-gradient);
 }
 
 .statCard:hover {
@@ -154,7 +170,7 @@
 .statNumber {
   font-size: 64px;
   font-weight: 900;
-  color: #3eb0c2;
+  color: var(--stat-number-color);
   line-height: 1;
   margin-bottom: 12px;
   letter-spacing: -3px;

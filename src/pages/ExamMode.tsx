@@ -31,7 +31,7 @@ const ExamMode: React.FC = () => {
   
   // Filter and optionally shuffle questions
   const questions = useMemo(() => {
-    let list = state.questions;
+    let list = state.questions.filter(q => !state.excludedQuestionIds.includes(q.id));
     if (fileFilter) list = list.filter(q => q.sourceFile === fileFilter);
     else if (subjectFilter) list = list.filter(q => q.subject === subjectFilter);
     
@@ -39,7 +39,7 @@ const ExamMode: React.FC = () => {
     if (limit) list = list.slice(0, limit);
     
     return list;
-  }, [state.questions, fileFilter, subjectFilter, isRandom, limit]);
+  }, [state.questions, state.excludedQuestionIds, fileFilter, subjectFilter, isRandom, limit]);
   
   // Timer state
   const [timeLeft, setTimeLeft] = useState(questions.length * 60); // 1 min per question default
@@ -65,8 +65,8 @@ const ExamMode: React.FC = () => {
     return (
       <div className={styles.emptyState}>
         <AlertCircle size={48} className="mb-4 text-secondary" />
-        <h2>저장된 문제가 없습니다</h2>
-        <p>문제 관리 페이지에서 JSON으로 문제를 추가해주세요.</p>
+        <h2>시험을 치를 수 있는 문제가 없습니다</h2>
+        <p>저장된 문제가 없거나 모두 범위에서 제외되었습니다.</p>
         <button className="btn-primary mt-6" onClick={() => navigate('/input')}>
           문제 추가하러 가기
         </button>
