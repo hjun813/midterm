@@ -1,96 +1,367 @@
 [
     {
-        "question": "인텔의 VT-x나 AMD의 AMD-V와 같이 하드웨어 차원에서 가상화를 지원하는 기술(HVM)에서 사용하는 두 가지 실행 모드는 무엇인가? (주관식)",
-        "answer": "VMX Root mode, VMX non-root mode",
-        "explanation": "하드웨어 기반 가상화(Hardware Assisted Virtualization)에서는 하이퍼바이저가 실행되는 VMX Root mode와 게스트 OS가 실행되는 VMX non-root mode로 나뉘어 동작합니다.",
-        "difficulty": "medium",
-        "probability": "high"
-    },
-    {
-        "question": "반가상화(Para-virtualization) 환경에서 수정된 Guest OS가 물리적 자원에 직접 접근하는 대신 하이퍼바이저에게 보내는 API 호출을 무엇이라고 하는가? (주관식)",
-        "answer": "Hypercall",
-        "explanation": "반가상화에서는 특권 명령(privileged operations) 대신 Hypercall이라는 하이퍼바이저 API를 호출하여 하드웨어 제어 작업을 수행합니다.",
+        "id": 1,
+        "type": "multiple",
+        "question": "가상화(Virtualization)의 가장 핵심적인 개념을 바르게 설명한 것은?",
+        "options": [
+            "물리적 자원과 논리적 자원을 결합하여 성능을 극대화하는 기술",
+            "물리적 자원과 논리적 자원을 분리하는 기술",
+            "소프트웨어 코드를 하드웨어로 변환하여 실행 속도를 높이는 기술",
+            "네트워크 트래픽을 물리적으로 분산시키는 보안 기술"
+        ],
+        "answer": "물리적 자원과 논리적 자원을 분리하는 기술",
+        "explanation": "가상화(Virtualization)는 물리적 자원과 논리적 자원을 분리하여 효율성과 유연성을 높이는 핵심 기술입니다.",
         "difficulty": "easy",
         "probability": "high"
     },
     {
-        "question": "CPU 가상화에서 하이퍼바이저가 여러 가상 머신의 vCPU를 물리적 CPU 코어에 할당하는 스케줄링 방식은 무엇인가? (객관식)",
+        "id": 2,
+        "type": "multiple",
+        "question": "다음 중 가상화의 5가지 핵심 키워드(5 key words)에 포함되지 않는 것은?",
         "options": [
-            "1-level scheduling",
-            "2-level scheduling",
-            "3-level scheduling",
-            "Direct Execution"
+            "통합 (Consolidation)",
+            "분산 (Distribution)",
+            "고립 (Isolation)",
+            "모의실험 (Emulation)"
         ],
-        "answer": "2-level scheduling",
-        "explanation": "CPU 가상화 환경에서는 하이퍼바이저가 vCPU를 물리적 코어에 할당하고, Guest OS가 내부적으로 프로세스를 vCPU에 할당하는 2-level scheduling(2단계 스케줄링) 방식으로 동작합니다.",
+        "answer": "분산 (Distribution)",
+        "explanation": "가상화의 5가지 핵심 키워드는 통합(Consolidation), 고립(Isolation), 집계(Aggregation), 이동성(Mobility), 모의실험(Emulation)입니다. 분산(Distribution)은 포함되지 않습니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 3,
+        "type": "multiple",
+        "question": "가상화의 5대 특징 중 '통합(Consolidation)'에 대한 설명으로 가장 적절한 것은?",
+        "options": [
+            "물리적 자원에 직접 접근하지 못하도록 환경을 분리한다.",
+            "여러 물리 자원들을 단일한 가상 자원으로 묶는다.",
+            "하나의 하드웨어에서 여러 개의 논리적 머신을 구동하여 자원 이용률을 상승시킨다.",
+            "실제로 존재하지 않는 물리적 공간을 논리적으로 생성한다."
+        ],
+        "answer": "하나의 하드웨어에서 여러 개의 논리적 머신을 구동하여 자원 이용률을 상승시킨다.",
+        "explanation": "통합(Consolidation)은 단일 물리적 하드웨어 상에서 여러 개의 논리적 머신(가상 머신)을 구동하여 서버 및 IT 자원의 활용도를 높이는 특징입니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 4,
+        "type": "multiple",
+        "question": "가상화의 특징 중 '이동성(Mobility)'을 통해 얻을 수 있는 장점이 아닌 것은?",
+        "options": [
+            "운영체제와 애플리케이션이 가상환경 상에서 동작하므로 하드웨어 종속성이 낮아진다.",
+            "새로운 하드웨어로의 이주(Migration)가 손쉽게 가능하다.",
+            "가상 머신의 복제(Cloning)가 쉽게 이루어진다.",
+            "물리적인 네트워크 선로를 자동으로 확장해 준다."
+        ],
+        "answer": "물리적인 네트워크 선로를 자동으로 확장해 준다.",
+        "explanation": "이동성(Mobility)은 OS와 애플리케이션이 가상환경에서 동작하여 새로운 하드웨어로의 이주와 복제를 쉽게 해주는 특성입니다. 물리적 선로의 확장은 이동성과 무관합니다.",
+        "difficulty": "easy",
+        "probability": "medium"
+    },
+    {
+        "id": 5,
+        "type": "multiple",
+        "question": "Type I 하이퍼바이저(Hardware-based Virtualization)와 비교한 Type II 하이퍼바이저(OS-based Virtualization)의 특징으로 올바른 것은?",
+        "options": [
+            "하드웨어 바로 위에 설치되어 성능이 매우 높다.",
+            "데이터센터나 클라우드 환경에서 주로 사용된다.",
+            "보안성이 Host OS에 의존적이다.",
+            "서버 관리자에 의해서만 설치 및 관리가 가능하다."
+        ],
+        "answer": "보안성이 Host OS에 의존적이다.",
+        "explanation": "Type II 하이퍼바이저는 Host OS 위에 설치되므로 성능이 상대적으로 낮고, 보안 역시 기반이 되는 Host OS에 의존적이라는 특징을 가집니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 6,
+        "type": "multiple",
+        "question": "전가상화(Full-virtualization)의 특징으로 올바르지 않은 것은?",
+        "options": [
+            "Guest OS를 전혀 수정하지 않고 가상화를 진행한다.",
+            "Hypervisor가 하드웨어를 완전히 모방(Trap-and-emulate)한다.",
+            "Guest OS가 특권 명령(Privileged instructions) 대신 Hypercall을 호출한다.",
+            "Guest OS가 물리적 자원에 직접 접근하려고 할 때 발생하는 문제를 하이퍼바이저가 중간에서 변환하여 처리한다."
+        ],
+        "answer": "Guest OS가 특권 명령(Privileged instructions) 대신 Hypercall을 호출한다.",
+        "explanation": "특권 명령 대신 Hypervisor API인 Hypercall을 호출하는 방식은 Guest OS가 수정된 반가상화(Para-virtualization)의 특징입니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 7,
+        "type": "multiple",
+        "question": "반가상화(Para-virtualization) 환경에서 Guest OS가 특권 명령(Privileged instructions)을 수행해야 할 때, 물리적 자원에 직접 접근하는 대신 하이퍼바이저에게 요청을 보내기 위해 사용하는 API의 명칭은?",
+        "options": [
+            "Syscall",
+            "Hypercall",
+            "Trap-and-emulate",
+            "Binary Translation"
+        ],
+        "answer": "Hypercall",
+        "explanation": "반가상화에서는 수정된 Guest OS가 물리적 하드웨어에 직접 명령을 내리지 않고 하이퍼바이저가 제공하는 API인 'Hypercall'을 호출하여 작업을 수행합니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 8,
+        "type": "multiple",
+        "question": "스토리지 가상화(Storage Virtualization)에 대한 설명으로 올바른 것은?",
+        "options": [
+            "물리적 스토리지의 용량을 하드웨어적으로 증설하는 기술이다.",
+            "하나의 가상 스토리지를 여러 개의 물리적 디스크로 분할하여 사용자에게 제공한다.",
+            "여러 개의 물리 스토리지 공간을 가상화 층(Layer)을 통해 단일한 논리적 스토리지 공간으로 집계하여 제공한다.",
+            "스토리지 내의 데이터를 압축하여 전송 속도를 높이는 네트워크 기술이다."
+        ],
+        "answer": "여러 개의 물리 스토리지 공간을 가상화 층(Layer)을 통해 단일한 논리적 스토리지 공간으로 집계하여 제공한다.",
+        "explanation": "스토리지 가상화는 실제 물리적 디스크, SAN, NAS 등의 여러 공간을 가상화 소프트웨어를 통해 단일한 논리 볼륨(가상 스토리지)으로 묶어 사용자에게 제공하는 기술입니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 9,
+        "type": "multiple",
+        "question": "네트워크 가상화(Network Virtualization)가 수행하는 주요 역할 두 가지로 가장 적절하게 짝지어진 것은?",
+        "options": [
+            "네트워크 대역폭 증폭 / 라우팅 테이블 삭제",
+            "물리적 네트워크의 가상 분할 / 여러 물리적 네트워크의 논리적 통합",
+            "물리적 스위치 생성 / 패킷 암호화",
+            "서버의 네트워크 카드 제거 / 무선 네트워크 반경 확장"
+        ],
+        "answer": "물리적 네트워크의 가상 분할 / 여러 물리적 네트워크의 논리적 통합",
+        "explanation": "네트워크 가상화는 하나의 물리적 네트워크를 여러 개의 가상 네트워크로 분할(예: VLAN)하거나 여러 물리 네트워크를 하나의 논리 네트워크로 통합하는 기술입니다.",
         "difficulty": "medium",
         "probability": "medium"
     },
     {
-        "question": "전가상화(Full Virtualization)에서 특권 명령을 처리하기 위해 하이퍼바이저를 거쳐 CPU에 작업을 보내도록 명령어를 변환하는 기술은 무엇인가? (주관식)",
-        "answer": "Binary Translation (이진 변환)",
-        "explanation": "전가상화 환경에서는 Guest OS의 수정 없이 가상화를 진행하기 위해, 특권 명령 등에 대해 하이퍼바이저가 명령어를 변환하여 CPU에 작업을 보내는 Binary Translation 기술을 사용합니다.",
-        "difficulty": "medium",
-        "probability": "high"
-    },
-    {
-        "question": "메모리 가상화 환경에서 가상 메모리(Virtual Memory) 주소를 머신 메모리(Machine Memory) 주소로 변환하기 위해 두 단계의 Page Table Lookup을 거쳐야 하는 오버헤드를 줄여주는 기법은? (객관식)",
+        "id": 10,
+        "type": "multiple",
+        "question": "가상화의 객체 기반 분류(Object-based types)에 해당하지 않는 것은?",
         "options": [
-            "Shadow Page Table",
-            "Balloon Process",
-            "COW (Copy-On-Write)",
-            "Lottery Scheduling"
+            "Server Virtualization",
+            "Storage Virtualization",
+            "Data Virtualization",
+            "Hypervisor Virtualization"
         ],
-        "answer": "Shadow Page Table",
-        "explanation": "Shadow Page Table은 게스트 OS의 가상 메모리 주소를 실제 물리적 머신 메모리 주소로 직접 매핑하여 2단계 변환 오버헤드를 줄여주는 역할을 하며, TLB(Translation Lookaside Buffer)에 캐시되어 성능을 향상시킵니다.",
-        "difficulty": "medium",
-        "probability": "high"
-    },
-    {
-        "question": "하이퍼바이저가 가상 머신들에게 실제 물리 메모리보다 더 많은 메모리를 할당하는 현상을 무엇이라고 하는가? (주관식)",
-        "answer": "Memory overcommit (메모리 오버커밋)",
-        "explanation": "실제 존재하는 물리적 메모리보다 더 많은 양의 메모리를 가상 머신들에게 할당하는 것을 Memory overcommit이라고 하며, 이를 해결하기 위해 Balloon process 기법 등이 사용됩니다.",
+        "answer": "Hypervisor Virtualization",
+        "explanation": "객체 기반 가상화 유형(Object-based types)에는 Server, Storage, Network, Data, Application, Desktop 등이 있습니다. 하이퍼바이저는 가상화를 구현하는 소프트웨어 계층 그 자체입니다.",
         "difficulty": "easy",
-        "probability": "high"
-    },
-    {
-        "question": "Balloon process 기법에서 호스트 시스템의 메모리가 부족해질 때, 하이퍼바이저는 가상 머신 내의 Balloon을 어떻게 하여 사용하지 않는 메모리를 회수하는가? (객관식)",
-        "options": [
-            "Balloon을 팽창(Inflating)시킨다.",
-            "Balloon을 수축(Deflating)시킨다.",
-            "Balloon을 삭제(Deleting)한다.",
-            "Balloon을 일시정지(Suspending)시킨다."
-        ],
-        "answer": "Balloon을 팽창(Inflating)시킨다.",
-        "explanation": "메모리 부족이 발생하면 하이퍼바이저는 가상 머신에게 Balloon inflating(팽창)을 요구합니다. 이에 따라 가상 머신은 사용하지 않는 메모리를 Balloon에 할당하게 되고, 하이퍼바이저는 이 메모리를 회수하여 부족 문제를 해결합니다.",
-        "difficulty": "medium",
-        "probability": "high"
-    },
-    {
-        "question": "메모리 가상화의 Contents-based page sharing 기법에서, 여러 VM이 내용이 같은 메모리 페이지를 공유하다가 특정 VM에서 해당 페이지에 쓰기(Write) 작업이 발생할 때 새로운 페이지를 할당받아 복사하는 방식을 무엇이라고 하는가? (주관식/약어 기입)",
-        "answer": "COW (Copy-On-Write)",
-        "explanation": "여러 VM에 동일한 OS가 수행될 때 내용이 같은 메모리는 서로 공유하다가, Write 작업이 발생하는 순간 해당 페이지를 새롭게 할당받아 복사하는 Copy-On-Write (COW) 방식이 적용됩니다.",
-        "difficulty": "medium",
-        "probability": "high"
-    },
-    {
-        "question": "Windows 환경에서 Linux를 사용하기 위한 WSL(Windows Subsystem for Linux) 아키텍처 중, 하드웨어 바로 위에서 Hypervisor가 동작하고 그 위에서 Windows 커널과 Linux 커널이 동시에 실행되는 방식은 다음 중 어느 것인가? (객관식)",
-        "options": [
-            "WSL 1",
-            "WSL 2",
-            "Type II Virtualization",
-            "Middleware-based Virtualization"
-        ],
-        "answer": "WSL 2",
-        "explanation": "WSL 2 아키텍처는 하드웨어 위에 Hypervisor가 있고, 그 위에서 Windows NT Kernel과 Linux Kernel이 병렬로 실행되는 구조를 가집니다.",
-        "difficulty": "hard",
         "probability": "low"
     },
     {
-        "question": "CPU 가상화에서 애플리케이션이나 운영체제가 변환을 거치지 않고 CPU에 직접 작업을 보내 수행하게 하는 방식을 무엇이라고 하는가? (주관식)",
-        "answer": "Direct Execution",
-        "explanation": "Direct Execution은 애플리케이션이나 운영체제가 하이퍼바이저의 별도 변환을 거치지 않고 CPU에 직접 작업을 보내는 실행 방식입니다.",
+        "id": 11,
+        "type": "ox",
+        "question": "전가상화(Full-virtualization) 방식은 하이퍼바이저가 하드웨어를 완전히 모방(emulate)하므로, Guest OS를 가상화 용도에 맞게 별도로 수정해야만 구동이 가능하다.",
+        "options": [
+            "O",
+            "X"
+        ],
+        "answer": "X",
+        "explanation": "전가상화(Full-virtualization)는 하드웨어를 완전히 모방하므로 Guest OS의 어떠한 수정 없이도 그대로 구동할 수 있습니다. 수정이 필요한 방식은 반가상화(Para-virtualization)입니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 12,
+        "type": "ox",
+        "question": "Type I 하이퍼바이저(Hardware-based Virtualization)는 하드웨어 위에 직접 설치되므로, Host OS 위에 설치되는 Type II 하이퍼바이저보다 일반적으로 성능과 보안이 높다.",
+        "options": [
+            "O",
+            "X"
+        ],
+        "answer": "O",
+        "explanation": "Type I 하이퍼바이저는 물리적 하드웨어에 직접 접근하여 자원을 관리하므로 OS의 오버헤드를 거치는 Type II에 비해 성능과 보안이 뛰어납니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 13,
+        "type": "ox",
+        "question": "가상화의 핵심 키워드 중 '고립(Isolation)'은 각 가상 머신의 수행 환경을 서로 분리하여 다른 환경의 물리적 자원 접근이나 충돌을 방지하는 특성이다.",
+        "options": [
+            "O",
+            "X"
+        ],
+        "answer": "O",
+        "explanation": "고립(Isolation)은 가상화 계층이 제공하는 논리적 공간 내에서만 작업하도록 하여 각 사용자의 환경을 타 환경으로부터 안전하게 분리하는 특성입니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 14,
+        "type": "ox",
+        "question": "가상화의 5대 특징 중 '모의실험(Emulation)'은 실제 물리적 공간보다 더 큰 논리적 공간을 생성하거나, 인위적 결함을 발생시킨 논리적 공간을 만드는 등 실제로 존재하지 않는 물리적 공간을 생성하는 것을 의미한다.",
+        "options": [
+            "O",
+            "X"
+        ],
+        "answer": "O",
+        "explanation": "모의실험(Emulation)을 통해 시스템은 실제 물리적 자원의 한계를 넘는 논리적 공간이나 특수한 테스트 환경을 소프트웨어적으로 생성할 수 있습니다.",
+        "difficulty": "medium",
+        "probability": "medium"
+    },
+    {
+        "id": 15,
+        "type": "ox",
+        "question": "Type II 하이퍼바이저는 주로 데이터센터나 대규모 클라우드 서버 환경에서 높은 성능을 내기 위해 데이터센터 관리자에 의해 사용된다.",
+        "options": [
+            "O",
+            "X"
+        ],
+        "answer": "X",
+        "explanation": "데이터센터나 클라우드 환경에서 고성능을 위해 사용되는 것은 Type I 하이퍼바이저입니다. Type II는 개인 PC나 개발환경에서 일반 사용자에 의해 주로 사용됩니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 16,
+        "type": "short",
+        "question": "실제 물리적 자원의 복잡함을 숨기고 단일하며 일관된 가상 자원들을 상위 계층에 제공하는 소프트웨어 계층을 가리키는 용어는 무엇인가? (영어 약자 3글자 기입)",
+        "answer": "VMM",
+        "explanation": "Virtual Machine Monitor (VMM) 또는 하이퍼바이저(Hypervisor)는 물리적 자원과 논리적 자원을 분리하여 가상 환경을 제공하는 핵심 계층입니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 17,
+        "type": "short",
+        "question": "반가상화(Para-virtualization) 환경에서 가상화 용도에 맞게 수정된 Guest OS가 물리적 하드웨어에 특권 명령을 직접 내리는 대신 호출하는 하이퍼바이저 API의 이름은 무엇인가? (영문 기입)",
+        "answer": "Hypercall",
+        "explanation": "Guest OS는 하드웨어 제어가 필요할 때 Privileged instructions 대신 Hypercall을 호출하여 하이퍼바이저에게 작업을 요청합니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 18,
+        "type": "short",
+        "question": "가상화의 5대 특징 중, 운영체제나 애플리케이션이 가상환경 상에서 동작하므로 새로운 하드웨어로의 이주(Migration)나 복제(Cloning)가 쉽게 이루어지는 특성을 뜻하는 단어는 무엇인가? (한글 기입)",
+        "answer": "이동성",
+        "explanation": "가상 머신은 파일 형태로 존재할 수 있어 다른 물리적 호스트로 쉽게 옮길 수 있으며, 이러한 특성을 이동성(Mobility)이라고 합니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 19,
+        "type": "short",
+        "question": "계층 기반 분류(Layer-based types)에 따른 가상화 중, Host OS가 존재하고 그 위에 가상화를 위한 소프트웨어 계층이 동작하는 방식은 Type 몇(Type 번호)에 해당하는가? (로마자 또는 숫자 기입)",
+        "answer": "Type II",
+        "explanation": "Type II(또는 Type 2) 가상화는 하드웨어 위에 Host OS가 설치되고 그 위에서 하이퍼바이저가 애플리케이션 형태로 동작하는 방식입니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 20,
+        "type": "short",
+        "question": "객체 기반 가상화 유형(Object-based types) 중, 물리적인 스위치나 라우터로 구성된 하나의 네트워크를 여러 개의 논리적 네트워크로 분할하거나 합치는 기술은 어떤 자원의 가상화인가? (영문 7글자 기입)",
+        "answer": "Network",
+        "explanation": "하나의 물리적 네트워크를 여러 가상 네트워크로 나누거나 통합하는 것은 Network Virtualization (네트워크 가상화)입니다.",
         "difficulty": "easy",
         "probability": "medium"
+    },
+    {
+        "id": 21,
+        "type": "blank",
+        "question": "가상화를 계층(Layer) 기반으로 분류할 때, 하드웨어 위에 직접 하이퍼바이저가 설치되는 방식을 [ A ] 기반 가상화 (Type I)라고 하며, 하드웨어 위에 운영체제가 설치되고 그 위에 하이퍼바이저가 설치되는 방식을 [ B ] 기반 가상화 (Type II)라고 한다. (영문 기입)",
+        "answer": [
+            "Hardware",
+            "OS"
+        ],
+        "explanation": "Type I은 Hardware-based Virtualization이며, Type II는 OS-based Virtualization입니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 22,
+        "type": "blank",
+        "question": "소프트웨어 기반 가상화 방식 중, [ A ] 가상화는 Guest OS의 수정 없이 하이퍼바이저가 하드웨어를 완전히 에뮬레이션하여 동작하며, [ B ] 가상화는 Guest OS를 가상화 환경에 맞게 수정하여 동작한다. (한글 기입)",
+        "answer": [
+            "전",
+            "반"
+        ],
+        "explanation": "수정 없이 완전히 모방하는 것은 전가상화(Full virtualization), 수정을 가하는 것은 반가상화(Para virtualization)입니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 23,
+        "type": "blank",
+        "question": "가상화의 핵심 키워드 중 [ A ]은(는) 여러 물리 자원들을 단일한 가상/논리 자원으로 모으는 기술(예: Clustering, Griding)을 뜻하며, [ B ]은(는) 하나의 하드웨어에서 여러 논리적 머신을 구동해 자원 이용률을 상승시키는 것을 뜻한다. (한글 기입)",
+        "answer": [
+            "집계",
+            "통합"
+        ],
+        "explanation": "여러 물리 자원을 하나로 묶는 것은 집계(Aggregation), 하나의 물리 자원에 여러 논리 머신을 올리는 것은 통합(Consolidation)입니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 24,
+        "type": "blank",
+        "question": "가상화의 5대 키워드 중 [ A ]은(는) 각 사용자의 수행 환경을 서로 물리적, 논리적으로 분리시켜 직접적인 접근을 차단하는 특성이며, [ B ]은(는) 실제로는 존재하지 않는 물리적 공간(예: 더 큰 공간, 인위적 결함 공간 등)을 가상으로 만들어내는 특성이다. (한글 기입)",
+        "answer": [
+            "고립",
+            "모의실험"
+        ],
+        "explanation": "사용자 환경을 분리하는 것은 고립(Isolation), 가상의 공간을 흉내내어 생성하는 것은 모의실험(Emulation)입니다.",
+        "difficulty": "medium",
+        "probability": "medium"
+    },
+    {
+        "id": 25,
+        "type": "blank",
+        "question": "스토리지 가상화는 실제 존재하는 물리적 디스크, SAN, NAS 등의 [ A ] 스토리지 공간을 가상화 층의 Mapping table 등을 거쳐 사용자에게 단일한 [ B ] 볼륨 형태로 제공하는 기술이다. (한글 기입)",
+        "answer": [
+            "물리",
+            "논리"
+        ],
+        "explanation": "스토리지 가상화는 복잡한 물리(Physical) 스토리지들을 하나로 묶어 사용자에게 편리한 논리(Logical) 볼륨으로 매핑하여 제공합니다.",
+        "difficulty": "easy",
+        "probability": "medium"
+    },
+    {
+        "id": 26,
+        "type": "essay",
+        "question": "소프트웨어 기반 가상화의 두 가지 방식인 '전가상화(Full virtualization)'와 '반가상화(Para virtualization)'의 차이점을 'Guest OS의 수정 여부'와 '특권 명령(Privileged instructions) 처리 방식' 측면에서 구체적으로 비교하여 서술하시오.",
+        "answer": "전가상화는 Guest OS를 전혀 수정하지 않고 구동하며, Guest OS가 특권 명령을 하드웨어에 직접 수행하려 할 때 하이퍼바이저가 이를 가로채어 하드웨어를 완전히 모방(Trap-and-emulate)하여 처리합니다. 반면, 반가상화는 가상화 환경에 맞게 Guest OS를 미리 수정하며, Guest OS는 하드웨어에 직접 특권 명령을 내리는 대신 하이퍼바이저가 제공하는 API인 'Hypercall'을 호출하여 자원 접근 문제를 해결합니다.",
+        "explanation": "Guest OS의 수정 유무와 그에 따른 가상화 환경에서의 명령 제어권(Trap-and-emulate vs Hypercall) 차이를 명확히 인지하고 있는지 평가하는 핵심 문제입니다.",
+        "difficulty": "hard",
+        "probability": "high"
+    },
+    {
+        "id": 27,
+        "type": "essay",
+        "question": "하이퍼바이저 아키텍처를 계층 기반(Layer-based)으로 분류할 때, Type I 하이퍼바이저와 Type II 하이퍼바이저의 구조적 차이점을 '설치 위치'를 중심으로 설명하고, 각각의 방식이 성능과 보안 측면에서 가지는 특징을 서술하시오.",
+        "answer": "Type I 하이퍼바이저는 물리적 하드웨어 위에 직접 설치되어 동작합니다. 운영체제를 거치지 않으므로 자원 제어에 대한 성능 오버헤드가 적어 성능이 높고, 독립된 계층에서 동작하여 보안성 또한 매우 높습니다. 반면 Type II 하이퍼바이저는 하드웨어 위에 설치된 범용 운영체제(Host OS) 상에서 애플리케이션처럼 동작합니다. 따라서 자원에 접근하기 위해 Host OS를 한 번 더 거쳐야 하므로 성능이 상대적으로 낮으며, 기반이 되는 Host OS가 해킹당하면 하이퍼바이저도 위험해지므로 보안성이 Host OS에 크게 의존적입니다.",
+        "explanation": "가상화 구조의 근본적인 차이인 하드웨어 직접 접근(Type I, 베어메탈)과 OS 경유 접근(Type II, 호스트 기반)의 차이를 성능 및 보안 측면과 연결하여 서술할 수 있는지 묻는 문제입니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 28,
+        "type": "essay",
+        "question": "클라우드 컴퓨팅과 가상화에서 자원을 다루는 특성 중, 가상화의 5대 핵심 키워드에 속하는 '통합(Consolidation)'과 '집계(Aggregation)'의 개념을 물리적 자원과 논리적 자원의 관계를 중심으로 서로 비교하여 서술하시오.",
+        "answer": "통합(Consolidation)은 '하나의' 물리적 하드웨어 상에 '여러 개의' 논리적 머신(가상 머신)을 구동시켜 남는 자원의 이용률을 끌어올리는 기술적 방향을 의미합니다. 이와 반대로 집계(Aggregation)는 클러스터링이나 그리딩 기술을 활용하여 '여러 개의' 물리적 자원들을 하나로 묶어 '단일한' 가상/논리적 자원 풀(Pool)로 구성하여 제공하는 기술적 방향을 의미합니다. 즉, 통합은 1개의 하드웨어를 N개로 쪼개어 쓰는 개념에 가깝고, 집계는 N개의 하드웨어를 1개로 합쳐서 쓰는 개념에 가깝습니다.",
+        "explanation": "물리적 자원(Hardware)과 논리적 자원(VM/Pool) 사이의 1:N 매핑과 N:1 매핑의 차이점을 구별하는 것은 가상화의 리소스 풀링 특성을 이해하는 데 필수적입니다.",
+        "difficulty": "hard",
+        "probability": "high"
+    },
+    {
+        "id": 29,
+        "type": "essay",
+        "question": "가상화(Virtualization)의 정의를 간략히 서술하고, 이 가상화 환경을 구성하기 위해 도입되는 소프트웨어 계층인 VMM(Virtual Machine Monitor, 또는 Hypervisor)이 사용자나 Guest OS에게 어떠한 역할을 수행하는지 서술하시오.",
+        "answer": "가상화란 물리적 자원과 논리적 자원을 서로 분리하여 효율적으로 자원을 배분하고 활용하게 하는 기술입니다. 이 환경에서 VMM(하이퍼바이저)은 실제 하단에 존재하는 물리적 하드웨어 자원의 복잡함과 다양성을 상위 계층으로부터 숨기고(추상화), 사용자나 다수의 Guest OS에게 마치 자신만이 하드웨어를 독점하는 것처럼 단일하고 일관된 가상 자원 환경을 제공하고 중재하는 핵심 소프트웨어 계층의 역할을 수행합니다.",
+        "explanation": "물리 자원과 논리 자원의 분리라는 가상화의 대전제와, 그 분리된 계층 사이에서 중재자 역할을 하는 VMM의 본질적 개념을 서술해야 합니다.",
+        "difficulty": "medium",
+        "probability": "medium"
+    },
+    {
+        "id": 30,
+        "type": "essay",
+        "question": "가상화의 5대 키워드 중 '모의실험(Emulation)'의 개념을 설명하고, 모의실험을 통해 가상 환경에서 구현할 수 있는 구체적인 활용 예시를 한 가지 이상 서술하시오.",
+        "answer": "모의실험(Emulation)은 시스템이 하드웨어나 특정 환경의 특성을 소프트웨어적으로 흉내내어, 실제로 존재하지 않거나 물리적으로 불가능한 논리적 환경을 가상으로 생성해내는 특성을 의미합니다. 활용 예시로는 시스템에 실제 장착된 물리적 메모리나 디스크 공간보다 훨씬 더 큰 크기의 가상 논리 공간을 생성하여 애플리케이션에 제공하거나, 소프트웨어의 신뢰성 테스트를 위해 하드웨어 오류 등 인위적인 결함(Fault)이 발생하는 환경을 논리적으로 만들어내는 것 등이 있습니다.",
+        "explanation": "Emulation이 단순한 분리나 통합을 넘어, 물리적 제약을 극복하고 소프트웨어적으로 새로운 환경을 창조해 낸다는 개념(가상 메모리 스와핑, 결함 주입 등)을 명확하게 짚어내야 합니다.",
+        "difficulty": "medium",
+        "probability": "high"
     }
 ]

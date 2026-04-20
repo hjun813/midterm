@@ -1,108 +1,367 @@
 [
     {
-        "question": "가상화(Virtualization)의 가장 핵심적인 개념으로 올바른 것은?",
+        "id": 1,
+        "type": "multiple",
+        "question": "클라우드 컴퓨팅의 기본 개념인 '유틸리티 컴퓨팅(Utility Computing)'에 대한 설명으로 가장 적절한 것은?",
         "options": [
-            "물리적 자원과 논리적 자원을 결합하는 기술",
-            "물리적 자원과 논리적 자원을 분리하는 기술",
-            "하드웨어의 성능을 물리적으로 향상시키는 기술",
-            "운영체제를 물리적 자원에 직접 설치하는 기술"
+            "네트워크 없이 로컬 환경에서만 자원을 사용하는 개념이다.",
+            "초기 구축 비용을 대규모로 투자하여 평생 무료로 사용하는 개념이다.",
+            "필요한 만큼 컴퓨팅 자원을 사용하고, 사용한 만큼만 비용을 지불하는 개념이다.",
+            "특정 커뮤니티 전용으로 하드웨어를 분할하여 사용하는 개념이다."
         ],
-        "answer": "물리적 자원과 논리적 자원을 분리하는 기술",
-        "explanation": "가상화는 물리적 자원과 논리적 자원을 분리하는 기술입니다.",
+        "answer": "필요한 만큼 컴퓨팅 자원을 사용하고, 사용한 만큼만 비용을 지불하는 개념이다.",
+        "explanation": "클라우드 컴퓨팅은 수도, 전기와 같이 필요한 만큼 자원을 사용하고 미터링을 통해 사용한 만큼 지불(Meter)하는 유틸리티 컴퓨팅과 동일한 개념을 가집니다.",
         "difficulty": "easy",
         "probability": "high"
     },
     {
-        "question": "실제 물리적 자원의 복잡함을 숨기고 단일하며 일관된 가상 자원들을 제공하는 소프트웨어 계층을 무엇이라고 하는가? (약어가 아닌 전체 명칭으로 기입)",
-        "answer": "Virtual Machine Monitor (또는 VMM, Hypervisor)",
-        "explanation": "VMM(Virtual Machine Monitor) 또는 하이퍼바이저는 실제 물리적 자원의 복잡함을 숨기고 단일하며 일관된 가상 자원들을 제공하는 역할을 수행합니다.",
+        "id": 2,
+        "type": "multiple",
+        "question": "NIST(미국 국립표준기술연구소)에서 정의한 클라우드 컴퓨팅 모델의 전체 구성 요소가 올바르게 짝지어진 것은?",
+        "options": [
+            "4개의 본질적 특성, 2개의 서비스 모델, 3개의 전개 모델",
+            "5개의 본질적 특성, 3개의 서비스 모델, 4개의 전개 모델",
+            "3개의 본질적 특성, 4개의 서비스 모델, 5개의 전개 모델",
+            "5개의 본질적 특성, 4개의 서비스 모델, 3개의 전개 모델"
+        ],
+        "answer": "5개의 본질적 특성, 3개의 서비스 모델, 4개의 전개 모델",
+        "explanation": "NIST 정의에 따르면 클라우드 컴퓨팅은 5개의 본질적 특성, 3개의 서비스 모델(IaaS, PaaS, SaaS), 4개의 전개 모델(Public, Private, Community, Hybrid)로 구성됩니다.",
         "difficulty": "medium",
         "probability": "high"
     },
     {
-        "question": "가상화의 5가지 핵심 특징 중, 하나의 하드웨어에서 여러 개의 논리적 머신을 구동하여 서버 및 IT 자원의 이용률을 상승시키는 특징은 무엇인가?",
+        "id": 3,
+        "type": "multiple",
+        "question": "온프레미스(On-Premise) 환경과 비교했을 때, 퍼블릭 클라우드 환경이 가지는 상대적인 단점 혹은 온프레미스의 장점으로 볼 수 있는 것은?",
         "options": [
-            "Isolation (고립)",
-            "Aggregation (집계)",
-            "Mobility (이동성)",
-            "Consolidation (통합)"
+            "자원 확장의 탄력성이 뛰어나다.",
+            "초기 인프라 세팅 비용이 매우 저렴하다.",
+            "자원에 대한 독점적 소유권을 가지며 물리적 보안 및 접근 속도(낮은 Latency)가 우수하다.",
+            "하드웨어 관리자를 별도로 고용할 필요가 없어 유지비가 낮다."
         ],
-        "answer": "Consolidation (통합)",
-        "explanation": "통합(Consolidation)은 하나의 물리적 하드웨어(H/W)에서 여러 개의 논리적 머신을 구동할 수 있게 하여 서버 및 IT 자원의 이용률을 상승시키는 특징을 의미합니다.",
-        "difficulty": "easy",
+        "answer": "자원에 대한 독점적 소유권을 가지며 물리적 보안 및 접근 속도(낮은 Latency)가 우수하다.",
+        "explanation": "온프레미스는 기업 영내에 인프라를 구축하므로 높은 보안성, 독점적 소유권, 빠른 접근 속도를 가지는 것이 장점입니다. 나머지 보기는 클라우드의 장점입니다.",
+        "difficulty": "medium",
         "probability": "high"
     },
     {
-        "question": "실제 물리적 공간보다 더 큰 논리적 공간을 생성하거나, 인위적인 결함을 발생시킨 논리적 공간을 만드는 등 '실제로 존재하지 않는 물리적 공간'을 생성하는 가상화의 특징은 무엇인가?",
-        "answer": "모의실험 (Emulation)",
-        "explanation": "모의실험(Emulation)을 통해 실제 물리적 공간보다 큰 논리적 공간이나 인위적 결함을 발생시킨 공간 등 실제로 존재하지 않는 물리적 공간을 생성할 수 있습니다.",
+        "id": 4,
+        "type": "multiple",
+        "question": "클라우드 컴퓨팅의 5대 특성 중 'Resource pooling'을 구현하는 기술에 대한 설명으로 올바른 것은?",
+        "options": [
+            "클러스터링(Clustering)은 컴퓨팅 노드 사이를 가상으로 연결하여 지리적으로 넓게 분산시키는 기술이다.",
+            "그리딩(Griding)은 물리적으로 상호 연결되어 통신 속도가 이론상 광속에 가까운 단일 시스템 구성 기술이다.",
+            "클러스터링(Clustering)은 독립적인 IT 자원들을 물리적으로 연결해 하나의 단일 시스템처럼 작동하게 하는 기술이다.",
+            "가상화(Virtualization)는 소프트웨어를 서비스 형태로만 배포하는 기술이다."
+        ],
+        "answer": "클러스터링(Clustering)은 독립적인 IT 자원들을 물리적으로 연결해 하나의 단일 시스템처럼 작동하게 하는 기술이다.",
+        "explanation": "클러스터링은 물리적인 상호연결과 빠른 통신(광속)이 특징이며, 그리딩은 가상의 연결로 지리적으로 분산된 자원들을 묶는 기술입니다.",
         "difficulty": "medium",
         "probability": "medium"
     },
     {
-        "question": "가상화의 5가지 핵심 특징에 대한 설명으로 올바르지 않은 것은?",
+        "id": 5,
+        "type": "multiple",
+        "question": "클라우드의 신속한 탄력성(Rapid elasticity) 구현 방식 중, 기존 IT 자원의 사양(CPU, RAM 등)을 높이거나(Scale up) 낮추어(Scale down) 성능을 동적으로 관리하는 스케일링 방식은?",
         "options": [
-            "고립(Isolation): 각 사용자의 수행환경을 다른 환경들로부터 고립시키고 물리적 자원에 직접 접근하지 못하게 한다.",
-            "집계(Aggregation): 여러 물리 자원들을 단일한 가상 자원으로 집계하는 기술로 Clustering이나 Griding이 포함된다.",
-            "이동성(Mobility): 가상환경 상에서 동작하므로 새로운 하드웨어로 이주(migration)는 어렵지만 복제(cloning)는 쉽다.",
-            "통합(Consolidation): 하나의 물리적 하드웨어에서 여러 머신을 구동해 자원 이용률을 상승시킨다."
+            "Horizontal scaling",
+            "Vertical scaling",
+            "Diagonal scaling",
+            "Griding scaling"
         ],
-        "answer": "이동성(Mobility): 가상환경 상에서 동작하므로 새로운 하드웨어로 이주(migration)는 어렵지만 복제(cloning)는 쉽다.",
-        "explanation": "이동성(Mobility)의 특징에 따라 OS와 애플리케이션은 가상환경 상에서 동작하므로 새로운 하드웨어로 손쉽게 이주(migration)가 가능하며, 복제(cloning) 역시 쉽습니다.",
+        "answer": "Vertical scaling",
+        "explanation": "기존 자원 자체의 사양을 고사양 또는 저사양으로 변경하는 방식은 Vertical scaling(수직 확장)입니다. 대수를 늘리거나 줄이는 것은 Horizontal scaling입니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 6,
+        "type": "multiple",
+        "question": "다음 중 클라우드 서비스 모델(Service Models)과 그에 대한 설명이 바르게 연결된 것은?",
+        "options": [
+            "IaaS - 응용 프로그램 개발 도구와 컴파일러만 클라우드 서비스로 제공한다.",
+            "PaaS - 컴퓨팅 자원을 직접 제공하여 고객이 직접 원하는 OS 및 소프트웨어를 모두 설치할 수 있게 한다.",
+            "SaaS - 응용 프로그램을 완성된 클라우드 서비스로 제공하며 사용자는 유지/보수할 필요가 없다.",
+            "DaaS - 서버의 남는 유휴 자원을 대여해 주는 최초의 클라우드 개념이다."
+        ],
+        "answer": "SaaS - 응용 프로그램을 완성된 클라우드 서비스로 제공하며 사용자는 유지/보수할 필요가 없다.",
+        "explanation": "SaaS는 소프트웨어를 서비스로 제공하여 사용자의 유지보수 책임을 덜어줍니다. IaaS는 인프라 직접 제공, PaaS는 개발 플랫폼 제공 모델입니다.",
         "difficulty": "medium",
         "probability": "high"
     },
     {
-        "question": "Type I (하드웨어 기반) 하이퍼바이저와 Type II (OS 기반) 하이퍼바이저의 비교로 올바른 것은?",
+        "id": 7,
+        "type": "multiple",
+        "question": "다음 중 SaaS(Software as a Service)에 해당하는 예시로만 올바르게 묶인 것은?",
         "options": [
-            "Type I은 Host OS 위에 설치된다.",
-            "Type II는 Type I보다 성능이 높다.",
-            "Type I은 주로 개인 PC나 개발환경에서 사용된다.",
-            "Type I은 보안이 높지만 Type II의 보안은 Host OS에 의존적이다."
+            "AWS EC2, Google Compute Engine",
+            "Office 365, Google Docs, Dropbox",
+            "Google App Engine, Firebase",
+            "Samsung Cloud Platform, Kakao Cloud"
         ],
-        "answer": "Type I은 보안이 높지만 Type II의 보안은 Host OS에 의존적이다.",
-        "explanation": "Type I 하이퍼바이저는 하드웨어 위에 직접 설치되어 성능과 보안이 높습니다. 반면 Type II 하이퍼바이저는 Host OS 위에 설치되므로 성능이 상대적으로 낮고 보안도 Host OS에 의존적입니다.",
+        "answer": "Office 365, Google Docs, Dropbox",
+        "explanation": "Office 365, Google Docs, Dropbox는 모두 완성된 소프트웨어 형태를 사용자에게 제공하는 SaaS의 대표적 예시입니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 8,
+        "type": "multiple",
+        "question": "클라우드 전개 모델(Deployment Models) 중, 공통의 보안 요구사항이나 정책을 가진 특정 기관들이 모여 인프라를 공유하는 형태(예: G-Cloud)는 무엇인가?",
+        "options": [
+            "Public Cloud",
+            "Private Cloud",
+            "Community Cloud",
+            "Hybrid Cloud"
+        ],
+        "answer": "Community Cloud",
+        "explanation": "Community Cloud(커뮤니티 클라우드)는 공통의 관심사나 보안 규칙 등을 공유하는 특정 커뮤니티가 사용하는 클라우드 모델입니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 9,
+        "type": "multiple",
+        "question": "프라이빗 클라우드(Private Cloud)의 특성으로 옳지 않은 것은?",
+        "options": [
+            "오직 한 조직만을 위하여 클라우드 인프라가 운영된다.",
+            "퍼블릭 클라우드에 비해 보안 및 신뢰성 제공에 유리하다.",
+            "하드웨어 구축 비용과 관리 인력 비용이 높게 발생한다.",
+            "투자 비용 대비 탄력성이 가장 높고 서비스 수준 관리(SLA)가 불가능하다."
+        ],
+        "answer": "투자 비용 대비 탄력성이 가장 높고 서비스 수준 관리(SLA)가 불가능하다.",
+        "explanation": "Private Cloud는 서비스 수준(SLA) 관리가 가능하다는 장점이 있지만, 직접 장비를 구축해야 하므로 퍼블릭 클라우드에 비해 탄력성이 낮다는 단점이 있습니다.",
         "difficulty": "medium",
         "probability": "high"
     },
     {
-        "question": "물리적인 하드웨어 바로 위에 운영체제(Host OS)가 설치되고, 그 위에서 가상화를 지원하는 하이퍼바이저가 동작하는 아키텍처는 가상화 방식 중 어떤 타입(Type)인가?",
-        "answer": "Type II hypervisor (또는 OS-based Virtualization)",
-        "explanation": "Type II 하이퍼바이저는 설치 위치가 하드웨어가 아닌 Host OS 위이며, 주로 개인 PC 및 개발환경에서 사용되는 OS 기반 가상화(OS-based Virtualization) 방식입니다.",
+        "id": 10,
+        "type": "multiple",
+        "question": "클라우드의 본질적 특성 중 'Measured service'가 의미하는 바로 가장 올바른 것은?",
+        "options": [
+            "사용자가 서비스 제공자와 상호작용 없이 직접 컴퓨팅 자원을 할당받는 것",
+            "자원 사용량의 미터링(metering)을 통해 자원 사용을 자동으로 통제하고 최적화하는 것",
+            "네트워크를 통해 언제 어디서나 자원에 접근할 수 있게 하는 것",
+            "여러 자원을 단일 시스템처럼 보이도록 논리적으로 묶는 것"
+        ],
+        "answer": "자원 사용량의 미터링(metering)을 통해 자원 사용을 자동으로 통제하고 최적화하는 것",
+        "explanation": "Measured service(측정 가능한 서비스)는 사용량을 계량하여 최적화하고 사용한 만큼 요금을 부과하기 위한 기반 특성입니다.",
+        "difficulty": "medium",
+        "probability": "medium"
+    },
+    {
+        "id": 11,
+        "type": "ox",
+        "question": "퍼블릭 클라우드(Public Cloud)는 아마존 웹 서비스(AWS)나 마이크로소프트 애저(MS Azure)와 같이 클라우드 인프라를 일반 대중에게 제공하는 형태를 의미한다.",
+        "options": [
+            "O",
+            "X"
+        ],
+        "answer": "O",
+        "explanation": "Public Cloud는 인터넷 기반으로 일반 대중(General public)을 위해 운영되는 클라우드 전개 모델입니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 12,
+        "type": "ox",
+        "question": "PaaS(Platform as a Service) 모델에서는 고객이 운영체제(OS)와 미들웨어를 직접 설치하고 패치하는 등 인프라의 모든 영역을 직접 관리해야 한다.",
+        "options": [
+            "O",
+            "X"
+        ],
+        "answer": "X",
+        "explanation": "운영체제와 미들웨어 등 인프라 전반을 직접 설치하고 관리해야 하는 모델은 IaaS입니다. PaaS는 플랫폼 환경이 이미 갖춰져 있어 사용자는 애플리케이션의 개발과 배포에만 집중할 수 있습니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 13,
+        "type": "ox",
+        "question": "온프레미스(On-Premise) 환경은 초기 데이터센터 구축 및 장비 비용이 많이 들지만, 트래픽 변화에 즉각 대응하여 인프라를 신속하게 확장하는 탄력성(Elasticity)은 클라우드보다 뛰어나다.",
+        "options": [
+            "O",
+            "X"
+        ],
+        "answer": "X",
+        "explanation": "온프레미스 환경은 고정된 하드웨어를 바탕으로 하므로 급격한 트래픽 변화에 신속하게 자원을 확장(탄력성)하기 어렵습니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 14,
+        "type": "ox",
+        "question": "그리드 컴퓨팅(Grid Computing)은 지리적으로 분산된 컴퓨팅 자원들을 인터넷 또는 인트라넷 등 가상의 연결을 통해 하나의 논리적 플랫폼으로 제공하는 기술이다.",
+        "options": [
+            "O",
+            "X"
+        ],
+        "answer": "O",
+        "explanation": "Griding(그리딩)은 지리적으로 분산된 자원을 인터넷 등으로 가상 연결하여 플랫폼 형태로 제공하며, Clustering과 함께 Resource pooling을 구현하는 핵심 기술입니다.",
+        "difficulty": "medium",
+        "probability": "medium"
+    },
+    {
+        "id": 15,
+        "type": "ox",
+        "question": "하이브리드 클라우드(Hybrid Cloud)는 보안에 민감한 데이터는 프라이빗 클라우드에, 일반 공공 데이터는 퍼블릭 클라우드에 분산 저장하는 등 2개 이상의 클라우드를 조합해 사용하는 모델이다.",
+        "options": [
+            "O",
+            "X"
+        ],
+        "answer": "O",
+        "explanation": "Hybrid Cloud는 Private Cloud와 Public Cloud 등의 여러 전개 모델을 결합하여 각각의 장점을 취하는 형태의 클라우드 인프라입니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 16,
+        "type": "short",
+        "question": "AWS의 EC2나 S3처럼 사용자가 필요한 컴퓨팅 인프라 자원을 제공받아 직접 원하는 운영체제나 소프트웨어를 설치 및 구성할 수 있도록 해주는 클라우드 서비스 모델의 영문 약어는 무엇인가?",
+        "answer": "IaaS",
+        "explanation": "IaaS(Infrastructure as a Service)는 컴퓨팅 인프라 자원을 제공하여 고객이 가장 높은 수준의 통제권(OS 설치 등)을 가질 수 있는 서비스 모델입니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 17,
+        "type": "short",
+        "question": "동일한 유형의 IT 자원(서버 등)의 개수를 늘리거나(Scale out) 줄이는(Scale in) 방식을 통해 인프라 용량을 동적으로 조절하는 스케일링 기법을 무엇이라 하는가? (영문 2단어)",
+        "answer": "Horizontal scaling",
+        "explanation": "자원의 사양이 아닌 개수를 늘리거나 줄이는 방식을 Horizontal scaling (수평 확장)이라고 부릅니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 18,
+        "type": "short",
+        "question": "클라우드 컴퓨팅의 기원으로 꼽히며, Amazon이 인터넷 서점 운영 중 유휴 상태가 된 남는 서버 자원을 고객에게 대여해주기 시작하면서 확립된 개념입니다. 전기나 수도처럼 '필요한 만큼 빌려 쓰고 사용한 만큼 요금을 지불'하는 이 컴퓨팅 개념을 무엇이라 하는가? (영문 2단어)",
+        "answer": "Utility Computing",
+        "explanation": "유틸리티 컴퓨팅(Utility Computing)은 클라우드의 핵심 개념인 On-demand와 과금(Meter)을 기반으로 한 자원 대여 개념입니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 19,
+        "type": "short",
+        "question": "NIST 정의에 따르면 클라우드 컴퓨팅은 5개의 본질적 특성(Characteristics), 3개의 서비스 모델(Service Models), 그리고 몇 개의 전개 모델(Deployment Models)로 구성되는가? (숫자만 기입)",
+        "answer": "4",
+        "explanation": "클라우드 컴퓨팅은 Public, Private, Community, Hybrid의 4가지 전개 모델로 나뉩니다.",
         "difficulty": "easy",
         "probability": "medium"
     },
     {
-        "question": "전가상화(Full virtualization)와 반가상화(Para virtualization)에 대한 설명으로 옳지 않은 것은?",
-        "options": [
-            "전가상화는 Guest OS의 수정 없이 가상화를 진행할 수 있다.",
-            "반가상화는 Guest OS를 가상화 용도에 맞게 수정해야 한다.",
-            "전가상화에서 Hypervisor는 하드웨어를 완전히 모방(Trap-and-emulate)하여 처리한다.",
-            "반가상화에서 Guest OS는 하드웨어에 직접 Privileged instructions를 수행한다."
+        "id": 20,
+        "type": "short",
+        "question": "여러 대의 물리적 컴퓨팅 자원들을 클러스터링, 그리딩, 가상화 기술을 통해 묶어 논리적 풀(Pool) 형태로 유지하고 통합 관리하는 클라우드의 본질적 특성(Characteristic)을 무엇이라 하는가? (영문 2단어)",
+        "answer": "Resource pooling",
+        "explanation": "자원 풀링(Resource pooling)은 물리적으로 분산된 여러 IT 자원을 사용자에게 단일하고 거대한 논리적 자원 풀로 제공하는 핵심 특성입니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 21,
+        "type": "blank",
+        "question": "자원 확장의 두 가지 방식 중, [ A ] 스케일링은 기존 서버의 사양(CPU, RAM 등) 자체를 높은 사양으로 교체하는 방식이며, [ B ] 스케일링은 서버의 대수를 늘려서 부하를 분산시키는 방식이다. (영문 기입)",
+        "answer": [
+            "Vertical",
+            "Horizontal"
         ],
-        "answer": "반가상화에서 Guest OS는 하드웨어에 직접 Privileged instructions를 수행한다.",
-        "explanation": "반가상화(Para virtualization) 환경에서는 Guest OS가 물리적 자원에 직접 접근해 특권 명령(Privileged instructions)을 수행하는 대신, Hypervisor API(hypercall)를 수행하도록 동작합니다.",
+        "explanation": "사양을 변경하는 것은 Vertical(수직) scaling이며, 대수를 변경하는 것은 Horizontal(수평) scaling입니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 22,
+        "type": "blank",
+        "question": "클라우드 전개 모델 중 인터넷을 기반으로 일반 대중에게 인프라가 제공되는 형태는 [ A ] 클라우드이며, 오직 특정 단일 조직의 보안과 임무만을 위하여 영내나 전용 인프라에 운영되는 형태는 [ B ] 클라우드이다. (영문 기입)",
+        "answer": [
+            "Public",
+            "Private"
+        ],
+        "explanation": "대중에게 열린 것은 퍼블릭 클라우드, 특정 조직 전용은 프라이빗 클라우드입니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 23,
+        "type": "blank",
+        "question": "클라우드 서비스 모델 중 [ A ]은(는) 고객에게 애플리케이션 개발 도구 및 런타임 환경을 제공하며, [ B ]은(는) 구글 독스(Google Docs)나 오피스 365(Office 365)처럼 완성된 응용 프로그램을 서비스 형태로 제공한다. (영문 약어 기입)",
+        "answer": [
+            "PaaS",
+            "SaaS"
+        ],
+        "explanation": "플랫폼을 제공하는 것은 PaaS(Platform as a Service), 완성된 소프트웨어를 제공하는 것은 SaaS(Software as a Service)입니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 24,
+        "type": "blank",
+        "question": "온프레미스(On-Premise) 환경은 클라우드에 비해 인프라 초기 구축 비용이 [ A ](높고/낮고), 자원의 사용량이 급변할 때 대응하는 탄력성이 [ B ](높다/낮다)는 특징이 있다.",
+        "answer": [
+            "높고",
+            "낮다"
+        ],
+        "explanation": "온프레미스는 장비를 직접 구매하고 설치해야 하므로 초기 비용이 매우 높고, 트래픽 급증 시 신속하게 장비를 늘릴 수 없어 탄력성이 낮습니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 25,
+        "type": "blank",
+        "question": "클라우드 컴퓨팅을 가능하게 하는 핵심 기술 중 하나로, 물리적인 서버들의 복잡성을 숨기고 여러 시스템을 단일한 논리적 자원 그룹으로 묶어주는 기술인 [ A ](Clustering)과 지리적으로 분산된 자원들을 인터넷으로 연결하는 [ B ](Griding) 기술이 있다. (한글 또는 영문 기입)",
+        "answer": [
+            "클러스터링",
+            "그리딩"
+        ],
+        "explanation": "Resource pooling을 위한 대표적 기술로 클러스터링과 그리딩이 있습니다.",
+        "difficulty": "medium",
+        "probability": "medium"
+    },
+    {
+        "id": 26,
+        "type": "essay",
+        "question": "클라우드 컴퓨팅의 Resource pooling을 구현하는 핵심 기술인 클러스터링(Clustering)과 그리딩(Griding)의 차이점을 '물리적/가상적 연결 방식'과 '지리적 분포' 측면을 중심으로 서술하시오.",
+        "answer": "클러스터링은 컴퓨팅 자원들이 물리적으로 상호 연결되어 통신 속도가 빠르고 근거리에 밀집되어 단일 시스템처럼 작동합니다. 반면, 그리딩은 지리적으로 분산된 컴퓨팅 자원들을 인터넷이나 인트라넷을 통한 가상의 연결로 묶어 플랫폼 형태로 조직화한다는 차이가 있습니다.",
+        "explanation": "두 기술 모두 Resource pooling을 위한 기술이지만, 노드 간의 물리적 거리와 네트워크 연결의 본질(물리적 회선 vs 인터넷 기반 가상 연결)에서 명확한 차이를 보입니다.",
         "difficulty": "hard",
         "probability": "high"
     },
     {
-        "question": "반가상화(Para virtualization) 환경에서 Guest OS가 특권 명령(Privileged instructions)을 처리하기 위해 하드웨어에 직접 접근하는 대신 호출하는 Hypervisor API를 무엇이라고 부르는가?",
-        "answer": "Hypercall",
-        "explanation": "반가상화에서는 특권 명령 대신 Hypervisor API인 Hypercall을 수행하여 물리적 자원에 대한 접근 문제를 해결합니다.",
+        "id": 27,
+        "type": "essay",
+        "question": "기업이 새로운 서비스를 런칭하기 위해 인프라를 구축하려 합니다. 전통적인 '온프레미스(On-Premise)' 환경과 '퍼블릭 클라우드(Public Cloud)' 환경을 비교할 때, '초기 투자 및 유지 비용'과 '트래픽 변화에 대한 탄력성(Elasticity)' 측면에서 두 환경의 장단점을 서술하시오.",
+        "answer": "온프레미스 환경은 장비 구매와 데이터센터 구축 등으로 인한 초기 투자 비용이 매우 높고 지속적인 관리 인건비가 발생하며, 트래픽이 급증할 때 즉각적으로 인프라를 늘리기 어려워 탄력성이 낮습니다. 반면 퍼블릭 클라우드는 사용한 만큼만 비용을 지불하므로(Utility computing) 초기 인프라 세팅 비용이 거의 없고, 트래픽 변화에 따라 신속하고 자동적으로 자원을 늘리거나 줄일 수 있어 높은 탄력성을 가집니다.",
+        "explanation": "클라우드의 도입 배경이 되는 가장 중요한 경제적, 운영적 이점을 온프레미스의 한계와 비교하여 이해하고 있는지 평가합니다.",
         "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 28,
+        "type": "essay",
+        "question": "클라우드 서비스 모델인 IaaS, PaaS, SaaS의 가장 큰 차이점을 '사용자(고객)가 직접 관리하고 통제해야 하는 계층의 범위' 관점에서 서술하시오.",
+        "answer": "IaaS는 인프라스트럭처만 제공되므로 사용자가 운영체제(OS), 미들웨어, 애플리케이션 및 데이터 전체를 직접 설치하고 관리해야 합니다. PaaS는 OS와 런타임 환경까지 플랫폼 형태로 제공되므로, 사용자는 인프라 관리를 신경 쓰지 않고 애플리케이션 코드와 데이터만 관리하면 됩니다. SaaS는 완성된 소프트웨어 전체가 서비스로 제공되므로, 사용자는 인프라나 플랫폼에 대한 아무런 유지보수 관리 없이 소프트웨어를 사용하기만 하면 됩니다.",
+        "explanation": "3가지 서비스 모델의 차이는 클라우드 서비스 제공자와 사용자 간의 관리 책임(Management Responsibility)이 어디까지 분담되는가에 있습니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 29,
+        "type": "essay",
+        "question": "하이브리드 클라우드(Hybrid Cloud) 모델의 개념을 설명하고, 왜 기업들이 프라이빗 클라우드나 퍼블릭 클라우드 단일 모델 대신 하이브리드 클라우드를 채택하는지 그 이유를 '데이터 보안'과 '비용 효율/확장성' 측면을 들어 구체적인 예시와 함께 서술하시오.",
+        "answer": "하이브리드 클라우드는 퍼블릭 클라우드와 프라이빗 클라우드 등 두 개 이상의 인프라를 결합하여 사용하는 모델입니다. 기업은 고객의 개인정보나 회사의 핵심 기밀 데이터처럼 보안이 중요한 데이터는 강력한 통제가 가능한 프라이빗 클라우드(또는 온프레미스)에 보관하고, 대규모 트래픽 처리가 필요하거나 보안 민감도가 낮은 일반 서비스 영역은 무한한 확장성과 탄력성을 제공하는 퍼블릭 클라우드에 배치하여 보안 유지와 비용 효율성을 동시에 달성할 수 있기 때문에 이 모델을 채택합니다.",
+        "explanation": "각 전개 모델의 한계를 보완하기 위해 두 모델의 장점을 혼합하는 하이브리드 클라우드의 실무적 효용성을 묻는 문제입니다.",
+        "difficulty": "hard",
         "probability": "medium"
     },
     {
-        "question": "다음 중 가상화의 객체 기반 분류(Object-based types)에 명시된 대상이 아닌 것은?",
-        "options": [
-            "Server",
-            "Storage",
-            "Application",
-            "Network"
-        ],
-        "answer": "Application",
-        "explanation": "가상화의 분류 중 객체 기반 유형(Object-based types)에는 Server, Storage, Network, Data 등이 포함됩니다. Application은 제시된 객체 기반 유형 목록에 포함되어 있지 않습니다.",
-        "difficulty": "hard",
-        "probability": "low"
+        "id": 30,
+        "type": "essay",
+        "question": "클라우드의 핵심 특성 중 신속한 탄력성(Rapid elasticity)을 달성하기 위한 자원 스케일링 방법으로 Scale up (Vertical scaling)과 Scale out (Horizontal scaling)이 있습니다. 두 방식이 컴퓨팅 자원을 확장하는 방법을 구체적으로 비교하여 서술하시오.",
+        "answer": "Scale up (Vertical scaling)은 기존에 사용 중인 서버의 부품(CPU, 메모리 등)을 더 높은 사양으로 업그레이드하여 단일 시스템의 처리 능력을 향상시키는 수직적 확장 방식입니다. 반면 Scale out (Horizontal scaling)은 기존 서버의 사양을 높이는 대신, 동일한 사양의 인스턴스(서버) 대수를 여러 대로 늘려서 트래픽과 부하를 여러 대의 머신으로 분산시키는 수평적 확장 방식입니다.",
+        "explanation": "탄력성 관리를 위해 필수적인 스케일링 개념의 구조적 차이(사양 업그레이드 vs 대수 증가)를 파악하고 있는지 묻는 문제입니다.",
+        "difficulty": "medium",
+        "probability": "high"
     }
 ]

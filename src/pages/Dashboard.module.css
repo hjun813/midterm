@@ -39,6 +39,32 @@
 .heroActions {
   display: flex;
   gap: 12px;
+  align-items: center;
+}
+
+.shuffleToggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px 16px;
+  background-color: white;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  user-select: none;
+}
+
+.shuffleToggle input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--primary-color);
+}
+
+.shuffleText {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-secondary);
 }
 
 .btnOutline {

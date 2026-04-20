@@ -2,7 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useQuizContext } from '../context/QuizContext';
 import QuestionCard from '../components/QuestionCard';
-import { ArrowLeft, ArrowRight, BookOpen, AlertCircle } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, AlertCircle, Shuffle } from 'lucide-react';
+import { shuffleArray } from '../utils/jsonParser';
 import styles from './Mode.module.css'; // Will share styles for Modes
 
 const StudyMode: React.FC = () => {
@@ -12,18 +13,20 @@ const StudyMode: React.FC = () => {
   const searchParams = new URLSearchParams(location.search);
   const fileFilter = searchParams.get('file');
   const subjectFilter = searchParams.get('subject');
+  const isRandom = searchParams.get('random') === 'true';
   
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string>>({});
+  const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string | string[]>>({});
   const [showFeedback, setShowFeedback] = useState<Record<string, boolean>>({});
 
-  // Filter questions based on URL params
+  // Filter and optionally shuffle questions
   const questions = useMemo(() => {
     let list = state.questions;
     if (fileFilter) list = list.filter(q => q.sourceFile === fileFilter);
     else if (subjectFilter) list = list.filter(q => q.subject === subjectFilter);
-    return list;
-  }, [state.questions, fileFilter, subjectFilter]);
+    
+    return isRandom ? shuffleArray(list) : list;
+  }, [state.questions, fileFilter, subjectFilter, isRandom]);
 
   if (questions.length === 0) {
     return (
@@ -54,8 +57,17 @@ const StudyMode: React.FC = () => {
   const handleCheckAnswer = () => {
     if (!isAnswered) return;
     
-    const isCorrect = selectedAnswers[currentQuestion.id] === currentQuestion.answer;
-    if (!isCorrect) {
+    const userAnswer = selectedAnswers[currentQuestion.id];
+    let isCorrect = false;
+
+    if (currentQuestion.type === 'blank' && Array.isArray(currentQuestion.answer)) {
+      const uArr = Array.isArray(userAnswer) ? userAnswer : String(userAnswer).split(',').map(s => s.trim());
+      isCorrect = currentQuestion.answer.every((ans, i) => uArr[i]?.toLowerCase() === ans.toLowerCase());
+    } else {
+      isCorrect = String(userAnswer).trim().toLowerCase() === String(currentQuestion.answer).trim().toLowerCase();
+    }
+    
+    if (!isCorrect && currentQuestion.type !== 'essay') {
       addToIncorrectNotes(currentQuestion.id);
     }
 

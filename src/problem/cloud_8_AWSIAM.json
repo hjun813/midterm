@@ -1,46 +1,53 @@
 [
     {
-        "question": "AWS IAM의 계정 유형 중, AWS 계정 생성 시 가장 먼저 만들어지는 최고 권한의 계정으로, 보안상 공유하거나 일상적인 서비스 접근에 사용하는 것을 권장하지 않는 계정은 무엇인가?",
+        "id": 1,
+        "type": "multiple",
+        "question": "AWS IAM의 계정 유형 중, AWS 계정 생성 시 가장 먼저 만들어지는 최고 권한의 계정으로 일상적인 서비스 접근을 위한 사용이나 타인과의 공유를 권장하지 않는 계정은 무엇인가?",
         "options": [
+            "IAM User",
             "Admin Account",
-            "Master Account",
-            "Root Account",
-            "Super User"
+            "Root account",
+            "IAM Group"
         ],
-        "answer": "Root Account",
-        "explanation": "Root account는 가장 기본적으로 생성되는 계정이며, 탈취될 경우 모든 권한을 잃을 수 있기 때문에 계정 공유나 일반적인 서비스 이용 목적으로 사용하는 것을 비추천합니다.",
+        "answer": "Root account",
+        "explanation": "Root account는 AWS 계정 생성 시 기본적으로 생성되는 계정으로, 보안상 공유를 권장하지 않으며 이를 통한 일상적인 서비스 이용도 비추천됩니다.",
         "difficulty": "easy",
         "probability": "high"
     },
     {
-        "question": "IAM의 User(사용자)와 Group(그룹)에 대한 설명으로 올바르지 않은 것은?",
+        "id": 2,
+        "type": "multiple",
+        "question": "IAM의 Group(그룹)에 대한 설명으로 가장 올바른 것은?",
         "options": [
-            "User는 AWS 서비스를 사용할 실제 사용자나 애플리케이션을 의미한다.",
-            "하나의 User는 여러 개의 Group에 동시에 배정될 수 있다.",
-            "Group은 다른 Group을 포함하여 계층 구조로 만들 수 있다.",
-            "User가 반드시 어떠한 Group에 속해야만 하는 것은 아니다."
+            "Group은 다수의 IAM User를 포함할 수 있다.",
+            "계층 구조를 만들기 위해 하나의 Group 안에 다른 하위 Group을 포함할 수 있다.",
+            "Group에 할당된 Policy(정책)는 User에게 상속(Inheritance)되지 않는다.",
+            "한 명의 IAM User는 오직 하나의 Group에만 배정될 수 있다."
         ],
-        "answer": "Group은 다른 Group을 포함하여 계층 구조로 만들 수 있다.",
-        "explanation": "IAM Group은 다수의 User를 포함하여 권한을 일괄적으로 관리할 수 있지만, 다른 Group을 포함할 수는 없습니다(No nested groups).",
+        "answer": "Group은 다수의 IAM User를 포함할 수 있다.",
+        "explanation": "Group은 여러 User를 포함할 수 있으나 다른 Group을 포함(Nested)할 수는 없습니다. User는 여러 그룹에 동시에 배정될 수 있으며 Group의 정책을 모두 상속받습니다.",
         "difficulty": "medium",
         "probability": "high"
     },
     {
-        "question": "사용자에게 권한(Policy)을 부여할 때, 해당 사용자가 실제로 필요한 업무를 수행하는 데 필요한 최소한의 권한만을 부여해야 한다는 보안의 기본 원칙을 무엇이라고 하는가? (영문 주관식)",
+        "id": 3,
+        "type": "multiple",
+        "question": "사용자에게 권한을 부여할 때 해당 사용자가 실제 업무를 수행하는 데 필요한 '최소한의 권한'만을 부여해야 한다는 보안의 기본 원칙은 무엇인가?",
+        "options": [
+            "Maximum Privilege Principle",
+            "Least Privilege Principle",
+            "Role-Based Access Control",
+            "Identity Federation"
+        ],
         "answer": "Least Privilege Principle",
-        "explanation": "최소 권한의 원칙(Least Privilege Principle)은 사용자가 과도한 권한을 가짐으로써 발생할 수 있는 보안 사고를 예방하기 위해, 꼭 필요한 권한만 부여해야 한다는 원칙입니다.",
+        "explanation": "User가 실제로 필요한 권한보다 높은 권한을 주지 않아야 한다는 원칙을 Least Privilege Principle (최소 권한의 원칙)이라고 합니다.",
         "difficulty": "medium",
         "probability": "high"
     },
     {
-        "question": "IAM Policy가 특정 Group에 할당된 경우, 해당 Group에 속한 모든 User에게 권한이 동일하게 적용되는 특성을 무엇이라 하는가? (영문 주관식)",
-        "answer": "Inheritance (상속)",
-        "explanation": "Policy가 Group에 할당되면, 해당 Group에 속한 모든 User는 그 정책을 상속(Inheritance)받아 동일한 권한을 가지게 됩니다. User가 여러 그룹에 속해 있다면 각 그룹의 정책을 모두 상속받습니다.",
-        "difficulty": "easy",
-        "probability": "medium"
-    },
-    {
-        "question": "IAM Policy를 구성하는 JSON 구조(Statement) 중, 허용하거나 거부할 특정 동작이나 명령어(예: s3:GetObject)의 리스트를 명시하는 필드는 무엇인가?",
+        "id": 4,
+        "type": "multiple",
+        "question": "IAM Policy를 구성하는 Statement의 항목 중, 허용(Allow)하거나 거부(Deny)할 '특정 API 호출이나 행위(예: s3:GetObject)'를 명시하는 필드는 무엇인가?",
         "options": [
             "Effect",
             "Principal",
@@ -48,61 +55,316 @@
             "Resource"
         ],
         "answer": "Action",
-        "explanation": "Policy의 Statement 구조에서 'Action'은 허용 또는 거부할 행위(API 호출 등)의 리스트를 지정하며, 'Resource'는 해당 Action이 적용될 대상 리소스를 지정합니다.",
+        "explanation": "Statement 구조에서 'Action'은 정책을 통해 허용하거나 거부할 행위(동작)들의 리스트를 지정합니다.",
         "difficulty": "medium",
         "probability": "high"
     },
     {
-        "question": "AWS 리소스에 접근하기 위한 3가지 주요 방식과 사용되는 인증 수단이 올바르게 짝지어지지 않은 것은?",
+        "id": 5,
+        "type": "multiple",
+        "question": "AWS 리소스에 접근하기 위한 방법(Access options)과 그에 따른 인증 수단이 올바르게 짝지어진 것은?",
         "options": [
-            "AWS Management Console - Password + MFA",
-            "AWS Command Line Interface (CLI) - Access Key",
+            "AWS Management Console - Access Key",
+            "AWS Command Line Interface (CLI) - Password + MFA",
             "AWS Software Development Kit (SDK) - Access Key",
-            "AWS CloudShell - Secret Access Key"
+            "AWS CloudShell - U2F Security Key 전용"
         ],
-        "answer": "AWS CloudShell - Secret Access Key",
-        "explanation": "AWS 서비스 접근 방식은 Management Console(비밀번호+MFA), CLI(Access Key), SDK(Access Key)의 3가지 옵션이 있습니다. CloudShell은 Management Console 내에서 실행되는 브라우저 기반 CLI이므로 Console 로그인 인증을 따르며, Secret Access Key 단독으로 접근하는 수단이 아닙니다.",
+        "answer": "AWS Software Development Kit (SDK) - Access Key",
+        "explanation": "AWS 접근 옵션 중 CLI와 SDK는 프로그래밍 방식이므로 Access Key를 사용하며, Management Console은 Password와 MFA를 조합하여 로그인합니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 6,
+        "type": "multiple",
+        "question": "IAM 관리자가 설정할 수 있는 Password Policy(비밀번호 정책)에 포함되지 않는 항목은 무엇인가?",
+        "options": [
+            "비밀번호의 최소 길이 지정",
+            "대소문자, 숫자, 특수문자의 포함 강제",
+            "일정 기간 후 비밀번호 변경 강제 (Expiration time)",
+            "모든 사용자에게 동일한 임시 비밀번호 일괄 지정"
+        ],
+        "answer": "모든 사용자에게 동일한 임시 비밀번호 일괄 지정",
+        "explanation": "Password Policy는 비밀번호의 복잡성(길이, 대/소문자, 특수문자), 재사용 방지, 유효기간(expiration time) 등을 강제하는 기능입니다. 모든 사용자에게 동일한 비밀번호를 일괄 지정하는 것은 보안 정책에 어긋납니다.",
+        "difficulty": "easy",
+        "probability": "medium"
+    },
+    {
+        "id": 7,
+        "type": "multiple",
+        "question": "AWS CLI나 SDK 등에서 사용하는 Access Key의 구성 요소로 올바르게 짝지어진 것은?",
+        "options": [
+            "User Name, Password",
+            "Account ID, Secret Access Key",
+            "Access Key ID, Secret Access Key",
+            "Access Key ID, MFA Token"
+        ],
+        "answer": "Access Key ID, Secret Access Key",
+        "explanation": "Access Key는 'Access Key ID'와 'Secret Access Key' 두 가지 요소로 구성되어 한 쌍으로 동작합니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 8,
+        "type": "multiple",
+        "question": "웹 브라우저 상에서 별도의 설치 없이 AWS CLI 환경을 사용할 수 있도록 해주는 서비스로, 서울(Seoul) 리전을 포함해 제한된 리전에서만 사용할 수 있는 기능은?",
+        "options": [
+            "AWS CloudTrail",
+            "AWS CloudShell",
+            "AWS Management Console",
+            "IAM Identity Center"
+        ],
+        "answer": "AWS CloudShell",
+        "explanation": "AWS CloudShell은 브라우저 기반의 CLI 환경으로 제한된 리전(서울 포함)에서만 사용 가능합니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 9,
+        "type": "multiple",
+        "question": "IAM Policy(정책) 문서는 어떠한 데이터 포맷으로 작성 및 제공되는가?",
+        "options": [
+            "XML",
+            "JSON",
+            "YAML",
+            "CSV"
+        ],
+        "answer": "JSON",
+        "explanation": "IAM Policy는 JSON(JavaScript Object Notation) 포맷으로 구성되어 제공됩니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 10,
+        "type": "multiple",
+        "question": "다중 인증(MFA) 장치로 AWS가 지원하는 방식이 아닌 것은?",
+        "options": [
+            "Virtual MFA devices (예: 스마트폰 앱)",
+            "U2F (Universal 2nd Factor) Security Key",
+            "MFA fob (하드웨어 토큰)",
+            "SMS text message verification (문자 메시지 인증 전용 기기)"
+        ],
+        "answer": "SMS text message verification (문자 메시지 인증 전용 기기)",
+        "explanation": "강의 자료에 명시된 AWS의 MFA 기기 옵션은 Virtual MFA devices, U2F Security Key, MFA fob 입니다.",
+        "difficulty": "medium",
+        "probability": "low"
+    },
+    {
+        "id": 11,
+        "type": "ox",
+        "question": "IAM Group은 조직의 계층 구조를 반영하기 위해 하나의 Group 안에 다른 하위 Group을 포함하여 설계할 수 있다.",
+        "options": [
+            "O",
+            "X"
+        ],
+        "answer": "X",
+        "explanation": "IAM Group은 다른 Group을 포함할 수 없습니다(No nested groups). 오직 IAM User들만을 포함할 수 있습니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 12,
+        "type": "ox",
+        "question": "하나의 IAM User는 반드시 하나의 Group에 속해야 하는 것은 아니며, 필요에 따라 여러 개의 Group에 동시에 배정받을 수도 있다.",
+        "options": [
+            "O",
+            "X"
+        ],
+        "answer": "O",
+        "explanation": "User는 Group을 가지지 않을 수도 있으며, 권한 필요에 따라 여러 개의 Group에 동시에 배정될 수도 있습니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 13,
+        "type": "ox",
+        "question": "AWS Management Console에 접근할 때는 Access Key를 사용하여 로그인하며, AWS CLI 환경을 사용할 때는 Password와 MFA를 조합하여 로그인한다.",
+        "options": [
+            "O",
+            "X"
+        ],
+        "answer": "X",
+        "explanation": "반대로 설명되었습니다. Management Console은 Password와 MFA를 사용하고, CLI나 SDK 접근 시에는 Access Key를 사용합니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 14,
+        "type": "ox",
+        "question": "IAM Policy가 특정 Group에 할당되면, 해당 Group에 속한 모든 User는 별도의 추가 설정 없이도 그 Policy를 상속(Inheritance)받아 권한이 적용된다.",
+        "options": [
+            "O",
+            "X"
+        ],
+        "answer": "O",
+        "explanation": "정책 상속(Policy Inheritance)에 의해 Group에 할당된 정책은 그 그룹에 속한 모든 사용자에게 자동으로 적용됩니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 15,
+        "type": "ox",
+        "question": "보안을 위해 IAM User 개인에게 직접 Policy를 할당하는 것은 불가능하며, 반드시 Group을 생성하여 Group 단위로만 Policy를 적용해야 한다.",
+        "options": [
+            "O",
+            "X"
+        ],
+        "answer": "X",
+        "explanation": "Group 단위 관리가 모범 사례로 권장되지만, User 개인에게 직접 Policy를 적용하는 것(Inline policy)도 가능합니다.",
         "difficulty": "medium",
         "probability": "medium"
     },
     {
-        "question": "CLI나 SDK를 통해 AWS에 프로그래밍 방식으로 접근하기 위해 생성하는 Access Key는 'Access Key ID'와 'Secret Access Key'로 구성된다. 이 중 'Secret Access Key'의 관리상 가장 중요한 특징은 무엇인가?",
-        "options": [
-            "User가 언제든지 Management Console에 접속하여 다시 확인할 수 있다.",
-            "생성되는 즉시 단 한 번만 확인 및 다운로드가 가능하며, 이후에는 다시 복구할 수 없다.",
-            "Access Key ID와 동일한 값을 가지므로 별도로 기억할 필요가 없다.",
-            "1개월마다 반드시 새로운 Secret Access Key로 자동 갱신된다."
-        ],
-        "answer": "생성되는 즉시 단 한 번만 확인 및 다운로드가 가능하며, 이후에는 다시 복구할 수 없다.",
-        "explanation": "Secret Access Key는 보안상의 이유로 Access Key를 생성하는 그 순간에 단 한 번만 화면에 표시되거나 .csv 파일로 다운로드할 수 있습니다. 잃어버릴 경우 복구가 불가능하며, 기존 키를 비활성화/삭제하고 새로 생성해야 합니다.",
-        "difficulty": "hard",
+        "id": 16,
+        "type": "short",
+        "question": "User에게 과도한 권한이 주어지는 것을 막기 위해, 실제 업무에 필요한 최소한의 권한만을 부여해야 한다는 IAM의 주요 보안 원칙은 무엇인가? (영문 3단어 기입)",
+        "answer": "Least Privilege Principle",
+        "explanation": "최소 권한의 원칙(Least Privilege Principle)은 보안 사고의 피해를 최소화하기 위해 필수적인 보안 설계 원칙입니다.",
+        "difficulty": "medium",
         "probability": "high"
     },
     {
-        "question": "EC2 인스턴스가 사용자를 대신하여 S3나 Lambda와 같은 다른 AWS 서비스에 접근하고 API를 호출할 수 있도록, 임시로 권한을 위임할 때 사용하는 IAM의 구성 요소는 무엇인가?",
-        "answer": "IAM Role (역할)",
-        "explanation": "IAM Role(역할)은 특정 User나 Group에 영구적으로 할당되는 것이 아니라, EC2 인스턴스, Lambda 등 AWS 서비스 또는 다른 계정이 임시로 권한을 부여받아(Assume Role) 동작할 수 있도록 신뢰할 수 있는 엔티티(Trusted Entity)를 설정할 때 사용됩니다.",
-        "difficulty": "hard",
+        "id": 17,
+        "type": "short",
+        "question": "IAM Policy의 Statement 구성 요소 중 정책(허용/거부)이 적용될 대상이 되는 주체(계정, 유저, 역할 등)를 명시하는 필드는 무엇인가? (영문 기입)",
+        "answer": "Principal",
+        "explanation": "Statement에서 Principal 필드는 해당 권한 정책을 부여받을 대상(account/user/role 등)을 지정합니다.",
+        "difficulty": "medium",
         "probability": "high"
     },
     {
-        "question": "AWS Management Console에서 웹 브라우저를 통해 바로 CLI(Command Line Interface) 환경을 이용할 수 있도록 제공하는 서비스로, 별도의 CLI 설치 없이 서울 리전 등에서 바로 셸 명령어를 사용할 수 있게 해주는 기능의 이름은?",
+        "id": 18,
+        "type": "short",
+        "question": "AWS CLI나 SDK 등에서 인증 수단으로 사용되는 Access Key는 'Access Key ID'와 이 키로 구성된다. 비밀번호 역할을 하는 이 키의 명칭은 무엇인가? (영문 3단어 기입)",
+        "answer": "Secret Access Key",
+        "explanation": "Access Key는 공개되는 식별자인 Access Key ID와 외부에 노출되면 안 되는 Secret Access Key로 구성됩니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "id": 19,
+        "type": "short",
+        "question": "IAM Policy Statement에서 명시된 Action들이 구체적으로 어떤 AWS 대상에 적용될지를 지정하는 필드는 무엇인가? (영문 기입)",
+        "answer": "Resource",
+        "explanation": "Resource 필드는 지정된 행위(Action)가 적용될 AWS의 자원(예: 특정 S3 버킷, 특정 EC2 인스턴스 등)을 명시합니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 20,
+        "type": "short",
+        "question": "웹 브라우저 내에서 직접 구동되어 사용자에게 CLI 환경을 제공해 주는 AWS 서비스로, 서울을 포함한 일부 리전에서만 사용할 수 있는 기능은 무엇인가?",
         "answer": "AWS CloudShell",
-        "explanation": "AWS CloudShell은 웹 브라우저에서 AWS 리소스를 안전하게 관리, 탐색 및 상호 작용할 수 있도록 지원하는 브라우저 기반의 셸(CLI) 환경입니다.",
+        "explanation": "AWS CloudShell은 별도의 터미널 설치 없이 브라우저 상에서 CLI 명령을 실행할 수 있는 편리한 환경을 제공합니다.",
         "difficulty": "easy",
+        "probability": "medium"
+    },
+    {
+        "id": 21,
+        "type": "blank",
+        "question": "AWS의 접근 방법(Access options)은 크게 3가지이다. 웹 브라우저를 통한 [ A ]은(는) Password와 MFA를 이용하며, 프로그래밍 방식의 [ B ]와(과) [ C ]은(는) Access key를 이용하여 접근한다.",
+        "answer": [
+            "AWS Management Console",
+            "CLI",
+            "SDK"
+        ],
+        "explanation": "접근 방식에 따라 Management Console(콘솔), CLI(명령줄 인터페이스), SDK(소프트웨어 개발 키트)로 나뉘며 인증 수단이 달라집니다. (CLI, SDK 순서 무관)",
+        "difficulty": "medium",
         "probability": "high"
     },
     {
-        "question": "IAM 관리자가 User의 보안 강화를 위해 설정할 수 있는 Password Policy(비밀번호 정책)에 포함될 수 없는 설정은?",
-        "options": [
-            "비밀번호의 최소 길이 지정",
-            "대문자, 소문자, 숫자, 특수문자 포함 강제",
-            "일정 기간(Expiration time) 이후 비밀번호 변경 강제",
-            "모든 User가 동일한 비밀번호를 사용하도록 강제"
+        "id": 22,
+        "type": "blank",
+        "question": "IAM Policy Statement 내에서 [ A ] 필드는 권한을 'Allow' 또는 'Deny'할 것인지를 결정하며, [ B ] 필드는 해당 권한이 적용되는 특별한 제약 조건(예: 특정 IP에서만 허용)을 옵션으로 지정한다.",
+        "answer": [
+            "Effect",
+            "Condition"
         ],
-        "answer": "모든 User가 동일한 비밀번호를 사용하도록 강제",
-        "explanation": "AWS IAM Password Policy는 최소 길이, 특정 문자 유형 포함, 비밀번호 재사용 방지, 유효 기간 만료 등을 설정하여 보안을 강화하는 기능입니다. 모든 사용자가 동일한 비밀번호를 쓰도록 강제하는 것은 보안 원칙에 어긋납니다.",
+        "explanation": "Effect는 허용/거부의 결론을 나타내며, Condition은 권한이 적용되기 위한 세부 조건(optional)을 지정합니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 23,
+        "type": "blank",
+        "question": "비밀번호 보안을 강화하기 위해 관리자는 [ A ] Policy를 설정할 수 있다. 여기에는 비밀번호의 최소 길이를 제한하거나, 일정 기간 후 비밀번호 변경을 강제하는 [ B ] time 설정 등이 포함된다.",
+        "answer": [
+            "Password",
+            "expiration"
+        ],
+        "explanation": "Password Policy(비밀번호 정책)를 통해 복잡도와 만료 기간(expiration time)을 강제하여 계정 보안을 강화할 수 있습니다.",
         "difficulty": "easy",
+        "probability": "medium"
+    },
+    {
+        "id": 24,
+        "type": "blank",
+        "question": "한 명의 사용자가 여러 개의 [ A ]에 동시에 속하게 되면, 해당 그룹들에 부여된 정책들을 모두 물려받게 되는데 이러한 특성을 정책의 [ B ](Inheritance)이라고 부른다. 한편, 사용자 개인에게 독립적으로 직접 부여하는 정책을 [ C ] policy라고 한다.",
+        "answer": [
+            "Group",
+            "상속",
+            "inline"
+        ],
+        "explanation": "User는 다수의 Group(그룹)에 속해 권한을 상속(Inheritance)받을 수 있으며, 필요 시 개인 단위의 inline policy를 사용할 수 있습니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 25,
+        "type": "blank",
+        "question": "보안 강화를 위해 AWS 계정 관리에 권장되는 다중 인증(MFA) 기기 종류에는 스마트폰 앱과 같은 [ A ] MFA devices, 하드웨어 형태의 물리 보안 키인 [ B ] Security Key, 그리고 [ C ] fob 형태가 있다.",
+        "answer": [
+            "Virtual",
+            "U2F",
+            "MFA"
+        ],
+        "explanation": "AWS는 스마트폰 앱 등을 활용하는 Virtual MFA, 범용 보안 표준인 U2F(Universal 2nd Factor) Security Key, 그리고 하드웨어 토큰인 MFA fob을 지원합니다.",
+        "difficulty": "hard",
         "probability": "low"
+    },
+    {
+        "id": 26,
+        "type": "essay",
+        "question": "AWS 계정 생성 시 주어지는 'Root account'와 업무용으로 생성하는 'IAM User'의 역할 차이를 설명하고, 보안 관점에서 Root account의 관리에 대한 권장 사항을 서술하시오.",
+        "answer": "Root account는 AWS 계정을 최초로 생성할 때 만들어지는 슈퍼 관리자 계정으로 모든 권한을 가지고 있습니다. 반면 IAM User는 개발자나 보안 담당자 등 실제 서비스를 운영하고 관리할 개별 작업자를 위해 필요한 권한만을 부여하여 생성하는 계정입니다. 보안 관점에서 Root account는 권한이 무한하므로 타인과 공유하는 것을 엄격히 금지하며, 일상적인 서비스 접근이나 작업 용도로 사용하는 것 역시 매우 비추천(권장하지 않음)합니다. 대신 일상 작업은 적절한 권한이 부여된 IAM User를 생성하여 수행해야 합니다.",
+        "explanation": "가장 기본적인 계정 운영 규칙인 Root 계정의 격리 보관 및 개별 IAM User 활용의 필요성을 묻는 문제입니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 27,
+        "type": "essay",
+        "question": "IAM Policy(정책)를 정의하는 JSON 구조인 'Statement'의 구성 요소 중 'Effect', 'Action', 'Resource'가 각각 어떠한 역할을 하는지 상호 연관 지어 서술하시오.",
+        "answer": "Statement 구조에서 'Effect'는 이후에 지정되는 행위에 대해 권한을 허용(Allow)할지 거부(Deny)할지를 결정하는 지시자입니다. 'Action'은 사용자가 시도하고자 하는 구체적인 동작이나 API 명령어(예: s3:GetObject)들의 목록을 의미합니다. 마지막으로 'Resource'는 앞서 명시된 Action(행위)이 실제로 적용될 타겟 대상 자원(예: 특정 S3 버킷의 경로 등)을 명시합니다. 즉, 이 세 요소는 결합되어 '어떤 자원(Resource)'에 대해 '어떤 행위(Action)'를 '허용/거부(Effect)'할 것인지를 명확하게 규정합니다.",
+        "explanation": "권한 제어의 뼈대가 되는 정책 문서의 3대 핵심 구성 요소가 어떻게 문맥을 형성하여 권한을 제어하는지 이해하는지 평가합니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 28,
+        "type": "essay",
+        "question": "AWS CLI(Command Line Interface)나 SDK(Software Development Kit)를 통해 프로그래밍 방식으로 AWS 리소스에 접근하기 위해서는 어떠한 자격 증명(Credential)을 사용해야 하는지 명칭과 구성 요소를 적고, 인증과 관련하여 유의해야 할 보안 관리 방법에 대해 서술하시오.",
+        "answer": "CLI나 SDK 환경에서는 비밀번호 대신 'Access Key'를 사용하여 인증합니다. Access Key는 공개 아이디 역할을 하는 'Access Key ID'와 비밀번호 역할을 하는 'Secret Access Key'의 한 쌍으로 구성됩니다. 보안 관리를 위해 Access key는 각 User가 개별적으로 발급받아 안전하게 보관해야 하며, 노출 시 심각한 보안 침해가 발생할 수 있으므로 주기적으로 갱신(Rotation)해 주는 것이 필수적인 관리 사항입니다.",
+        "explanation": "프로그래밍 방식의 접근 수단인 Access Key의 구조를 파악하고, 유출 방지를 위한 주기적 갱신 등의 관리 요건을 묻는 문제입니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "id": 29,
+        "type": "essay",
+        "question": "기업 내 IAM 관리자가 사용자 계정의 보안성을 높이기 위해 'Password Policy(비밀번호 정책)'를 수립하고자 합니다. 설정 가능한 구체적인 비밀번호 제약 규칙 4가지를 서술하시오.",
+        "answer": "관리자는 Password Policy를 통해 사용자 비밀번호에 대해 다음과 같은 규칙을 강제할 수 있습니다. 1) 비밀번호의 최소 길이를 제한할 수 있습니다. 2) 대문자, 소문자, 숫자, 특수문자 등 다양한 문자 유형이 반드시 섞여 포함되도록 구성 요건을 강제할 수 있습니다. 3) 과거에 사용했던 비밀번호를 다시 쓰지 못하도록 비밀번호 재사용을 방지할 수 있습니다. 4) 일정 기간(Expiration time)이 지나면 반드시 새로운 비밀번호로 변경하도록 만료일을 설정하여 변경을 강제할 수 있습니다.",
+        "explanation": "가장 기본적인 인증 강화 수단인 비밀번호 정책 옵션들의 실무적인 적용 항목들을 정확히 숙지하고 있는지 평가합니다.",
+        "difficulty": "easy",
+        "probability": "medium"
+    },
+    {
+        "id": 30,
+        "type": "essay",
+        "question": "IAM에서 User를 Group에 배정하여 관리할 때 발생하는 권한 상속(Policy Inheritance)의 특성을 설명하고, 만약 특정 User가 2개 이상의 Group에 동시에 배정될 경우 권한 적용이 어떻게 처리되는지 서술하시오.",
+        "answer": "IAM에서는 권한 정책(Policy)을 User 개인에게 일일이 직접 할당하는 대신, Group에 정책을 부여하고 User를 그 Group에 배정함으로써 정책 관리를 효율화합니다. 이때 Group에 할당된 정책은 해당 Group에 속한 모든 User에게 자동으로 적용되는데 이를 권한 상속(Policy Inheritance)이라고 합니다. 만약 특정 User가 프로젝트나 직무상의 이유로 서로 다른 권한을 가진 2개 이상의 여러 Group에 동시에 속하게 된다면, 그 User는 자신이 속한 모든 Group의 Policy를 누적하여 모두 상속받게 되며, 여러 그룹의 권한을 합친 범위의 작업을 수행할 수 있게 됩니다.",
+        "explanation": "Group 단위 권한 관리의 편의성을 가능하게 하는 상속 개념과, 다중 그룹 소속 시의 권한 누적(Union) 원리를 이해하고 있는지 묻는 문제입니다.",
+        "difficulty": "hard",
+        "probability": "high"
     }
 ]

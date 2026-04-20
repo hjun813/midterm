@@ -10,6 +10,7 @@ const Dashboard: React.FC = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const selectedSubject = searchParams.get('subject');
+  const [isRandom, setIsRandom] = React.useState(false);
 
   // Filter questions by subject if selected, or show all if none selected
   const filteredQuestions = selectedSubject 
@@ -65,13 +66,21 @@ const Dashboard: React.FC = () => {
               : "등록된 다양한 과목의 예상 문제를 풀며 시험을 준비하세요."}
           </p>
           <div className={styles.heroActions}>
-            <button className="btn-primary" onClick={() => navigate('/study' + (selectedSubject ? `?subject=${selectedSubject}` : ''))}>
+            <button className="btn-primary" onClick={() => navigate(`/study?${selectedSubject ? `subject=${selectedSubject}&` : ''}random=${isRandom}`)}>
               과목 전체 학습하기
               <ChevronRight size={18} />
             </button>
-            <button className={`${styles.btnOutline}`} onClick={() => navigate('/exam' + (selectedSubject ? `?subject=${selectedSubject}` : ''))}>
+            <button className={`${styles.btnOutline}`} onClick={() => navigate(`/exam?${selectedSubject ? `subject=${selectedSubject}&` : ''}random=${isRandom}`)}>
               실전 테스트 응시
             </button>
+            <label className={styles.shuffleToggle}>
+              <input 
+                type="checkbox" 
+                checked={isRandom} 
+                onChange={(e) => setIsRandom(e.target.checked)} 
+              />
+              <span className={styles.shuffleText}>랜덤 섞기</span>
+            </label>
           </div>
         </div>
       </div>
@@ -113,13 +122,13 @@ const Dashboard: React.FC = () => {
               <div className={styles.chapterActions}>
                 <button 
                   className={styles.chapterBtn}
-                  onClick={() => navigate(`/study?file=${chapter.id}`)}
+                  onClick={() => navigate(`/study?file=${chapter.id}&random=${isRandom}`)}
                 >
                   학습하기
                 </button>
                 <button 
                   className={`${styles.chapterBtn} ${styles.examBtn}`}
-                  onClick={() => navigate(`/exam?file=${chapter.id}`)}
+                  onClick={() => navigate(`/exam?file=${chapter.id}&random=${isRandom}`)}
                 >
                   테스트
                 </button>

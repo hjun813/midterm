@@ -12,6 +12,8 @@ const formatTime = (seconds: number) => {
   return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
 };
 
+import { shuffleArray } from '../utils/jsonParser';
+
 const ExamMode: React.FC = () => {
   const { state, saveExamResult } = useQuizContext();
   const navigate = useNavigate();
@@ -19,19 +21,21 @@ const ExamMode: React.FC = () => {
   const searchParams = new URLSearchParams(location.search);
   const fileFilter = searchParams.get('file');
   const subjectFilter = searchParams.get('subject');
+  const isRandom = searchParams.get('random') === 'true';
   
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string>>({});
+  const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string | string[]>>({});
   const [isFinished, setIsFinished] = useState(false);
   const [examScore, setExamScore] = useState(0);
   
-  // Filter questions based on URL params
+  // Filter and optionally shuffle questions
   const questions = useMemo(() => {
     let list = state.questions;
     if (fileFilter) list = list.filter(q => q.sourceFile === fileFilter);
     else if (subjectFilter) list = list.filter(q => q.subject === subjectFilter);
-    return list;
-  }, [state.questions, fileFilter, subjectFilter]);
+    
+    return isRandom ? shuffleArray(list) : list;
+  }, [state.questions, fileFilter, subjectFilter, isRandom]);
   
   // Timer state
   const [timeLeft, setTimeLeft] = useState(questions.length * 60); // 1 min per question default
@@ -92,7 +96,17 @@ const ExamMode: React.FC = () => {
     const incorrectIds: string[] = [];
 
     questions.forEach(q => {
-      if (selectedAnswers[q.id] === q.answer) {
+      const userAnswer = selectedAnswers[q.id];
+      let isCorrect = false;
+
+      if (q.type === 'blank' && Array.isArray(q.answer)) {
+        const uArr = Array.isArray(userAnswer) ? userAnswer : String(userAnswer || '').split(',').map(s => s.trim());
+        isCorrect = q.answer.every((ans, i) => uArr[i]?.toLowerCase() === ans.toLowerCase());
+      } else {
+        isCorrect = String(userAnswer || '').trim().toLowerCase() === String(q.answer).trim().toLowerCase();
+      }
+
+      if (isCorrect || q.type === 'essay') {
         correctCount++;
       } else {
         incorrectIds.push(q.id);

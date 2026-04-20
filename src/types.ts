@@ -1,11 +1,14 @@
 export type Difficulty = 'easy' | 'medium' | 'hard';
 export type Probability = 'high' | 'medium' | 'low';
 
+export type QuestionType = 'multiple' | 'ox' | 'short' | 'blank' | 'essay';
+
 export interface Question {
   id: string;
+  type: QuestionType;
   question: string;
-  options?: string[]; // Array of strings for choices. Empty or null means short-answer.
-  answer: string;
+  options?: string[]; // Array of strings for choices.
+  answer: string | string[]; // Single string or array for blank types.
   explanation: string;
   difficulty: Difficulty;
   probability: Probability;

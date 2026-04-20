@@ -22,11 +22,14 @@ export const parseQuestionsJSON = (jsonString: string, sourcePrefix?: string): Q
     return questionsArray.map((item: any) => {
       const qText = item.question || '';
       const baseId = item.id || generateHashId(qText);
+      const qType = item.type || (item.options?.length > 0 ? 'multiple' : 'short');
+      
       return {
         id: sourcePrefix ? `${sourcePrefix}_${baseId}` : baseId,
+        type: qType,
         question: qText,
         options: item.options || [],
-        answer: String(item.answer || ''),
+        answer: Array.isArray(item.answer) ? item.answer.map(String) : String(item.answer || ''),
         explanation: item.explanation || '',
         difficulty: item.difficulty || 'medium',
         probability: item.probability || 'medium',
@@ -39,4 +42,16 @@ export const parseQuestionsJSON = (jsonString: string, sourcePrefix?: string): Q
     console.error("Failed to parse JSON:", error);
     throw new Error("올바르지 않은 JSON 형식입니다.");
   }
+};
+
+/**
+ * Shuffles an array using Fisher-Yates algorithm.
+ */
+export const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
 };
