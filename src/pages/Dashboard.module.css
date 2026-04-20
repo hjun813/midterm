@@ -100,7 +100,22 @@
 }
 
 .btnOutline:hover {
-  background-color: rgba(68, 171, 112, 0.05);
+  background-color: rgba(77, 196, 216, 0.05);
+}
+
+.btnSpecial {
+  background: linear-gradient(135deg, #ff9fb4 0%, #fa5252 100%);
+  color: white;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(250, 82, 82, 0.2);
+  transition: all 0.3s ease;
+}
+
+.btnSpecial:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(250, 82, 82, 0.3);
 }
 
 .statsGrid {

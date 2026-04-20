@@ -22,6 +22,7 @@ const ExamMode: React.FC = () => {
   const fileFilter = searchParams.get('file');
   const subjectFilter = searchParams.get('subject');
   const isRandom = searchParams.get('random') === 'true';
+  const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : null;
   
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string | string[]>>({});
@@ -34,8 +35,11 @@ const ExamMode: React.FC = () => {
     if (fileFilter) list = list.filter(q => q.sourceFile === fileFilter);
     else if (subjectFilter) list = list.filter(q => q.subject === subjectFilter);
     
-    return isRandom ? shuffleArray(list) : list;
-  }, [state.questions, fileFilter, subjectFilter, isRandom]);
+    if (isRandom) list = shuffleArray(list);
+    if (limit) list = list.slice(0, limit);
+    
+    return list;
+  }, [state.questions, fileFilter, subjectFilter, isRandom, limit]);
   
   // Timer state
   const [timeLeft, setTimeLeft] = useState(questions.length * 60); // 1 min per question default

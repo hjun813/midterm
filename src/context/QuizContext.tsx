@@ -11,12 +11,14 @@ interface QuizContextType {
   addToIncorrectNotes: (id: string) => void;
   removeFromIncorrectNotes: (id: string) => void;
   deleteQuestion: (id: string) => void;
+  setShuffleEnabled: (enabled: boolean) => void;
 }
 
 const defaultState: AppState = {
   questions: [],
   examResults: [],
-  incorrectNotes: []
+  incorrectNotes: [],
+  isShuffleEnabled: false
 };
 
 const QuizContext = createContext<QuizContextType | undefined>(undefined);
@@ -127,10 +129,15 @@ export const QuizProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }));
   };
 
+  const setShuffleEnabled = (enabled: boolean) => {
+    setState(prev => ({ ...prev, isShuffleEnabled: enabled }));
+  };
+
   return (
     <QuizContext.Provider value={{ 
         state, addQuestions, clearQuestions, saveExamResult, 
-        toggleStar, addToIncorrectNotes, removeFromIncorrectNotes, deleteQuestion 
+        toggleStar, addToIncorrectNotes, removeFromIncorrectNotes, deleteQuestion,
+        setShuffleEnabled
     }}>
       {children}
     </QuizContext.Provider>

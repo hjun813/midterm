@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
-import { BookOpen, Database, LayoutDashboard, Star, HelpCircle } from 'lucide-react';
+import { Database, LayoutDashboard, Star, HelpCircle } from 'lucide-react';
 import { useQuizContext } from '../context/QuizContext';
 import type { Question } from '../types';
 import styles from './Layout.module.css';

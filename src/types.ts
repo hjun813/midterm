@@ -29,4 +29,5 @@ export interface AppState {
   questions: Question[];
   examResults: ExamResult[];
   incorrectNotes: string[]; // Array of question IDs
+  isShuffleEnabled?: boolean;
 }

@@ -1,16 +1,16 @@
 import React from 'react';
 import { useQuizContext } from '../context/QuizContext';
-import { Database, TrendingUp, AlertTriangle, PlayCircle, ChevronRight } from 'lucide-react';
+import { Database } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './Dashboard.module.css';
 
 const Dashboard: React.FC = () => {
-  const { state } = useQuizContext();
+  const { state, setShuffleEnabled } = useQuizContext();
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const selectedSubject = searchParams.get('subject');
-  const [isRandom, setIsRandom] = React.useState(false);
+  const isRandom = state.isShuffleEnabled || false;
 
   // Random emojis for dashboard elements
   const { heroEmoji, statEmoji1, statEmoji2, statEmoji3 } = React.useMemo(() => {
@@ -85,6 +85,17 @@ const Dashboard: React.FC = () => {
             <button className={`${styles.btnOutline}`} onClick={() => navigate(`/exam?${selectedSubject ? `subject=${selectedSubject}&` : ''}random=${isRandom}`)}>
               실전 테스트
             </button>
+            <button className={`${styles.btnSpecial}`} onClick={() => navigate(`/exam?${selectedSubject ? `subject=${selectedSubject}&` : ''}random=true&limit=20`)}>
+              20문제 벼락치기
+            </button>
+            <label className={styles.shuffleToggle}>
+              <input 
+                type="checkbox" 
+                checked={isRandom} 
+                onChange={(e) => setShuffleEnabled(e.target.checked)} 
+              />
+              <span className={styles.shuffleText}>랜덤 섞기</span>
+            </label>
           </div>
         </div>
         <img src={heroEmoji} alt="hero" className={styles.heroCharacter} />
