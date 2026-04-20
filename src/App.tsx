@@ -6,6 +6,7 @@ import InputPage from './pages/InputPage';
 import StudyMode from './pages/StudyMode';
 import ExamMode from './pages/ExamMode';
 import ReviewNotes from './pages/ReviewNotes';
+import Guide from './pages/Guide';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="study" element={<StudyMode />} />
         <Route path="exam" element={<ExamMode />} />
         <Route path="review" element={<ReviewNotes />} />
+        <Route path="guide" element={<Guide />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
