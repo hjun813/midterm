@@ -58,7 +58,7 @@ const Layout: React.FC = () => {
                     className={() => `${styles.subNavItem} ${location.search.includes(`subject=${subjectStr}`) ? styles.active : ''}`}
                   >
                     <div className={styles.dot}></div>
-                    <span>{subjectStr.charAt(0).toUpperCase() + subjectStr.slice(1)}</span>
+                    <span>{subjectStr ? subjectStr.charAt(0).toUpperCase() + subjectStr.slice(1) : 'Uncategorized'}</span>
                   </NavLink>
                 );
               })}

@@ -177,9 +177,9 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
       <div className={styles.header}>
         <div className={styles.badges}>
            {index !== undefined && <span className={styles.indexBadge}>Q{index + 1}</span>}
-           <span className={styles.typeBadge}>{question.type.toUpperCase()}</span>
-           <span className={`${styles.difficulty} ${styles[question.difficulty]}`}>
-             {question.difficulty.toUpperCase()}
+           <span className={styles.typeBadge}>{(question.type || 'multiple').toUpperCase()}</span>
+           <span className={`${styles.difficulty} ${styles[question.difficulty || 'medium']}`}>
+             {(question.difficulty || 'medium').toUpperCase()}
            </span>
         </div>
         {mode === 'review' && onToggleStar && (

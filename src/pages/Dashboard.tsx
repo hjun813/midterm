@@ -49,6 +49,7 @@ const Dashboard: React.FC = () => {
   const getSafeTitle = (subject: string | null) => {
     if (!subject) return "프로그래밍 시험 대비";
     const subStr = String(subject);
+    if (!subStr) return "프로그래밍 시험 대비";
     return `${subStr.charAt(0).toUpperCase() + subStr.slice(1)} 학습`;
   };
 
