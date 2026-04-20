@@ -2,9 +2,38 @@ import React, { useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useQuizContext } from '../context/QuizContext';
 import QuestionCard from '../components/QuestionCard';
-import { ArrowLeft, ArrowRight, BookOpen, AlertCircle } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, AlertCircle, Sparkles } from 'lucide-react';
 import { shuffleArray } from '../utils/jsonParser';
 import styles from './Mode.module.css'; // Will share styles for Modes
+
+const EMOJIS = [
+  '/assets/emoji_1.png',
+  '/assets/emoji_2.png',
+  '/assets/emoji_3.png',
+  '/assets/emoji_4.png',
+  '/assets/emoji_5.png',
+  '/assets/emoji_6.png',
+  '/assets/emoji_7.png',
+  '/assets/emoji_8.png',
+  '/assets/emoji_9.png',
+  '/assets/emoji_10.png',
+  '/assets/emoji_11.png',
+  '/assets/emoji_12.png',
+  '/assets/emoji_13.png',
+  '/assets/emoji_14.png',
+  '/assets/emoji_15.png',
+  '/assets/emoji_16.png'
+];
+
+const SUCCESS_MESSAGES = [
+  "정답이에요!",
+  "천재인데요?!",
+  "참 잘했어요!",
+  "완벽해요!",
+  "대단해요!",
+  "교동이가 칭찬해요!",
+  "최고예요!"
+];
 
 const StudyMode: React.FC = () => {
   const { state, addToIncorrectNotes } = useQuizContext();
@@ -18,6 +47,9 @@ const StudyMode: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string | string[]>>({});
   const [showFeedback, setShowFeedback] = useState<Record<string, boolean>>({});
+  const [randomEmoji, setRandomEmoji] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [showEmoji, setShowEmoji] = useState(false);
 
   // Filter and optionally shuffle questions
   const questions = useMemo(() => {
@@ -69,6 +101,13 @@ const StudyMode: React.FC = () => {
     
     if (!isCorrect && currentQuestion.type !== 'essay') {
       addToIncorrectNotes(currentQuestion.id);
+    } else if (isCorrect) {
+      const emoji = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+      const msg = SUCCESS_MESSAGES[Math.floor(Math.random() * SUCCESS_MESSAGES.length)];
+      setRandomEmoji(emoji);
+      setSuccessMessage(msg);
+      setShowEmoji(true);
+      setTimeout(() => setShowEmoji(false), 1000);
     }
 
     setShowFeedback(prev => ({
@@ -148,6 +187,15 @@ const StudyMode: React.FC = () => {
           </button>
         )}
       </div>
+      {showEmoji && randomEmoji && (
+        <div className={styles.emojiOverlay}>
+          <div className={styles.emojiContent}>
+            <img src={randomEmoji} alt="celebration" className={styles.emojiImg} />
+            <div className={styles.emojiText}>{successMessage}</div>
+            <Sparkles className={styles.sparkle} size={24} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

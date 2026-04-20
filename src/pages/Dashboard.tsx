@@ -12,6 +12,18 @@ const Dashboard: React.FC = () => {
   const selectedSubject = searchParams.get('subject');
   const [isRandom, setIsRandom] = React.useState(false);
 
+  // Random emojis for dashboard elements
+  const { heroEmoji, statEmoji1, statEmoji2, statEmoji3 } = React.useMemo(() => {
+    const allEmojis = Array.from({ length: 16 }, (_, i) => `/assets/emoji_${i + 1}.png`);
+    const shuffled = [...allEmojis].sort(() => 0.5 - Math.random());
+    return {
+      heroEmoji: shuffled[0],
+      statEmoji1: shuffled[1],
+      statEmoji2: shuffled[2],
+      statEmoji3: shuffled[3]
+    };
+  }, []);
+
   // Filter questions by subject if selected, or show all if none selected
   const filteredQuestions = selectedSubject 
     ? state.questions.filter(q => q.subject === selectedSubject)
@@ -59,31 +71,23 @@ const Dashboard: React.FC = () => {
     <div className="fade-in">
       <div className={styles.heroSection}>
         <div className={styles.heroContent}>
-          <div className={styles.badge}>학습 시작하기</div>
+          <div className={styles.badge}>GyoDong과 함께 준비해요!</div>
           <h1 className={styles.title}>{pageTitle}</h1>
           <p className={styles.subtitle}>
             {selectedSubject 
-              ? `${selectedSubject} 과목의 챕터별 문제를 풀며 완벽하게 대비하세요.`
-              : "등록된 다양한 과목의 예상 문제를 풀며 시험을 준비하세요."}
+              ? `${selectedSubject} 과목도 한교동이랑 같이하면 문제 없어요!`
+              : "한교동과 함께 모든 과목을 완벽하게 마스터해봐요!"}
           </p>
           <div className={styles.heroActions}>
             <button className="btn-primary" onClick={() => navigate(`/study?${selectedSubject ? `subject=${selectedSubject}&` : ''}random=${isRandom}`)}>
-              과목 전체 학습하기
-              <ChevronRight size={18} />
+              전체 학습하기
             </button>
             <button className={`${styles.btnOutline}`} onClick={() => navigate(`/exam?${selectedSubject ? `subject=${selectedSubject}&` : ''}random=${isRandom}`)}>
-              실전 테스트 응시
+              실전 테스트
             </button>
-            <label className={styles.shuffleToggle}>
-              <input 
-                type="checkbox" 
-                checked={isRandom} 
-                onChange={(e) => setIsRandom(e.target.checked)} 
-              />
-              <span className={styles.shuffleText}>랜덤 섞기</span>
-            </label>
           </div>
         </div>
+        <img src={heroEmoji} alt="hero" className={styles.heroCharacter} />
       </div>
 
       <div className={styles.statsGrid}>
@@ -92,21 +96,21 @@ const Dashboard: React.FC = () => {
             <span className={styles.statNumber}>{totalQuestions}</span>
             <span className={styles.statLabel}>전체 문제 수</span>
           </div>
-          <PlayCircle className={styles.statIcon} size={40} />
+          <img src={statEmoji1} alt="stat" />
         </div>
         <div className={styles.statCard}>
           <div className={styles.statInfo}>
             <span className={styles.statNumber}>{incorrectCount}</span>
             <span className={styles.statLabel}>오답 노트 개수</span>
           </div>
-          <AlertTriangle className={styles.statIcon} size={40} style={{ color: 'var(--warning-color)' }} />
+          <img src={statEmoji2} alt="stat" />
         </div>
         <div className={styles.statCard}>
           <div className={styles.statInfo}>
             <span className={styles.statNumber}>{state.examResults.length}</span>
             <span className={styles.statLabel}>완료한 테스트</span>
           </div>
-          <TrendingUp className={styles.statIcon} size={40} style={{ color: 'var(--primary-color)' }} />
+          <img src={statEmoji3} alt="stat" />
         </div>
       </div>
 

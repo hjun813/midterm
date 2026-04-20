@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Premium Modern Theme */
-  --bg-color: #fcfdfe;
+  /* Hangyodong Theme */
+  --bg-color: #e0f4f9; /* Light Hangyodong Blue */
   --bg-white: #ffffff;
   --bg-sidebar: #ffffff;
   
@@ -11,27 +11,29 @@
   --text-muted: #909296;
   --text-white: #ffffff;
   
-  --primary-color: #00bf71; /* Vibrant Modern Green */
-  --primary-hover: #00a863;
-  --primary-light: #e6f9f1;
-  --primary-gradient: linear-gradient(135deg, #00bf71 0%, #00d48a 100%);
+  --primary-color: #4dc4d8; /* Hangyodong Body Blue */
+  --primary-hover: #3eb0c2;
+  --primary-light: #f0fafd;
+  --primary-gradient: linear-gradient(135deg, #4dc4d8 0%, #3bb2c5 100%);
   
-  --success-color: #00bf71;
+  --secondary-color: #ff9fb4; /* Hangyodong Friend Pink/Red */
+  
+  --success-color: #4dc4d8;
   --error-color: #fa5252;
   --warning-color: #fcc419;
 
-  --border-color: #edf2f7;
-  --border-light: #f8f9fa;
+  --border-color: #d1e9f0;
+  --border-light: #f1f8fa;
   
-  --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
-  --shadow-md: 0 4px 20px rgba(0,0,0,0.04);
-  --shadow-lg: 0 12px 30px rgba(0,0,0,0.06);
-  --shadow-premium: 0 20px 40px rgba(0, 191, 113, 0.08);
+  --shadow-sm: 0 2px 4px rgba(77, 196, 216, 0.05);
+  --shadow-md: 0 4px 20px rgba(77, 196, 216, 0.1);
+  --shadow-lg: 0 12px 30px rgba(77, 196, 216, 0.15);
+  --shadow-premium: 0 20px 40px rgba(77, 196, 216, 0.2);
 
   --font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
 }
 
 * {
@@ -43,6 +45,9 @@
 body {
   font-family: var(--font-family);
   background-color: var(--bg-color);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(77, 196, 216, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(255, 159, 180, 0.05) 0%, transparent 20%);
   color: var(--text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;

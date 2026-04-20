@@ -19,9 +19,9 @@ const Layout: React.FC = () => {
         <aside className={styles.sidebar}>
           <div className={styles.logo}>
             <div className={styles.logoCircle}>
-              <BookOpen className={styles.logoIcon} />
+              <img src="/assets/octopus.png" alt="logo" className={styles.logoImg} />
             </div>
-            <h2>ExamPrep</h2>
+            <h2>GyoDong Prep</h2>
           </div>
           
           <nav className={styles.nav}>
@@ -67,6 +67,10 @@ const Layout: React.FC = () => {
               )}
             </div>
           </nav>
+
+          <div className={styles.sidebarFooter}>
+            <img src="/assets/hangyodong_full.png" alt="hangyodong" className={styles.hangyoFull} />
+          </div>
         </aside>
       )}
       

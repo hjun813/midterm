@@ -1,22 +1,31 @@
 .heroSection {
-  background: linear-gradient(135deg, #f0fdf4 0%, #e6f9f1 100%);
+  background: linear-gradient(135deg, #e0f4f9 0%, #ffffff 100%);
   border-radius: var(--radius-lg);
-  padding: 60px;
+  padding: 80px 60px;
   margin-bottom: 40px;
-  border: 1px solid rgba(0, 191, 113, 0.1);
+  border: 1px solid var(--border-color);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-premium);
 }
 
-.heroSection::after {
-  content: '';
+.heroCharacter {
   position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(0, 191, 113, 0.1) 0%, transparent 70%);
-  border-radius: 50%;
+  top: -60px;
+  right: 60px;
+  width: 280px;
+  filter: drop-shadow(0 20px 40px rgba(77, 196, 216, 0.4));
+  animation: float 4s ease-in-out infinite;
+  z-index: 5;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }
 
 .heroContent {
@@ -110,27 +119,30 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: var(--shadow-md);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background-image: 
+    radial-gradient(circle at top right, rgba(77, 196, 216, 0.03) 0%, transparent 40%);
 }
 
 .statCard:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-premium);
   border-color: var(--primary-color);
 }
 
 .statInfo {
   display: flex;
   flex-direction: column;
+  z-index: 2;
 }
 
 .statNumber {
-  font-size: 56px;
+  font-size: 64px;
   font-weight: 900;
-  color: var(--primary-color);
+  color: #3eb0c2;
   line-height: 1;
   margin-bottom: 12px;
-  letter-spacing: -2px;
+  letter-spacing: -3px;
 }
 
 .statLabel {
@@ -139,9 +151,18 @@
   color: var(--text-primary);
 }
 
-.statIcon {
-  color: var(--primary-color);
-  opacity: 0.15;
+.statCard img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  opacity: 0.8;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+  transition: transform 0.3s ease;
+}
+
+.statCard:hover img {
+  transform: scale(1.2) rotate(10deg);
+  opacity: 1;
 }
 
 .tocSection {
