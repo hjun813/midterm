@@ -1,9 +1,22 @@
 .heroSection {
-  background-color: var(--primary-light);
+  background: linear-gradient(135deg, #f0fdf4 0%, #e6f9f1 100%);
   border-radius: var(--radius-lg);
-  padding: 40px;
-  margin-bottom: 32px;
-  border: 1px solid rgba(68, 171, 112, 0.1);
+  padding: 60px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(0, 191, 113, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.heroSection::after {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(0, 191, 113, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
 }
 
 .heroContent {
@@ -96,6 +109,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
 }
 
 .statInfo {
@@ -104,11 +125,12 @@
 }
 
 .statNumber {
-  font-size: 48px;
-  font-weight: 800;
+  font-size: 56px;
+  font-weight: 900;
   color: var(--primary-color);
   line-height: 1;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  letter-spacing: -2px;
 }
 
 .statLabel {
@@ -118,7 +140,8 @@
 }
 
 .statIcon {
-  color: var(--primary-light);
+  color: var(--primary-color);
+  opacity: 0.15;
 }
 
 .tocSection {
