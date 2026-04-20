@@ -14,6 +14,7 @@ interface QuizContextType {
   setShuffleEnabled: (enabled: boolean) => void;
   toggleExcludeQuestion: (id: string) => void;
   resetExclusions: () => void;
+  resetAllData: () => void;
 }
 
 const defaultState: AppState = {
@@ -152,11 +153,18 @@ export const QuizProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setState(prev => ({ ...prev, excludedQuestionIds: [] }));
   };
 
+  const resetAllData = () => {
+    if (window.confirm("모든 저장된 데이터(오답 노트, 별표, 등록한 문제 등)를 초기화하고 처음 상태로 되돌리시겠습니까?")) {
+      localStorage.removeItem('quizAppState');
+      window.location.reload();
+    }
+  };
+
   return (
     <QuizContext.Provider value={{ 
         state, addQuestions, clearQuestions, saveExamResult, 
         toggleStar, addToIncorrectNotes, removeFromIncorrectNotes, deleteQuestion,
-        setShuffleEnabled, toggleExcludeQuestion, resetExclusions
+        setShuffleEnabled, toggleExcludeQuestion, resetExclusions, resetAllData
     }}>
       {children}
     </QuizContext.Provider>

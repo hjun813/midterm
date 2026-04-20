@@ -5,7 +5,7 @@ import { parseQuestionsJSON } from '../utils/jsonParser';
 import styles from './InputPage.module.css';
 
 const InputPage: React.FC = () => {
-  const { addQuestions, state } = useQuizContext();
+  const { addQuestions, state, resetAllData } = useQuizContext();
   const [jsonText, setJsonText] = useState('');
   const [status, setStatus] = useState<{type: 'idle' | 'success' | 'error', message: string}>({ type: 'idle', message: '' });
 
@@ -73,11 +73,27 @@ const InputPage: React.FC = () => {
         <p className={styles.subtitle}>PPT별로 정리된 예상 문제 JSON 파일을 업로드하거나 텍스트로 붙여넣으세요.</p>
       </div>
 
-      <div className={styles.statsCard}>
+      <div className={styles.statsCard} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div className={styles.statItem}>
           <span className={styles.statLabel}>현재 저장된 총 문제 수</span>
           <span className={styles.statValue}>{state.questions.length}개</span>
         </div>
+        <button 
+          onClick={resetAllData}
+          style={{ 
+            backgroundColor: 'var(--error-color)', 
+            color: 'white', 
+            padding: '8px 16px', 
+            borderRadius: '8px', 
+            fontSize: '14px', 
+            fontWeight: '600',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}
+        >
+          데이터 전체 초기화
+        </button>
       </div>
 
       <div className={styles.grid}>
