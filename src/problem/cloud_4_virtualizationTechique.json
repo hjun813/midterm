@@ -1,0 +1,96 @@
+[
+    {
+        "question": "전가상화(Full-virtualization) 환경에서 Guest OS의 수정 없이 특권 명령(Privileged instructions)을 처리하기 위해 하이퍼바이저가 명령어를 변환하여 CPU에 작업을 보내는 기술은 무엇인가?",
+        "options": [
+            "Direct Execution",
+            "Binary Translation",
+            "Hypercall",
+            "Hardware-assisted Virtualization"
+        ],
+        "answer": "Binary Translation",
+        "explanation": "전가상화에서는 Guest OS를 수정하지 않고 가상화를 진행하기 위해, 특권 명령에 대해 하이퍼바이저가 하드웨어를 모방하여 명령어를 변환하는 Binary Translation(이진 변환) 기술을 사용합니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "question": "반가상화(Para-virtualization) 환경에서 가상화 용도에 맞게 수정된 Guest OS가 특권 명령을 직접 수행하는 대신, 하이퍼바이저(VMM)에게 보내는 API 호출을 무엇이라고 하는가? (영문 주관식)",
+        "answer": "Hypercall",
+        "explanation": "반가상화 환경에서는 수정된 Guest OS가 물리적 자원에 접근하기 위해 Privileged instructions 대신 하이퍼바이저 API인 Hypercall을 호출하여 작업을 수행합니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "question": "인텔의 VT-x나 AMD의 AMD-V와 같이 하드웨어 차원에서 가상화를 지원하는 기술(Hardware Assisted Virtualization)에서, 하이퍼바이저(VMM)와 게스트 OS(Guest OS)가 각각 실행되는 실행 모드를 올바르게 짝지은 것은?",
+        "options": [
+            "하이퍼바이저: VMX non-root mode, 게스트 OS: VMX Root mode",
+            "하이퍼바이저: VMX Root mode, 게스트 OS: VMX non-root mode",
+            "하이퍼바이저: Ring 3, 게스트 OS: Ring 0",
+            "하이퍼바이저: Ring 0, 게스트 OS: Ring 3"
+        ],
+        "answer": "하이퍼바이저: VMX Root mode, 게스트 OS: VMX non-root mode",
+        "explanation": "하드웨어 지원 가상화(HVM) 환경에서는 하드웨어 레벨에서 두 가지 모드를 제공하며, 하이퍼바이저(VMM)는 VMX Root mode에서 동작하고 게스트 OS는 VMX non-root mode에서 동작합니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "question": "가상화 환경의 CPU 스케줄링 과정에서, 하이퍼바이저는 vCPU를 물리적 코어(Physical Core)에 할당하고, Guest OS는 내부적으로 프로세스(Job)를 vCPU에 할당하는 계층적 스케줄링 방식을 무엇이라 하는가? (영문 주관식)",
+        "answer": "2-level scheduling",
+        "explanation": "CPU 가상화 환경의 스케줄링은 하이퍼바이저가 vCPU와 물리적 CPU 사이의 스케줄링을 담당하고, Guest OS가 프로세스와 vCPU 사이의 스케줄링을 담당하는 2단계 스케줄링(2-level scheduling) 방식으로 동작합니다.",
+        "difficulty": "medium",
+        "probability": "medium"
+    },
+    {
+        "question": "하이퍼바이저가 vCPU에 물리적 CPU 자원을 할당할 때, 각 vCPU에 크레딧(Credit/Ticket)을 부여하고 난수(Random)를 발생시켜 자원을 분배하는 스케줄링 기법의 이름은 무엇인가? (영문 주관식)",
+        "answer": "Lottery scheduling",
+        "explanation": "복권 스케줄링(Lottery scheduling)은 각 vCPU에 우선순위 등에 비례하여 크레딧(티켓)을 부여하고, 무작위로 난수를 발생시켜 당첨된 vCPU에게 CPU 자원을 할당하는 확률 기반의 스케줄링 기법입니다.",
+        "difficulty": "hard",
+        "probability": "medium"
+    },
+    {
+        "question": "메모리 가상화(Memory Virtualization) 환경에서 이루어지는 주소 변환(Address Translation) 과정의 올바른 순서는?",
+        "options": [
+            "Virtual Memory -> Machine Memory -> Physical Memory",
+            "Physical Memory -> Virtual Memory -> Machine Memory",
+            "Machine Memory -> Physical Memory -> Virtual Memory",
+            "Virtual Memory -> Physical Memory -> Machine Memory"
+        ],
+        "answer": "Virtual Memory -> Physical Memory -> Machine Memory",
+        "explanation": "메모리 가상화 환경에서는 프로세스의 가상 메모리(Virtual Memory)가 Guest OS의 물리 메모리(Physical Memory)로 변환되고, 하이퍼바이저에 의해 최종적으로 호스트의 머신 메모리(Machine Memory)로 매핑되는 2단계 변환을 거칩니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "question": "메모리 가상화에서 2단계의 페이지 테이블 변환(Page Table Lookup)으로 인한 성능 오버헤드를 줄이기 위해, Guest OS의 Virtual Memory를 호스트의 Machine Memory로 직접 매핑하고 이를 TLB에 캐싱하여 성능을 향상시키는 기법은 무엇인가? (영문 주관식)",
+        "answer": "Shadow Page Table",
+        "explanation": "Shadow Page Table은 게스트의 가상 메모리 주소를 실제 호스트의 물리 머신 메모리 주소로 바로 매핑하여 2단계 변환을 1단계로 줄여주며, TLB(Translation Lookaside Buffer)와 함께 사용되어 메모리 접근 성능을 획기적으로 높여줍니다.",
+        "difficulty": "hard",
+        "probability": "high"
+    },
+    {
+        "question": "메모리 가상화의 Contents-based page sharing 기법에서, 여러 가상 머신(VM)이 내용이 같은 메모리 페이지를 공유하고 있다가 특정 VM에서 해당 페이지에 쓰기(Write) 작업이 발생할 때 새로운 페이지를 할당받고 내용을 복사하는 방식을 의미하는 약어는 무엇인가? (영문 약어 주관식)",
+        "answer": "COW",
+        "explanation": "여러 VM에 동일한 OS나 애플리케이션이 구동될 때 내용이 동일한 메모리는 서로 공유(Contents-based page sharing)하다가, 데이터의 쓰기 작업이 발생하는 순간에 새로운 페이지를 할당하여 복사하는 방식을 Copy-On-Write (COW)라고 부릅니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "question": "CPU 가상화 환경에서 애플리케이션이나 운영체제가 하이퍼바이저의 Binary Translation과 같은 별도의 변환 과정을 거치지 않고 물리적 CPU에 직접 작업을 보내어 수행하게 하는 방식을 무엇이라 하는가? (영문 주관식)",
+        "answer": "Direct Execution",
+        "explanation": "Direct Execution은 게스트 환경의 일반적인 명령어나 애플리케이션 작업이 별도의 하이퍼바이저 개입 없이 CPU에서 직접 수행되도록 하여 가상화 오버헤드를 최소화하는 방식입니다.",
+        "difficulty": "easy",
+        "probability": "medium"
+    },
+    {
+        "question": "다음 중 이전 장(03장)의 리뷰 내용으로 제시된, 물리적 자원과 논리적 자원을 분리하는 가상화의 5가지 핵심 키워드(5 keywords)에 해당하지 않는 것은?",
+        "options": [
+            "Consolidation (통합)",
+            "Distribution (분산)",
+            "Isolation (고립)",
+            "Mobility (이동성)"
+        ],
+        "answer": "Distribution (분산)",
+        "explanation": "가상화의 5가지 핵심 특징은 Consolidation(통합), Isolation(고립), Aggregation(집계), Mobility(이동성), Emulation(모의실험)입니다. Distribution(분산)은 5대 키워드에 포함되지 않습니다.",
+        "difficulty": "easy",
+        "probability": "low"
+    }
+]

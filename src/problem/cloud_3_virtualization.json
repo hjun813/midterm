@@ -1,0 +1,96 @@
+[
+    {
+        "question": "인텔의 VT-x나 AMD의 AMD-V와 같이 하드웨어 차원에서 가상화를 지원하는 기술(HVM)에서 사용하는 두 가지 실행 모드는 무엇인가? (주관식)",
+        "answer": "VMX Root mode, VMX non-root mode",
+        "explanation": "하드웨어 기반 가상화(Hardware Assisted Virtualization)에서는 하이퍼바이저가 실행되는 VMX Root mode와 게스트 OS가 실행되는 VMX non-root mode로 나뉘어 동작합니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "question": "반가상화(Para-virtualization) 환경에서 수정된 Guest OS가 물리적 자원에 직접 접근하는 대신 하이퍼바이저에게 보내는 API 호출을 무엇이라고 하는가? (주관식)",
+        "answer": "Hypercall",
+        "explanation": "반가상화에서는 특권 명령(privileged operations) 대신 Hypercall이라는 하이퍼바이저 API를 호출하여 하드웨어 제어 작업을 수행합니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "question": "CPU 가상화에서 하이퍼바이저가 여러 가상 머신의 vCPU를 물리적 CPU 코어에 할당하는 스케줄링 방식은 무엇인가? (객관식)",
+        "options": [
+            "1-level scheduling",
+            "2-level scheduling",
+            "3-level scheduling",
+            "Direct Execution"
+        ],
+        "answer": "2-level scheduling",
+        "explanation": "CPU 가상화 환경에서는 하이퍼바이저가 vCPU를 물리적 코어에 할당하고, Guest OS가 내부적으로 프로세스를 vCPU에 할당하는 2-level scheduling(2단계 스케줄링) 방식으로 동작합니다.",
+        "difficulty": "medium",
+        "probability": "medium"
+    },
+    {
+        "question": "전가상화(Full Virtualization)에서 특권 명령을 처리하기 위해 하이퍼바이저를 거쳐 CPU에 작업을 보내도록 명령어를 변환하는 기술은 무엇인가? (주관식)",
+        "answer": "Binary Translation (이진 변환)",
+        "explanation": "전가상화 환경에서는 Guest OS의 수정 없이 가상화를 진행하기 위해, 특권 명령 등에 대해 하이퍼바이저가 명령어를 변환하여 CPU에 작업을 보내는 Binary Translation 기술을 사용합니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "question": "메모리 가상화 환경에서 가상 메모리(Virtual Memory) 주소를 머신 메모리(Machine Memory) 주소로 변환하기 위해 두 단계의 Page Table Lookup을 거쳐야 하는 오버헤드를 줄여주는 기법은? (객관식)",
+        "options": [
+            "Shadow Page Table",
+            "Balloon Process",
+            "COW (Copy-On-Write)",
+            "Lottery Scheduling"
+        ],
+        "answer": "Shadow Page Table",
+        "explanation": "Shadow Page Table은 게스트 OS의 가상 메모리 주소를 실제 물리적 머신 메모리 주소로 직접 매핑하여 2단계 변환 오버헤드를 줄여주는 역할을 하며, TLB(Translation Lookaside Buffer)에 캐시되어 성능을 향상시킵니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "question": "하이퍼바이저가 가상 머신들에게 실제 물리 메모리보다 더 많은 메모리를 할당하는 현상을 무엇이라고 하는가? (주관식)",
+        "answer": "Memory overcommit (메모리 오버커밋)",
+        "explanation": "실제 존재하는 물리적 메모리보다 더 많은 양의 메모리를 가상 머신들에게 할당하는 것을 Memory overcommit이라고 하며, 이를 해결하기 위해 Balloon process 기법 등이 사용됩니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "question": "Balloon process 기법에서 호스트 시스템의 메모리가 부족해질 때, 하이퍼바이저는 가상 머신 내의 Balloon을 어떻게 하여 사용하지 않는 메모리를 회수하는가? (객관식)",
+        "options": [
+            "Balloon을 팽창(Inflating)시킨다.",
+            "Balloon을 수축(Deflating)시킨다.",
+            "Balloon을 삭제(Deleting)한다.",
+            "Balloon을 일시정지(Suspending)시킨다."
+        ],
+        "answer": "Balloon을 팽창(Inflating)시킨다.",
+        "explanation": "메모리 부족이 발생하면 하이퍼바이저는 가상 머신에게 Balloon inflating(팽창)을 요구합니다. 이에 따라 가상 머신은 사용하지 않는 메모리를 Balloon에 할당하게 되고, 하이퍼바이저는 이 메모리를 회수하여 부족 문제를 해결합니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "question": "메모리 가상화의 Contents-based page sharing 기법에서, 여러 VM이 내용이 같은 메모리 페이지를 공유하다가 특정 VM에서 해당 페이지에 쓰기(Write) 작업이 발생할 때 새로운 페이지를 할당받아 복사하는 방식을 무엇이라고 하는가? (주관식/약어 기입)",
+        "answer": "COW (Copy-On-Write)",
+        "explanation": "여러 VM에 동일한 OS가 수행될 때 내용이 같은 메모리는 서로 공유하다가, Write 작업이 발생하는 순간 해당 페이지를 새롭게 할당받아 복사하는 Copy-On-Write (COW) 방식이 적용됩니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "question": "Windows 환경에서 Linux를 사용하기 위한 WSL(Windows Subsystem for Linux) 아키텍처 중, 하드웨어 바로 위에서 Hypervisor가 동작하고 그 위에서 Windows 커널과 Linux 커널이 동시에 실행되는 방식은 다음 중 어느 것인가? (객관식)",
+        "options": [
+            "WSL 1",
+            "WSL 2",
+            "Type II Virtualization",
+            "Middleware-based Virtualization"
+        ],
+        "answer": "WSL 2",
+        "explanation": "WSL 2 아키텍처는 하드웨어 위에 Hypervisor가 있고, 그 위에서 Windows NT Kernel과 Linux Kernel이 병렬로 실행되는 구조를 가집니다.",
+        "difficulty": "hard",
+        "probability": "low"
+    },
+    {
+        "question": "CPU 가상화에서 애플리케이션이나 운영체제가 변환을 거치지 않고 CPU에 직접 작업을 보내 수행하게 하는 방식을 무엇이라고 하는가? (주관식)",
+        "answer": "Direct Execution",
+        "explanation": "Direct Execution은 애플리케이션이나 운영체제가 하이퍼바이저의 별도 변환을 거치지 않고 CPU에 직접 작업을 보내는 실행 방식입니다.",
+        "difficulty": "easy",
+        "probability": "medium"
+    }
+]

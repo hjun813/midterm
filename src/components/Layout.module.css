@@ -1,0 +1,144 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  position: fixed;
+  height: 100vh;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  margin-bottom: 32px;
+}
+
+.logoCircle {
+  width: 36px;
+  height: 36px;
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.logo h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0 12px;
+}
+
+.navSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  padding: 8px 12px;
+  letter-spacing: 0.5px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.navItem:hover {
+  background-color: var(--border-light);
+  color: var(--text-primary);
+}
+
+.navItem.active {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.subNavItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.subNavItem:hover {
+  color: var(--text-primary);
+}
+
+.subNavItem.active {
+  color: var(--primary-color);
+  background-color: var(--primary-light);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--border-color);
+}
+
+.active .dot {
+  background-color: var(--primary-color);
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 16px 8px;
+}
+
+.emptyNav {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 8px 12px;
+  font-style: italic;
+}
+
+.mainContent {
+  flex: 1;
+  margin-left: 240px;
+  padding: 40px 60px;
+  max-width: 1300px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.mainContent.focusMode {
+  margin-left: 0;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}

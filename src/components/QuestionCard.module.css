@@ -1,0 +1,214 @@
+.card {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.badges {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.indexBadge {
+  background-color: var(--bg-color);
+  color: var(--text-secondary);
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid var(--border-color);
+}
+
+.difficulty {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+
+.difficulty.easy { background-color: rgba(16, 185, 129, 0.1); color: var(--success-color); }
+.difficulty.medium { background-color: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
+.difficulty.hard { background-color: rgba(239, 68, 68, 0.1); color: var(--error-color); }
+
+.starBtn {
+  color: var(--text-muted);
+  transition: all 0.2s;
+  padding: 8px;
+  border-radius: 50%;
+}
+
+.starBtn:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--warning-color);
+  transform: scale(1.1);
+}
+
+.starBtn.starred {
+  color: var(--warning-color);
+}
+
+.questionText {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 32px;
+  color: var(--text-primary);
+}
+
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.optionBtn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  text-align: left;
+  padding: 16px 20px;
+  background-color: var(--bg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.optionBtn:not(:disabled):hover {
+  border-color: var(--text-muted);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.optionMarker {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--border-color);
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.optionText {
+  flex: 1;
+  font-size: 16px;
+}
+
+.feedbackIcon {
+  margin-left: auto;
+}
+
+/* Option States */
+.selectedOption {
+  border-color: var(--primary-color);
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.selectedOption .optionMarker {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.correctOption {
+  border-color: var(--success-color);
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.correctOption .optionMarker {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.correctOption .feedbackIcon {
+  color: var(--success-color);
+}
+
+.wrongOption {
+  border-color: var(--error-color);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.wrongOption .optionMarker {
+  background-color: var(--error-color);
+  color: white;
+}
+
+.wrongOption .feedbackIcon {
+  color: var(--error-color);
+}
+
+/* Short Answer Area */
+.shortAnswerArea {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.textInput {
+  width: 100%;
+  padding: 16px;
+  background-color: var(--bg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+
+.textInput:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.textInput.correctInput { border-color: var(--success-color); }
+.textInput.wrongInput { border-color: var(--error-color); }
+
+.submitAnswerBtn {
+  align-self: flex-start;
+}
+
+.shortAnswerFeedback {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.correctText { color: var(--success-color); display: flex; align-items: center; gap: 6px; }
+.wrongText { color: var(--error-color); display: flex; align-items: center; gap: 6px; }
+
+
+/* Explanation */
+.explanationArea {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.explanationHeader {
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.explanationText {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}

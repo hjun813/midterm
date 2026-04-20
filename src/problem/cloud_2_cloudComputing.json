@@ -1,0 +1,108 @@
+[
+    {
+        "question": "가상화(Virtualization)의 가장 핵심적인 개념으로 올바른 것은?",
+        "options": [
+            "물리적 자원과 논리적 자원을 결합하는 기술",
+            "물리적 자원과 논리적 자원을 분리하는 기술",
+            "하드웨어의 성능을 물리적으로 향상시키는 기술",
+            "운영체제를 물리적 자원에 직접 설치하는 기술"
+        ],
+        "answer": "물리적 자원과 논리적 자원을 분리하는 기술",
+        "explanation": "가상화는 물리적 자원과 논리적 자원을 분리하는 기술입니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "question": "실제 물리적 자원의 복잡함을 숨기고 단일하며 일관된 가상 자원들을 제공하는 소프트웨어 계층을 무엇이라고 하는가? (약어가 아닌 전체 명칭으로 기입)",
+        "answer": "Virtual Machine Monitor (또는 VMM, Hypervisor)",
+        "explanation": "VMM(Virtual Machine Monitor) 또는 하이퍼바이저는 실제 물리적 자원의 복잡함을 숨기고 단일하며 일관된 가상 자원들을 제공하는 역할을 수행합니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "question": "가상화의 5가지 핵심 특징 중, 하나의 하드웨어에서 여러 개의 논리적 머신을 구동하여 서버 및 IT 자원의 이용률을 상승시키는 특징은 무엇인가?",
+        "options": [
+            "Isolation (고립)",
+            "Aggregation (집계)",
+            "Mobility (이동성)",
+            "Consolidation (통합)"
+        ],
+        "answer": "Consolidation (통합)",
+        "explanation": "통합(Consolidation)은 하나의 물리적 하드웨어(H/W)에서 여러 개의 논리적 머신을 구동할 수 있게 하여 서버 및 IT 자원의 이용률을 상승시키는 특징을 의미합니다.",
+        "difficulty": "easy",
+        "probability": "high"
+    },
+    {
+        "question": "실제 물리적 공간보다 더 큰 논리적 공간을 생성하거나, 인위적인 결함을 발생시킨 논리적 공간을 만드는 등 '실제로 존재하지 않는 물리적 공간'을 생성하는 가상화의 특징은 무엇인가?",
+        "answer": "모의실험 (Emulation)",
+        "explanation": "모의실험(Emulation)을 통해 실제 물리적 공간보다 큰 논리적 공간이나 인위적 결함을 발생시킨 공간 등 실제로 존재하지 않는 물리적 공간을 생성할 수 있습니다.",
+        "difficulty": "medium",
+        "probability": "medium"
+    },
+    {
+        "question": "가상화의 5가지 핵심 특징에 대한 설명으로 올바르지 않은 것은?",
+        "options": [
+            "고립(Isolation): 각 사용자의 수행환경을 다른 환경들로부터 고립시키고 물리적 자원에 직접 접근하지 못하게 한다.",
+            "집계(Aggregation): 여러 물리 자원들을 단일한 가상 자원으로 집계하는 기술로 Clustering이나 Griding이 포함된다.",
+            "이동성(Mobility): 가상환경 상에서 동작하므로 새로운 하드웨어로 이주(migration)는 어렵지만 복제(cloning)는 쉽다.",
+            "통합(Consolidation): 하나의 물리적 하드웨어에서 여러 머신을 구동해 자원 이용률을 상승시킨다."
+        ],
+        "answer": "이동성(Mobility): 가상환경 상에서 동작하므로 새로운 하드웨어로 이주(migration)는 어렵지만 복제(cloning)는 쉽다.",
+        "explanation": "이동성(Mobility)의 특징에 따라 OS와 애플리케이션은 가상환경 상에서 동작하므로 새로운 하드웨어로 손쉽게 이주(migration)가 가능하며, 복제(cloning) 역시 쉽습니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "question": "Type I (하드웨어 기반) 하이퍼바이저와 Type II (OS 기반) 하이퍼바이저의 비교로 올바른 것은?",
+        "options": [
+            "Type I은 Host OS 위에 설치된다.",
+            "Type II는 Type I보다 성능이 높다.",
+            "Type I은 주로 개인 PC나 개발환경에서 사용된다.",
+            "Type I은 보안이 높지만 Type II의 보안은 Host OS에 의존적이다."
+        ],
+        "answer": "Type I은 보안이 높지만 Type II의 보안은 Host OS에 의존적이다.",
+        "explanation": "Type I 하이퍼바이저는 하드웨어 위에 직접 설치되어 성능과 보안이 높습니다. 반면 Type II 하이퍼바이저는 Host OS 위에 설치되므로 성능이 상대적으로 낮고 보안도 Host OS에 의존적입니다.",
+        "difficulty": "medium",
+        "probability": "high"
+    },
+    {
+        "question": "물리적인 하드웨어 바로 위에 운영체제(Host OS)가 설치되고, 그 위에서 가상화를 지원하는 하이퍼바이저가 동작하는 아키텍처는 가상화 방식 중 어떤 타입(Type)인가?",
+        "answer": "Type II hypervisor (또는 OS-based Virtualization)",
+        "explanation": "Type II 하이퍼바이저는 설치 위치가 하드웨어가 아닌 Host OS 위이며, 주로 개인 PC 및 개발환경에서 사용되는 OS 기반 가상화(OS-based Virtualization) 방식입니다.",
+        "difficulty": "easy",
+        "probability": "medium"
+    },
+    {
+        "question": "전가상화(Full virtualization)와 반가상화(Para virtualization)에 대한 설명으로 옳지 않은 것은?",
+        "options": [
+            "전가상화는 Guest OS의 수정 없이 가상화를 진행할 수 있다.",
+            "반가상화는 Guest OS를 가상화 용도에 맞게 수정해야 한다.",
+            "전가상화에서 Hypervisor는 하드웨어를 완전히 모방(Trap-and-emulate)하여 처리한다.",
+            "반가상화에서 Guest OS는 하드웨어에 직접 Privileged instructions를 수행한다."
+        ],
+        "answer": "반가상화에서 Guest OS는 하드웨어에 직접 Privileged instructions를 수행한다.",
+        "explanation": "반가상화(Para virtualization) 환경에서는 Guest OS가 물리적 자원에 직접 접근해 특권 명령(Privileged instructions)을 수행하는 대신, Hypervisor API(hypercall)를 수행하도록 동작합니다.",
+        "difficulty": "hard",
+        "probability": "high"
+    },
+    {
+        "question": "반가상화(Para virtualization) 환경에서 Guest OS가 특권 명령(Privileged instructions)을 처리하기 위해 하드웨어에 직접 접근하는 대신 호출하는 Hypervisor API를 무엇이라고 부르는가?",
+        "answer": "Hypercall",
+        "explanation": "반가상화에서는 특권 명령 대신 Hypervisor API인 Hypercall을 수행하여 물리적 자원에 대한 접근 문제를 해결합니다.",
+        "difficulty": "medium",
+        "probability": "medium"
+    },
+    {
+        "question": "다음 중 가상화의 객체 기반 분류(Object-based types)에 명시된 대상이 아닌 것은?",
+        "options": [
+            "Server",
+            "Storage",
+            "Application",
+            "Network"
+        ],
+        "answer": "Application",
+        "explanation": "가상화의 분류 중 객체 기반 유형(Object-based types)에는 Server, Storage, Network, Data 등이 포함됩니다. Application은 제시된 객체 기반 유형 목록에 포함되어 있지 않습니다.",
+        "difficulty": "hard",
+        "probability": "low"
+    }
+]
