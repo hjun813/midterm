@@ -29,6 +29,9 @@ npm install
 npm run dev
 ```
 
+### Vercel 링크
+https://midterm-ten-sigma.vercel.app
+
 ## 📖 사용 가이드
 상세한 사용법은 [USAGE_GUIDE.md](./USAGE_GUIDE.md)를 참고해 주세요.
 
