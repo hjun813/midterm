@@ -72,7 +72,8 @@ const ExamMode: React.FC = () => {
 
   const currentQuestion = questions[currentIndex];
 
-  const handleSelectOption = (answer: string) => {
+  const handleSelectOption = (answer: string | string[]) => {
+    if (isFinished) return;
     setSelectedAnswers(prev => ({
       ...prev,
       [currentQuestion.id]: answer

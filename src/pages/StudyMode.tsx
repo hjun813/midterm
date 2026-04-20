@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useQuizContext } from '../context/QuizContext';
 import QuestionCard from '../components/QuestionCard';
-import { ArrowLeft, ArrowRight, BookOpen, AlertCircle, Shuffle } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, AlertCircle } from 'lucide-react';
 import { shuffleArray } from '../utils/jsonParser';
 import styles from './Mode.module.css'; // Will share styles for Modes
 
@@ -45,7 +45,7 @@ const StudyMode: React.FC = () => {
   const isAnswered = !!selectedAnswers[currentQuestion.id];
   const isFeedbackShown = showFeedback[currentQuestion.id];
 
-  const handleSelectOption = (answer: string) => {
+  const handleSelectOption = (answer: string | string[]) => {
     if (isFeedbackShown) return; // Cannot change answer after showing feedback
     
     setSelectedAnswers(prev => ({
