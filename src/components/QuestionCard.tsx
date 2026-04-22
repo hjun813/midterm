@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import type { Question } from '../types';
 import { Star, CheckCircle, XCircle, Info } from 'lucide-react';
+import { checkAnswer } from '../utils/quizUtils';
 import styles from './QuestionCard.module.css';
 
 interface QuestionCardProps {
@@ -35,17 +36,8 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   }, [selectedAnswer]);
 
   const checkIsCorrect = () => {
-    if (!selectedAnswer) return false;
-    if (question.type === 'blank' && Array.isArray(question.answer)) {
-      const userAnswers = typeof selectedAnswer === 'string' 
-        ? selectedAnswer.split(',').map(s => s.trim()) 
-        : selectedAnswer;
-      return question.answer.every((ans, i) => 
-        userAnswers[i]?.toLowerCase() === ans.toLowerCase()
-      );
-    }
     if (question.type === 'essay') return true; // Essay is self-graded/manual
-    return String(selectedAnswer).trim().toLowerCase() === String(question.answer).trim().toLowerCase();
+    return checkAnswer(selectedAnswer, question.answer, question.type || 'multiple');
   };
 
   const isCorrect = checkIsCorrect();

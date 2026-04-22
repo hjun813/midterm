@@ -67,6 +67,7 @@ const Dashboard: React.FC = () => {
 
   const pageTitle = getSafeTitle(selectedSubject);
   const isKirbyTheme = selectedSubject === 'koreanGrammer';
+  const isPinguTheme = selectedSubject === 'koreanHistory';
 
   // Pool of all Kirby assets for randomization
   const kirbyHeroPool = [
@@ -87,20 +88,41 @@ const Dashboard: React.FC = () => {
     return kirbyHeroPool[Math.floor(Math.random() * kirbyHeroPool.length)];
   }, [isKirbyTheme]);
 
+  // Expanded Pool of all available Pingu assets
+  const pinguHeroPool = [
+    "/assets/pingu_happy.png",
+    "/assets/pingu_full.png",
+    "/assets/pingu_peek.png",
+    "/assets/pingu_satisfied.png",
+    "/assets/pingu_suprised.png",
+    "/assets/pingu_tongue.jpg",
+    "/assets/pingu_angry.png",
+    "/assets/pingu_angry_2.jpg",
+    "/assets/pingu_cry.jpg",
+    "/assets/pingu_shock.jpg",
+    "/assets/pingu_study.png"
+  ];
+
+  const randomPinguHero = React.useMemo(() => {
+    return pinguHeroPool[Math.floor(Math.random() * pinguHeroPool.length)];
+  }, [isPinguTheme]);
+
   return (
     <div className="fade-in">
       <div className={styles.heroSection}>
         <div className={styles.heroContent}>
           <div className={styles.badge}>
-            {isKirbyTheme ? "💖 Kirby's Dream Land" : "🦖 Hangyo's Learning Lab"}
+            {isKirbyTheme ? "💖 Kirby's Dream Land" : (isPinguTheme ? "🐧 Pingu's Ice Village" : "🦖 Hangyo's Learning Lab")}
           </div>
           <h1 className={styles.title}>{pageTitle}</h1>
           <p className={styles.subtitle}>
             {isKirbyTheme 
               ? "커비와 함께 꿈의 샘에서 즐겁게 한글 문법을 배워보아요! 뾰로롱~✨"
-              : (selectedSubject === 'cloud'
-                ? "구름 위를 걷는 듯 가벼운 마음으로 클라우드 컴퓨팅을 마스터해볼까요? ☁️"
-                : "한교동과 함께라면 어떤 과목이든 문제없어요! 지금 바로 시작하세요!")}
+              : (isPinguTheme
+                ? "핑구와 핑가, 그리고 친구들과 함께 남극처럼 시원하게 한국사를 마스터해볼까요? Noot Noot! 🐧❄️"
+                : (selectedSubject === 'cloud'
+                  ? "구름 위를 걷는 듯 가벼운 마음으로 클라우드 컴퓨팅을 마스터해볼까요? ☁️"
+                  : "한교동과 함께라면 어떤 과목이든 문제없어요! 지금 바로 시작하세요!"))}
           </p>
           <div className={styles.heroActions}>
             <button className="btn-primary" onClick={() => navigate(`/study?${selectedSubject ? `subject=${selectedSubject}&` : ''}random=${isRandom}`)}>
@@ -112,9 +134,11 @@ const Dashboard: React.FC = () => {
             <button className={`${styles.btnSpecial}`} onClick={() => navigate(`/exam?${selectedSubject ? `subject=${selectedSubject}&` : ''}random=true&limit=20`)}>
               {isKirbyTheme ? (
                 <img src="/assets/kirby_car.png" alt="car" style={{ width: '24px', marginRight: '8px', verticalAlign: 'middle' }} />
+              ) : (isPinguTheme ? (
+                <span style={{ marginRight: '8px' }}>⛄</span>
               ) : (
                 <span style={{ marginRight: '8px' }}>🚀</span>
-              )}
+              ))}
               20문제 벼락치기
             </button>
             <label className={styles.shuffleToggle}>
@@ -151,7 +175,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
         <img 
-          src={isKirbyTheme ? randomKirbyHero : heroEmoji} 
+          src={isKirbyTheme ? randomKirbyHero : (isPinguTheme ? randomPinguHero : heroEmoji)} 
           alt="hero" 
           className={styles.heroCharacter} 
         />
@@ -163,27 +187,28 @@ const Dashboard: React.FC = () => {
             <span className={styles.statNumber}>{totalQuestions}</span>
             <span className={styles.statLabel}>전체 문제 수</span>
           </div>
-          <img src={isKirbyTheme ? "/assets/kirby_inhale.jpg" : statEmoji1} alt="stat" />
+          <img src={isKirbyTheme ? "/assets/kirby_inhale.jpg" : (isPinguTheme ? "/assets/pingu_satisfied.png" : statEmoji1)} alt="stat" />
         </div>
         <div className={styles.statCard}>
           <div className={styles.statInfo}>
             <span className={styles.statNumber}>{incorrectCount}</span>
             <span className={styles.statLabel}>오답 노트 개수</span>
           </div>
-          <img src={isKirbyTheme ? "/assets/enemy_waddle.png" : statEmoji2} alt="stat" />
+          <img src={isKirbyTheme ? "/assets/enemy_waddle.png" : (isPinguTheme ? "/assets/pingu_angry.png" : statEmoji2)} alt="stat" />
         </div>
         <div className={styles.statCard}>
           <div className={styles.statInfo}>
             <span className={styles.statNumber}>{state.examResults.length}</span>
             <span className={styles.statLabel}>완료한 테스트</span>
           </div>
-          <img src={isKirbyTheme ? "/assets/kirby_eat.jpg" : statEmoji3} alt="stat" />
+          <img src={isKirbyTheme ? "/assets/kirby_eat.jpg" : (isPinguTheme ? "/assets/pingu_tongue.jpg" : statEmoji3)} alt="stat" />
         </div>
       </div>
 
       <div className={styles.tocSection}>
         <h2 className={styles.tocTitle}>
           {isKirbyTheme && <img src="/assets/waddle_dee_jump.png" alt="jump" style={{ width: '32px', marginRight: '10px', verticalAlign: 'middle' }} />}
+          {isPinguTheme && <span style={{ fontSize: '24px', marginRight: '10px' }}>📁</span>}
           목차
         </h2>
         <div className={styles.chapterList}>

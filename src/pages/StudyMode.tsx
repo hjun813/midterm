@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useQuizContext } from '../context/QuizContext';
+import { checkAnswer } from '../utils/quizUtils';
 import QuestionCard from '../components/QuestionCard';
 import { ArrowLeft, ArrowRight, BookOpen, AlertCircle, Sparkles, EyeOff } from 'lucide-react';
 import { shuffleArray } from '../utils/jsonParser';
@@ -54,6 +55,7 @@ const StudyMode: React.FC = () => {
   
   const currentSubject = subjectFilter || (fileFilter ? state.questions.find(q => q.sourceFile === fileFilter)?.subject : null);
   const isKirbyTheme = currentSubject === 'koreanGrammer';
+  const isPinguTheme = currentSubject === 'koreanHistory';
 
   // Filter and optionally shuffle questions
   const questions = useMemo(() => {
@@ -102,14 +104,7 @@ const StudyMode: React.FC = () => {
     if (!isAnswered) return;
     
     const userAnswer = selectedAnswers[currentQuestion.id];
-    let isCorrect = false;
-
-    if (currentQuestion.type === 'blank' && Array.isArray(currentQuestion.answer)) {
-      const uArr = Array.isArray(userAnswer) ? userAnswer : String(userAnswer).split(',').map(s => s.trim());
-      isCorrect = currentQuestion.answer.every((ans, i) => uArr[i]?.toLowerCase() === ans.toLowerCase());
-    } else {
-      isCorrect = String(userAnswer).trim().toLowerCase() === String(currentQuestion.answer).trim().toLowerCase();
-    }
+    const isCorrect = checkAnswer(userAnswer, currentQuestion.answer, currentQuestion.type || 'multiple');
     
     if (!isCorrect && currentQuestion.type !== 'essay') {
       addToIncorrectNotes(currentQuestion.id);
@@ -117,6 +112,20 @@ const StudyMode: React.FC = () => {
       if (isKirbyTheme) {
         setRandomEmoji('/assets/kirby_sick.jpg');
         setSuccessMessage("앗! 다시 한번 생각해보세요.");
+        setShowEmoji(true);
+        setTimeout(() => setShowEmoji(false), 1500);
+      } else if (isPinguTheme) {
+        const pinguIncorrectEmojis = [
+          '/assets/pingu_angry.png',
+          '/assets/pingu_angry_2.jpg',
+          '/assets/pingu_cry.jpg',
+          '/assets/pingu_shock.jpg',
+          '/assets/pingu_suprised.png'
+        ];
+        const randomIncorrectEmoji = pinguIncorrectEmojis[Math.floor(Math.random() * pinguIncorrectEmojis.length)];
+        
+        setRandomEmoji(randomIncorrectEmoji);
+        setSuccessMessage("앗! 핑구가 속상해해요. 다시 해볼까요?");
         setShowEmoji(true);
         setTimeout(() => setShowEmoji(false), 1500);
       }
@@ -136,15 +145,34 @@ const StudyMode: React.FC = () => {
         '/assets/waddle_dee_jump.png',
         '/assets/waddle_dee_group.png'
       ];
-      const kirbyMessages = ["커비가 칭찬해요!", "뾰로롱! 정답이에요!", "정말 대단해!", "커비처럼 완벽해요!", "꿈의 샘의 기운이 느껴져요!", "커비도 동의해요!", "Yep! Yep! 최고예요!", "와들디와 함께 정답!", "와들디가 박수를 보내요!"];
-      
+      const pinguEmojis = [
+        '/assets/pingu_happy.png',
+        '/assets/pingu_full.png',
+        '/assets/pingu_satisfied.png',
+        '/assets/pingu_tongue.jpg',
+        '/assets/pingu_study.png'
+      ];
+      const pinguMessages = [
+        "Noot Noot! 정답이에요!", 
+        "핑구가 박수를 쳐요! 🐧", 
+        "핑가가 너무 기뻐서 춤을 춰요! ❄️", 
+        "요리사 핑구가 축하의 의미로 생선을 준비했대요! 🐟", 
+        "핑구의 썰매처럼 빠르게 정답을 맞히셨네요!", 
+        "대단해요! 핑구 가족이 모두 기뻐하고 있어요! 🐧💖",
+        "열공 중인 핑구도 인정하는 정답입니다!"
+      ];
+
       const emoji = isKirbyTheme 
         ? kirbyEmojis[Math.floor(Math.random() * kirbyEmojis.length)]
-        : EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+        : (isPinguTheme 
+            ? pinguEmojis[Math.floor(Math.random() * pinguEmojis.length)]
+            : EMOJIS[Math.floor(Math.random() * EMOJIS.length)]);
       
       const msg = isKirbyTheme
         ? kirbyMessages[Math.floor(Math.random() * kirbyMessages.length)]
-        : SUCCESS_MESSAGES[Math.floor(Math.random() * SUCCESS_MESSAGES.length)];
+        : (isPinguTheme
+            ? pinguMessages[Math.floor(Math.random() * pinguMessages.length)]
+            : SUCCESS_MESSAGES[Math.floor(Math.random() * SUCCESS_MESSAGES.length)]);
         
       setRandomEmoji(emoji);
       setSuccessMessage(msg);

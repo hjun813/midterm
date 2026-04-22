@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { useQuizContext } from '../context/QuizContext';
+import { checkAnswer } from '../utils/quizUtils';
 import QuestionCard from '../components/QuestionCard';
 import { PenTool, AlertCircle, Clock, CheckCircle } from 'lucide-react';
 import styles from './Mode.module.css';
@@ -102,14 +103,7 @@ const ExamMode: React.FC = () => {
 
     questions.forEach(q => {
       const userAnswer = selectedAnswers[q.id];
-      let isCorrect = false;
-
-      if (q.type === 'blank' && Array.isArray(q.answer)) {
-        const uArr = Array.isArray(userAnswer) ? userAnswer : String(userAnswer || '').split(',').map(s => s.trim());
-        isCorrect = q.answer.every((ans, i) => uArr[i]?.toLowerCase() === ans.toLowerCase());
-      } else {
-        isCorrect = String(userAnswer || '').trim().toLowerCase() === String(q.answer).trim().toLowerCase();
-      }
+      const isCorrect = checkAnswer(userAnswer, q.answer, q.type || 'multiple');
 
       if (isCorrect || q.type === 'essay') {
         correctCount++;

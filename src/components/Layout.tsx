@@ -19,15 +19,17 @@ const Layout: React.FC = () => {
   
   const currentSubject = subjectFilter || (fileFilter ? state.questions.find(q => q.sourceFile === fileFilter)?.subject : null);
   const isKirbyTheme = currentSubject === 'koreanGrammer';
+  const isPinguTheme = currentSubject === 'koreanHistory';
 
   // Apply theme class to body for global consistency
   React.useEffect(() => {
+    document.body.classList.remove('theme-kirby', 'theme-pingu');
     if (isKirbyTheme) {
       document.body.classList.add('theme-kirby');
-    } else {
-      document.body.classList.remove('theme-kirby');
+    } else if (isPinguTheme) {
+      document.body.classList.add('theme-pingu');
     }
-  }, [isKirbyTheme]);
+  }, [isKirbyTheme, isPinguTheme]);
 
   return (
     <div 
@@ -38,9 +40,13 @@ const Layout: React.FC = () => {
         <aside className={styles.sidebar}>
           <div className={styles.logo}>
             <div className={styles.logoCircle}>
-              <img src={isKirbyTheme ? "/assets/kirby_classic.png" : "/assets/octopus.png"} alt="logo" className={styles.logoImg} />
+              <img 
+                src={isKirbyTheme ? "/assets/kirby_classic.png" : (isPinguTheme ? "/assets/pingu_happy.png" : "/assets/octopus.png")} 
+                alt="logo" 
+                className={styles.logoImg} 
+              />
             </div>
-            <h2>{isKirbyTheme ? "Kirby Prep" : "GyoDong Prep"}</h2>
+            <h2>{isKirbyTheme ? "Kirby Prep" : (isPinguTheme ? "Pingu History" : "GyoDong Prep")}</h2>
           </div>
           
           <nav className={styles.nav}>
@@ -78,9 +84,11 @@ const Layout: React.FC = () => {
                   >
                     {isKirbyTheme && subjectStr === 'koreanGrammer' ? (
                       <img src="/assets/kirby_round.png" alt="dot" style={{ width: '16px', height: '16px', marginRight: '10px' }} />
+                    ) : (isPinguTheme && subjectStr === 'koreanHistory' ? (
+                      <span style={{ fontSize: '16px', marginRight: '10px' }}>🐧</span>
                     ) : (
                       <div className={styles.dot}></div>
-                    )}
+                    ))}
                     <span>{subjectStr ? subjectStr.charAt(0).toUpperCase() + subjectStr.slice(1) : 'Uncategorized'}</span>
                   </NavLink>
                 );
@@ -93,7 +101,7 @@ const Layout: React.FC = () => {
 
           <div className={styles.sidebarFooter}>
             <img 
-              src={isKirbyTheme ? "/assets/kirby_hero.png" : "/assets/hangyodong_full.png"} 
+              src={isKirbyTheme ? "/assets/kirby_hero.png" : (isPinguTheme ? "/assets/pingu_full.png" : "/assets/hangyodong_full.png")} 
               alt="character" 
               className={styles.hangyoFull} 
             />
