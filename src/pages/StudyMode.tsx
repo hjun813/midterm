@@ -145,6 +145,8 @@ const StudyMode: React.FC = () => {
         '/assets/waddle_dee_jump.png',
         '/assets/waddle_dee_group.png'
       ];
+      const kirbyMessages = ["커비가 칭찬해요!", "뾰로롱! 정답이에요!", "정말 대단해!", "커비처럼 완벽해요!", "꿈의 샘의 기운이 느껴져요!", "커비도 동의해요!", "Yep! Yep! 최고예요!", "와들디와 함께 정답!", "와들디가 박수를 보내요!"];
+      
       const pinguEmojis = [
         '/assets/pingu_happy.png',
         '/assets/pingu_full.png',
