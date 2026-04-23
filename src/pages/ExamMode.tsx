@@ -126,17 +126,31 @@ const ExamMode: React.FC = () => {
     setIsFinished(true);
   };
 
+  const currentSubject = subjectFilter || (fileFilter ? state.questions.find(q => q.sourceFile === fileFilter)?.subject : null);
+  const isKirbyTheme = currentSubject === 'koreanGrammer';
+  const isPinguTheme = currentSubject === 'koreanHistory';
+  const isSlowpokeTheme = currentSubject === 'multiProcess';
+
   if (isFinished) {
     return (
       <div className={`${styles.container} fade-in`} style={{ justifyContent: 'center', alignItems: 'center' }}>
         <div className="card text-center" style={{ maxWidth: '600px', width: '100%', padding: '48px' }}>
-          <CheckCircle size={64} className="mb-4" style={{ color: 'var(--success-color)', margin: '0 auto' }} />
-          <h2 style={{ fontSize: '32px', marginBottom: '16px' }}>시험 완료!</h2>
+          <div style={{ position: 'relative', display: 'inline-block', marginBottom: '24px' }}>
+            <CheckCircle size={64} style={{ color: 'var(--success-color)', margin: '0 auto' }} />
+            {isKirbyTheme && <img src="/assets/kirby_hero.png" alt="kirby" style={{ position: 'absolute', top: '-20px', right: '-40px', width: '60px' }} />}
+            {isPinguTheme && <img src="/assets/pingu_happy.png" alt="pingu" style={{ position: 'absolute', top: '-20px', right: '-40px', width: '60px' }} />}
+            {isSlowpokeTheme && <img src="/assets/slowpoke_3.webp" alt="slowpoke" style={{ position: 'absolute', top: '-20px', right: '-40px', width: '60px' }} />}
+          </div>
+          <h2 style={{ fontSize: '32px', marginBottom: '16px' }}>
+            {isSlowpokeTheme ? "오... 다 풀었나요...?" : "시험 완료!"}
+          </h2>
           <div style={{ fontSize: '64px', fontWeight: '700', color: 'var(--primary-color)', marginBottom: '32px' }}>
             {examScore}점
           </div>
           <p className="text-secondary" style={{ marginBottom: '40px', fontSize: '18px' }}>
-            총 {questions.length}문제 중 {Math.round((examScore/100)*questions.length)}문제 정답
+            {isSlowpokeTheme 
+              ? `천천히... ${questions.length}문제 중 ${Math.round((examScore/100)*questions.length)}문제를 맞혔어요...`
+              : `총 ${questions.length}문제 중 ${Math.round((examScore/100)*questions.length)}문제 정답`}
           </p>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
             <button className="btn-secondary" onClick={() => navigate('/review')}>

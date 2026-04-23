@@ -101,6 +101,44 @@
   --shadow-premium: 0 30px 60px rgba(0, 100, 200, 0.18);
 }
 
+/* Slowpoke Theme Overrides */
+.theme-slowpoke {
+  --bg-color: #fff0f5; /* Lavender Blush */
+  --bg-white: #ffffff;
+  
+  --primary-color: #ffa6c9; /* Slowpoke Body Pink */
+  --primary-hover: #ff8fb9;
+  --primary-light: #fff5f8;
+  --primary-gradient: linear-gradient(135deg, #ffa6c9 0%, #ff80ab 100%);
+  
+  --secondary-color: #fff9e6; /* Slowpoke Snout Cream */
+  
+  --success-color: #ffa6c9;
+  --border-color: #ffe1ed;
+  --border-light: #fff0f5;
+  
+  --hero-bg: linear-gradient(135deg, #fff0f5 0%, #fff9e6 100%);
+  --hero-shadow: rgba(255, 166, 201, 0.4);
+  --stat-number-color: #ff80ab;
+  --peek-character: url('/assets/slowpoke_3.webp');
+  --bg-sidebar: #fffafd;
+  --card-bg-gradient: radial-gradient(circle at top right, rgba(255, 166, 201, 0.1) 0%, transparent 40%);
+
+  --shadow-sm: 0 2px 4px rgba(255, 166, 201, 0.1);
+  --shadow-md: 0 4px 20px rgba(255, 166, 201, 0.15);
+  --shadow-lg: 0 12px 30px rgba(255, 166, 201, 0.2);
+  --shadow-premium: 0 20px 40px rgba(255, 166, 201, 0.25);
+}
+
+body.theme-slowpoke {
+  background-image: 
+    radial-gradient(circle at 0% 0%, rgba(255, 166, 201, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(255, 249, 230, 0.2) 0%, transparent 50%),
+    linear-gradient(180deg, #fff0f5 0%, #ffffff 100%);
+  background-attachment: fixed;
+}
+
+
 body.theme-pingu {
   background-image: 
     radial-gradient(circle at 0% 0%, rgba(0, 162, 255, 0.08) 0%, transparent 50%),

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuizContext } from '../context/QuizContext';
-import { Database } from 'lucide-react';
+import { Database, Lightbulb } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './Dashboard.module.css';
 
@@ -68,6 +68,7 @@ const Dashboard: React.FC = () => {
   const pageTitle = getSafeTitle(selectedSubject);
   const isKirbyTheme = selectedSubject === 'koreanGrammer';
   const isPinguTheme = selectedSubject === 'koreanHistory';
+  const isSlowpokeTheme = selectedSubject === 'multiProcess';
 
   // Pool of all Kirby assets for randomization
   const kirbyHeroPool = [
@@ -107,12 +108,31 @@ const Dashboard: React.FC = () => {
     return pinguHeroPool[Math.floor(Math.random() * pinguHeroPool.length)];
   }, [isPinguTheme]);
 
+  // Pool of all Slowpoke assets
+  const slowpokeHeroPool = [
+    "/assets/slowpoke_1.jpeg",
+    "/assets/slowpoke_2.jpeg",
+    "/assets/slowpoke_3.webp",
+    "/assets/slowpoke_4.jpg",
+    "/assets/slowpoke_5.jpg",
+    "/assets/slowpoke_6.jpg",
+    "/assets/slowpoke_7.jpg",
+    "/assets/slowpoke_8.jpg",
+    "/assets/slowpoke_9.jpg",
+    "/assets/slowpoke_10.jpg",
+    "/assets/slowpoke_11.jpg"
+  ];
+
+  const randomSlowpokeHero = React.useMemo(() => {
+    return slowpokeHeroPool[Math.floor(Math.random() * slowpokeHeroPool.length)];
+  }, [isSlowpokeTheme]);
+
   return (
     <div className="fade-in">
       <div className={styles.heroSection}>
         <div className={styles.heroContent}>
           <div className={styles.badge}>
-            {isKirbyTheme ? "💖 Kirby's Dream Land" : (isPinguTheme ? "🐧 Pingu's Ice Village" : "🦖 Hangyo's Learning Lab")}
+            {isKirbyTheme ? "💖 Kirby's Dream Land" : (isPinguTheme ? "🐧 Pingu's Ice Village" : (isSlowpokeTheme ? "🐚 Slowpoke's Lazy Beach" : "🦖 Hangyo's Learning Lab"))}
           </div>
           <h1 className={styles.title}>{pageTitle}</h1>
           <p className={styles.subtitle}>
@@ -120,9 +140,11 @@ const Dashboard: React.FC = () => {
               ? "커비와 함께 꿈의 샘에서 즐겁게 한글 문법을 배워보아요! 뾰로롱~✨"
               : (isPinguTheme
                 ? "핑구와 핑가, 그리고 친구들과 함께 남극처럼 시원하게 한국사를 마스터해볼까요? Noot Noot! 🐧❄️"
-                : (selectedSubject === 'cloud'
-                  ? "구름 위를 걷는 듯 가벼운 마음으로 클라우드 컴퓨팅을 마스터해볼까요? ☁️"
-                  : "한교동과 함께라면 어떤 과목이든 문제없어요! 지금 바로 시작하세요!"))}
+                : (isSlowpokeTheme
+                  ? "야돈과 함께라면 운영체제도 느긋하게 정복할 수 있어요... 야돈야돈... 🐚💤"
+                  : (selectedSubject === 'cloud'
+                    ? "구름 위를 걷는 듯 가벼운 마음으로 클라우드 컴퓨팅을 마스터해볼까요? ☁️"
+                    : "한교동과 함께라면 어떤 과목이든 문제없어요! 지금 바로 시작하세요!")))}
           </p>
           <div className={styles.heroActions}>
             <button className="btn-primary" onClick={() => navigate(`/study?${selectedSubject ? `subject=${selectedSubject}&` : ''}random=${isRandom}`)}>
@@ -136,9 +158,11 @@ const Dashboard: React.FC = () => {
                 <img src="/assets/kirby_car.png" alt="car" style={{ width: '24px', marginRight: '8px', verticalAlign: 'middle' }} />
               ) : (isPinguTheme ? (
                 <span style={{ marginRight: '8px' }}>⛄</span>
+              ) : (isSlowpokeTheme ? (
+                <span style={{ marginRight: '8px' }}>🏖️</span>
               ) : (
                 <span style={{ marginRight: '8px' }}>🚀</span>
-              ))}
+              )))}
               20문제 벼락치기
             </button>
             <label className={styles.shuffleToggle}>
@@ -175,7 +199,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
         <img 
-          src={isKirbyTheme ? randomKirbyHero : (isPinguTheme ? randomPinguHero : heroEmoji)} 
+          src={isKirbyTheme ? randomKirbyHero : (isPinguTheme ? randomPinguHero : (isSlowpokeTheme ? randomSlowpokeHero : heroEmoji))} 
           alt="hero" 
           className={styles.heroCharacter} 
         />
@@ -187,21 +211,21 @@ const Dashboard: React.FC = () => {
             <span className={styles.statNumber}>{totalQuestions}</span>
             <span className={styles.statLabel}>전체 문제 수</span>
           </div>
-          <img src={isKirbyTheme ? "/assets/kirby_inhale.jpg" : (isPinguTheme ? "/assets/pingu_satisfied.png" : statEmoji1)} alt="stat" />
+          <img src={isKirbyTheme ? "/assets/kirby_inhale.jpg" : (isPinguTheme ? "/assets/pingu_satisfied.png" : (isSlowpokeTheme ? "/assets/slowpoke_3.webp" : statEmoji1))} alt="stat" />
         </div>
         <div className={styles.statCard}>
           <div className={styles.statInfo}>
             <span className={styles.statNumber}>{incorrectCount}</span>
             <span className={styles.statLabel}>오답 노트 개수</span>
           </div>
-          <img src={isKirbyTheme ? "/assets/enemy_waddle.png" : (isPinguTheme ? "/assets/pingu_angry.png" : statEmoji2)} alt="stat" />
+          <img src={isKirbyTheme ? "/assets/enemy_waddle.png" : (isPinguTheme ? "/assets/pingu_angry.png" : (isSlowpokeTheme ? "/assets/slowpoke_4.jpg" : statEmoji2))} alt="stat" />
         </div>
         <div className={styles.statCard}>
           <div className={styles.statInfo}>
             <span className={styles.statNumber}>{state.examResults.length}</span>
             <span className={styles.statLabel}>완료한 테스트</span>
           </div>
-          <img src={isKirbyTheme ? "/assets/kirby_eat.jpg" : (isPinguTheme ? "/assets/pingu_tongue.jpg" : statEmoji3)} alt="stat" />
+          <img src={isKirbyTheme ? "/assets/kirby_eat.jpg" : (isPinguTheme ? "/assets/pingu_tongue.jpg" : (isSlowpokeTheme ? "/assets/slowpoke_5.jpg" : statEmoji3))} alt="stat" />
         </div>
       </div>
 
@@ -209,6 +233,7 @@ const Dashboard: React.FC = () => {
         <h2 className={styles.tocTitle}>
           {isKirbyTheme && <img src="/assets/waddle_dee_jump.png" alt="jump" style={{ width: '32px', marginRight: '10px', verticalAlign: 'middle' }} />}
           {isPinguTheme && <span style={{ fontSize: '24px', marginRight: '10px' }}>📁</span>}
+          {isSlowpokeTheme && <span style={{ fontSize: '24px', marginRight: '10px' }}>🏖️</span>}
           목차
         </h2>
         <div className={styles.chapterList}>
@@ -251,6 +276,93 @@ const Dashboard: React.FC = () => {
           )}
         </div>
       </div>
+
+      {isSlowpokeTheme && (
+        <div className={`${styles.studyGuideSection} fade-in`}>
+          <h2 className={styles.studyGuideTitle}>
+            <Lightbulb className="text-yellow-500" />
+            핵심 학습 가이드 (시험 단골 주제)
+          </h2>
+          <div className={styles.studyGuideGrid}>
+            <div className={styles.studyGuideCard}>
+              <div className={styles.guideHeader}>
+                <h4>1. 레지스터 및 버스</h4>
+                <div className={styles.importance}>★★★</div>
+              </div>
+              <div className={styles.guideContent}>
+                <ul>
+                  <li><strong>주소 버스:</strong> CPU → 외부 (단방향), 최대 기억장치 용량 결정</li>
+                  <li><strong>데이터 버스:</strong> CPU ↔ 기억장치 (양방향), 데이터 전송</li>
+                  <li><strong>MAR vs MBR:</strong> MAR(주소 일시 저장), MBR(데이터 일시 저장)</li>
+                </ul>
+              </div>
+              <div className={styles.tipBadge}>기초 개념 필수 암기</div>
+            </div>
+
+            <div className={styles.studyGuideCard}>
+              <div className={styles.guideHeader}>
+                <h4>2. 명령어 사이클</h4>
+                <div className={styles.importance}>★★★★★</div>
+              </div>
+              <div className={styles.guideContent}>
+                <ul>
+                  <li><strong>인출 사이클:</strong> $t_0(PC \to MAR)$, $t_1(M[MAR] \to MBR, PC+1)$, $t_2(MBR \to IR)$</li>
+                  <li><strong>간접 사이클:</strong> 실제 데이터 주소(유효 주소)를 가져오는 단계</li>
+                  <li><strong>JUMP 명령어:</strong> $t_0$에 PC에 목적지 주소를 직접 적재</li>
+                </ul>
+              </div>
+              <div className={styles.tipBadge}>마이크로 연산 순서 100% 출제</div>
+            </div>
+
+            <div className={styles.studyGuideCard}>
+              <div className={styles.guideHeader}>
+                <h4>3. 주소지정 방식</h4>
+                <div className={styles.importance}>★★★★</div>
+              </div>
+              <div className={styles.guideContent}>
+                <ul>
+                  <li><strong>직접 vs 간접:</strong> 직접(액세스 1번, 제한적), 간접(액세스 2번, 확장성)</li>
+                  <li><strong>상대 주소지정:</strong> PC + 변위, 분기 명령어에 사용</li>
+                  <li><strong>계산 문제:</strong> 명령어 비트 구조 기반 유효 주소 도출</li>
+                </ul>
+              </div>
+              <div className={styles.tipBadge}>장단점 및 계산법 비교</div>
+            </div>
+
+            <div className={styles.studyGuideCard}>
+              <div className={styles.guideHeader}>
+                <h4>4. 파이프라이닝</h4>
+                <div className={styles.importance}>★★★</div>
+              </div>
+              <div className={styles.guideContent}>
+                <ul>
+                  <li><strong>속도 향상($S_p$):</strong> $S_p = (k \times N) / (k + N - 1)$ 공식 활용</li>
+                  <li><strong>해저드:</strong> 성능 저하 요인 (특히 조건 분기)</li>
+                  <li><strong>슈퍼스칼라:</strong> 여러 파이프라인으로 동시 실행</li>
+                </ul>
+              </div>
+              <div className={styles.tipBadge}>성능 분석 계산 연습</div>
+            </div>
+
+            <div className={styles.studyGuideCard}>
+              <div className={styles.guideHeader}>
+                <h4>5. 최신 프로세서</h4>
+                <div className={styles.importance}>★★</div>
+              </div>
+              <div className={styles.guideContent}>
+                <ul>
+                  <li><strong>인텔 하이브리드:</strong> P-코어(고성능) vs E-코어(저전력/효율)</li>
+                  <li><strong>트렌드:</strong> 멀티코어 및 전력 효율 중점 설계</li>
+                </ul>
+              </div>
+              <div className={styles.tipBadge}>최신 기술 트렌드 이해</div>
+            </div>
+          </div>
+          <div style={{ marginTop: '24px', padding: '16px', background: 'rgba(255, 166, 201, 0.1)', borderRadius: '12px', fontSize: '14px', border: '1px dashed var(--primary-color)' }}>
+            <strong>💡 시험 팁:</strong> 인출 사이클의 마이크로 연산 순서와 파이프라인 속도 향상 계산은 거의 100% 출제되는 단골 문제이니 꼭 손으로 직접 써보며 익히시길 권장합니다!
+          </div>
+        </div>
+      )}
     </div>
   );
 };

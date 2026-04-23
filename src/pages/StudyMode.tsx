@@ -56,6 +56,7 @@ const StudyMode: React.FC = () => {
   const currentSubject = subjectFilter || (fileFilter ? state.questions.find(q => q.sourceFile === fileFilter)?.subject : null);
   const isKirbyTheme = currentSubject === 'koreanGrammer';
   const isPinguTheme = currentSubject === 'koreanHistory';
+  const isSlowpokeTheme = currentSubject === 'multiProcess';
 
   // Filter and optionally shuffle questions
   const questions = useMemo(() => {
@@ -128,6 +129,11 @@ const StudyMode: React.FC = () => {
         setSuccessMessage("앗! 핑구가 속상해해요. 다시 해볼까요?");
         setShowEmoji(true);
         setTimeout(() => setShowEmoji(false), 1500);
+      } else if (isSlowpokeTheme) {
+        setRandomEmoji('/assets/slowpoke_6.jpg');
+        setSuccessMessage("어라...? 틀렸나...?");
+        setShowEmoji(true);
+        setTimeout(() => setShowEmoji(false), 2000); // Slowpoke is slow
       }
     } else if (isCorrect) {
       const kirbyEmojis = [
@@ -164,22 +170,47 @@ const StudyMode: React.FC = () => {
         "열공 중인 핑구도 인정하는 정답입니다!"
       ];
 
+      const slowpokeEmojis = [
+        '/assets/slowpoke_1.jpeg',
+        '/assets/slowpoke_2.jpeg',
+        '/assets/slowpoke_3.webp',
+        '/assets/slowpoke_4.jpg',
+        '/assets/slowpoke_5.jpg',
+        '/assets/slowpoke_7.jpg',
+        '/assets/slowpoke_8.jpg',
+        '/assets/slowpoke_9.jpg',
+        '/assets/slowpoke_10.jpg',
+        '/assets/slowpoke_11.jpg'
+      ];
+      const slowpokeMessages = [
+        "와... 맞았어요... (3초 뒤)", 
+        "천천히... 정답이에요...", 
+        "하아암... 잘했어요...", 
+        "야돈야돈! 정답이다!", 
+        "어...? 정답이었네...?", 
+        "느릿느릿 정답 완료!"
+      ];
+
       const emoji = isKirbyTheme 
         ? kirbyEmojis[Math.floor(Math.random() * kirbyEmojis.length)]
         : (isPinguTheme 
             ? pinguEmojis[Math.floor(Math.random() * pinguEmojis.length)]
-            : EMOJIS[Math.floor(Math.random() * EMOJIS.length)]);
+            : (isSlowpokeTheme
+                ? slowpokeEmojis[Math.floor(Math.random() * slowpokeEmojis.length)]
+                : EMOJIS[Math.floor(Math.random() * EMOJIS.length)]));
       
       const msg = isKirbyTheme
         ? kirbyMessages[Math.floor(Math.random() * kirbyMessages.length)]
         : (isPinguTheme
             ? pinguMessages[Math.floor(Math.random() * pinguMessages.length)]
-            : SUCCESS_MESSAGES[Math.floor(Math.random() * SUCCESS_MESSAGES.length)]);
+            : (isSlowpokeTheme
+                ? slowpokeMessages[Math.floor(Math.random() * slowpokeMessages.length)]
+                : SUCCESS_MESSAGES[Math.floor(Math.random() * SUCCESS_MESSAGES.length)]));
         
       setRandomEmoji(emoji);
       setSuccessMessage(msg);
       setShowEmoji(true);
-      setTimeout(() => setShowEmoji(false), 1000);
+      setTimeout(() => setShowEmoji(false), isSlowpokeTheme ? 2000 : 1000);
     }
 
     setShowFeedback(prev => ({

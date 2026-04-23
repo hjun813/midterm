@@ -290,6 +290,109 @@
   color: var(--text-muted);
 }
 
+.studyGuideSection {
+  margin-top: 48px;
+  background-color: var(--bg-white);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+}
+
+.studyGuideTitle {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 32px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.studyGuideGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.studyGuideCard {
+  background: var(--bg-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.studyGuideCard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
+}
+
+.guideHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.guideHeader h4 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.importance {
+  color: #ffcc00;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.guideContent {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.guideContent ul {
+  list-style: none;
+  padding: 0;
+}
+
+.guideContent li {
+  margin-bottom: 12px;
+  padding-left: 18px;
+  position: relative;
+}
+
+.guideContent li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.guideContent strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.tipBadge {
+  margin-top: auto;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary-color);
+  background: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  display: inline-block;
+  align-self: flex-start;
+}
+
 @media (max-width: 900px) {
   .statsGrid {
     grid-template-columns: 1fr;
