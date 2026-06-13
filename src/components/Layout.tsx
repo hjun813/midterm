@@ -21,18 +21,21 @@ const Layout: React.FC = () => {
   const isKirbyTheme = currentSubject === 'koreanGrammer';
   const isPinguTheme = currentSubject === 'koreanHistory';
   const isSlowpokeTheme = currentSubject === 'multiProcess';
+  const isPatTheme = currentSubject === 'finalmultiProcess';
 
   // Apply theme class to body for global consistency
   React.useEffect(() => {
-    document.body.classList.remove('theme-kirby', 'theme-pingu', 'theme-slowpoke');
+    document.body.classList.remove('theme-kirby', 'theme-pingu', 'theme-slowpoke', 'theme-pat');
     if (isKirbyTheme) {
       document.body.classList.add('theme-kirby');
     } else if (isPinguTheme) {
       document.body.classList.add('theme-pingu');
     } else if (isSlowpokeTheme) {
       document.body.classList.add('theme-slowpoke');
+    } else if (isPatTheme) {
+      document.body.classList.add('theme-pat');
     }
-  }, [isKirbyTheme, isPinguTheme, isSlowpokeTheme]);
+  }, [isKirbyTheme, isPinguTheme, isSlowpokeTheme, isPatTheme]);
 
   return (
     <div 
@@ -44,12 +47,12 @@ const Layout: React.FC = () => {
           <div className={styles.logo}>
             <div className={styles.logoCircle}>
               <img 
-                src={isKirbyTheme ? "/assets/kirby_classic.png" : (isPinguTheme ? "/assets/pingu_happy.png" : (isSlowpokeTheme ? "/assets/slowpoke_1.jpeg" : "/assets/octopus.png"))} 
+                src={isKirbyTheme ? "/assets/kirby_classic.png" : (isPinguTheme ? "/assets/pingu_happy.png" : (isSlowpokeTheme ? "/assets/slowpoke_1.jpeg" : (isPatTheme ? "/assets/pat_3.jpg" : "/assets/octopus.png")))} 
                 alt="logo" 
                 className={styles.logoImg} 
               />
             </div>
-            <h2>{isKirbyTheme ? "Kirby Prep" : (isPinguTheme ? "Pingu History" : (isSlowpokeTheme ? "Slowpoke OS" : "GyoDong Prep"))}</h2>
+            <h2>{isKirbyTheme ? "Kirby Prep" : (isPinguTheme ? "Pingu History" : (isSlowpokeTheme ? "Slowpoke OS" : (isPatTheme ? "Pat&Mat Prep" : "GyoDong Prep")))}</h2>
           </div>
           
           <nav className={styles.nav}>
@@ -91,9 +94,11 @@ const Layout: React.FC = () => {
                       <span style={{ fontSize: '16px', marginRight: '10px' }}>🐧</span>
                     ) : (isSlowpokeTheme && subjectStr === 'multiProcess' ? (
                       <span style={{ fontSize: '16px', marginRight: '10px' }}>🐚</span>
+                    ) : (isPatTheme && subjectStr === 'finalmultiProcess' ? (
+                      <span style={{ fontSize: '16px', marginRight: '10px' }}>🛠️</span>
                     ) : (
                       <div className={styles.dot}></div>
-                    )))}
+                    ))))}
                     <span>{subjectStr ? subjectStr.charAt(0).toUpperCase() + subjectStr.slice(1) : 'Uncategorized'}</span>
                   </NavLink>
                 );
@@ -106,7 +111,7 @@ const Layout: React.FC = () => {
 
           <div className={styles.sidebarFooter}>
             <img 
-              src={isKirbyTheme ? "/assets/kirby_hero.png" : (isPinguTheme ? "/assets/pingu_full.png" : (isSlowpokeTheme ? "/assets/slowpoke_2.jpeg" : "/assets/hangyodong_full.png"))} 
+              src={isKirbyTheme ? "/assets/kirby_hero.png" : (isPinguTheme ? "/assets/pingu_full.png" : (isSlowpokeTheme ? "/assets/slowpoke_2.jpeg" : (isPatTheme ? "/assets/pat_2.png" : "/assets/hangyodong_full.png")))} 
               alt="character" 
               className={styles.hangyoFull} 
             />

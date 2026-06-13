@@ -28,6 +28,7 @@ export const parseQuestionsJSON = (jsonString: string, sourcePrefix?: string): Q
         id: sourcePrefix ? `${sourcePrefix}_${baseId}` : baseId,
         type: qType,
         question: qText,
+        image: item.image,
         options: item.options || [],
         answer: Array.isArray(item.answer) ? item.answer.map(String) : String(item.answer || ''),
         explanation: item.explanation || '',

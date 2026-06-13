@@ -138,6 +138,42 @@ body.theme-slowpoke {
   background-attachment: fixed;
 }
 
+/* Pat and Mat Theme Overrides */
+.theme-pat {
+  --bg-color: #fff9e6; /* Light yellow */
+  --bg-white: #ffffff;
+  
+  --primary-color: #ffcc00; /* Pat Yellow */
+  --primary-hover: #ffb300;
+  --primary-light: #fffdf5;
+  --primary-gradient: linear-gradient(135deg, #ffcc00 0%, #ff4d4d 100%);
+  
+  --secondary-color: #ff4d4d; /* Mat Red */
+  
+  --success-color: #ffcc00;
+  --border-color: #ffe680;
+  --border-light: #fff9e6;
+  
+  --hero-bg: linear-gradient(135deg, #fff9e6 0%, #fff0f5 100%);
+  --hero-shadow: rgba(255, 204, 0, 0.4);
+  --stat-number-color: #ff4d4d;
+  --peek-character: url('/assets/pat_3.jpg');
+  --bg-sidebar: #ffffff;
+  --card-bg-gradient: radial-gradient(circle at top right, rgba(255, 204, 0, 0.1) 0%, transparent 40%);
+
+  --shadow-sm: 0 2px 4px rgba(255, 77, 77, 0.1);
+  --shadow-md: 0 4px 20px rgba(255, 77, 77, 0.15);
+  --shadow-lg: 0 12px 30px rgba(255, 77, 77, 0.2);
+  --shadow-premium: 0 20px 40px rgba(255, 77, 77, 0.25);
+}
+
+body.theme-pat {
+  background-image: 
+    radial-gradient(circle at 0% 0%, rgba(255, 204, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(255, 77, 77, 0.1) 0%, transparent 50%),
+    linear-gradient(180deg, #fff9e6 0%, #ffffff 100%);
+  background-attachment: fixed;
+}
 
 body.theme-pingu {
   background-image: 

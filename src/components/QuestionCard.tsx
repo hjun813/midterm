@@ -186,6 +186,15 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
 
       <h2 className={styles.questionText}>{question.question}</h2>
 
+      {question.image && (
+        <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+          <img 
+            src={question.image} 
+            alt="Question Context" 
+            style={{ maxWidth: '100%', maxHeight: '300px', objectFit: 'contain', borderRadius: '8px' }} 
+          />
+        </div>
+      )}
       <div className={styles.inputArea}>
         {renderInputArea()}
       </div>

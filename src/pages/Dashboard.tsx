@@ -69,6 +69,7 @@ const Dashboard: React.FC = () => {
   const isKirbyTheme = selectedSubject === 'koreanGrammer';
   const isPinguTheme = selectedSubject === 'koreanHistory';
   const isSlowpokeTheme = selectedSubject === 'multiProcess';
+  const isPatTheme = selectedSubject === 'finalmultiProcess';
 
   // Pool of all Kirby assets for randomization
   const kirbyHeroPool = [
@@ -127,12 +128,29 @@ const Dashboard: React.FC = () => {
     return slowpokeHeroPool[Math.floor(Math.random() * slowpokeHeroPool.length)];
   }, [isSlowpokeTheme]);
 
+  const patHeroPool = [
+    "/assets/pat_2.png",
+    "/assets/pat_3.jpg",
+    "/assets/pat_4.png",
+    "/assets/pat_5.png",
+    "/assets/pat_7.jpeg",
+    "/assets/pat_8.jpg",
+    "/assets/pat_9.jpg",
+    "/assets/pat_1.jpg",
+    "/assets/pat_10.gif",
+    "/assets/pat__6.png"
+  ];
+
+  const randomPatHero = React.useMemo(() => {
+    return patHeroPool[Math.floor(Math.random() * patHeroPool.length)];
+  }, [isPatTheme]);
+
   return (
     <div className="fade-in">
       <div className={styles.heroSection}>
         <div className={styles.heroContent}>
           <div className={styles.badge}>
-            {isKirbyTheme ? "💖 Kirby's Dream Land" : (isPinguTheme ? "🐧 Pingu's Ice Village" : (isSlowpokeTheme ? "🐚 Slowpoke's Lazy Beach" : "🦖 Hangyo's Learning Lab"))}
+            {isKirbyTheme ? "💖 Kirby's Dream Land" : (isPinguTheme ? "🐧 Pingu's Ice Village" : (isSlowpokeTheme ? "🐚 Slowpoke's Lazy Beach" : (isPatTheme ? "🛠️ Pat & Mat's Workshop" : "🦖 Hangyo's Learning Lab")))}
           </div>
           <h1 className={styles.title}>{pageTitle}</h1>
           <p className={styles.subtitle}>
@@ -142,9 +160,11 @@ const Dashboard: React.FC = () => {
                 ? "핑구와 핑가, 그리고 친구들과 함께 남극처럼 시원하게 한국사를 마스터해볼까요? Noot Noot! 🐧❄️"
                 : (isSlowpokeTheme
                   ? "야돈과 함께라면 운영체제도 느긋하게 정복할 수 있어요... 야돈야돈... 🐚💤"
-                  : (selectedSubject === 'cloud'
-                    ? "구름 위를 걷는 듯 가벼운 마음으로 클라우드 컴퓨팅을 마스터해볼까요? ☁️"
-                    : "한교동과 함께라면 어떤 과목이든 문제없어요! 지금 바로 시작하세요!")))}
+                  : (isPatTheme
+                    ? "패트와 매트와 함께 뚝딱뚝딱 문제를 해결해봐요! 아자! 🛠️"
+                    : (selectedSubject === 'cloud'
+                      ? "구름 위를 걷는 듯 가벼운 마음으로 클라우드 컴퓨팅을 마스터해볼까요? ☁️"
+                      : "한교동과 함께라면 어떤 과목이든 문제없어요! 지금 바로 시작하세요!"))))}
           </p>
           <div className={styles.heroActions}>
             <button className="btn-primary" onClick={() => navigate(`/study?${selectedSubject ? `subject=${selectedSubject}&` : ''}random=${isRandom}`)}>
@@ -160,9 +180,11 @@ const Dashboard: React.FC = () => {
                 <span style={{ marginRight: '8px' }}>⛄</span>
               ) : (isSlowpokeTheme ? (
                 <span style={{ marginRight: '8px' }}>🏖️</span>
+              ) : (isPatTheme ? (
+                <span style={{ marginRight: '8px' }}>🔨</span>
               ) : (
                 <span style={{ marginRight: '8px' }}>🚀</span>
-              )))}
+              ))))}
               20문제 벼락치기
             </button>
             <label className={styles.shuffleToggle}>
@@ -199,7 +221,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
         <img 
-          src={isKirbyTheme ? randomKirbyHero : (isPinguTheme ? randomPinguHero : (isSlowpokeTheme ? randomSlowpokeHero : heroEmoji))} 
+          src={isKirbyTheme ? randomKirbyHero : (isPinguTheme ? randomPinguHero : (isSlowpokeTheme ? randomSlowpokeHero : (isPatTheme ? randomPatHero : heroEmoji)))} 
           alt="hero" 
           className={styles.heroCharacter} 
         />
@@ -211,21 +233,21 @@ const Dashboard: React.FC = () => {
             <span className={styles.statNumber}>{totalQuestions}</span>
             <span className={styles.statLabel}>전체 문제 수</span>
           </div>
-          <img src={isKirbyTheme ? "/assets/kirby_inhale.jpg" : (isPinguTheme ? "/assets/pingu_satisfied.png" : (isSlowpokeTheme ? "/assets/slowpoke_3.webp" : statEmoji1))} alt="stat" />
+          <img src={isKirbyTheme ? "/assets/kirby_inhale.jpg" : (isPinguTheme ? "/assets/pingu_satisfied.png" : (isSlowpokeTheme ? "/assets/slowpoke_3.webp" : (isPatTheme ? "/assets/pat_3.jpg" : statEmoji1)))} alt="stat" />
         </div>
         <div className={styles.statCard}>
           <div className={styles.statInfo}>
             <span className={styles.statNumber}>{incorrectCount}</span>
             <span className={styles.statLabel}>오답 노트 개수</span>
           </div>
-          <img src={isKirbyTheme ? "/assets/enemy_waddle.png" : (isPinguTheme ? "/assets/pingu_angry.png" : (isSlowpokeTheme ? "/assets/slowpoke_4.jpg" : statEmoji2))} alt="stat" />
+          <img src={isKirbyTheme ? "/assets/enemy_waddle.png" : (isPinguTheme ? "/assets/pingu_angry.png" : (isSlowpokeTheme ? "/assets/slowpoke_4.jpg" : (isPatTheme ? "/assets/pat_8.jpg" : statEmoji2)))} alt="stat" />
         </div>
         <div className={styles.statCard}>
           <div className={styles.statInfo}>
             <span className={styles.statNumber}>{state.examResults.length}</span>
             <span className={styles.statLabel}>완료한 테스트</span>
           </div>
-          <img src={isKirbyTheme ? "/assets/kirby_eat.jpg" : (isPinguTheme ? "/assets/pingu_tongue.jpg" : (isSlowpokeTheme ? "/assets/slowpoke_5.jpg" : statEmoji3))} alt="stat" />
+          <img src={isKirbyTheme ? "/assets/kirby_eat.jpg" : (isPinguTheme ? "/assets/pingu_tongue.jpg" : (isSlowpokeTheme ? "/assets/slowpoke_5.jpg" : (isPatTheme ? "/assets/pat_4.png" : statEmoji3)))} alt="stat" />
         </div>
       </div>
 
@@ -234,6 +256,7 @@ const Dashboard: React.FC = () => {
           {isKirbyTheme && <img src="/assets/waddle_dee_jump.png" alt="jump" style={{ width: '32px', marginRight: '10px', verticalAlign: 'middle' }} />}
           {isPinguTheme && <span style={{ fontSize: '24px', marginRight: '10px' }}>📁</span>}
           {isSlowpokeTheme && <span style={{ fontSize: '24px', marginRight: '10px' }}>🏖️</span>}
+          {isPatTheme && <span style={{ fontSize: '24px', marginRight: '10px' }}>🛠️</span>}
           목차
         </h2>
         <div className={styles.chapterList}>
@@ -266,6 +289,11 @@ const Dashboard: React.FC = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <img src="/assets/waddle_dee_group.png" alt="empty" style={{ width: '180px', marginBottom: '16px', borderRadius: '12px' }} />
                   <p style={{ fontWeight: '600' }}>와들디들이 공부할 준비를 마쳤어요!</p>
+                </div>
+              ) : isPatTheme ? (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <img src="/assets/pat_2.png" alt="empty" style={{ width: '180px', marginBottom: '16px', borderRadius: '12px' }} />
+                  <p style={{ fontWeight: '600' }}>패트와 매트가 뚝딱뚝딱 준비하고 있어요!</p>
                 </div>
               ) : (
                 <Database size={40} />

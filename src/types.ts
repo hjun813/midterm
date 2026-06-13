@@ -7,6 +7,7 @@ export interface Question {
   id: string;
   type: QuestionType;
   question: string;
+  image?: string;
   options?: string[]; // Array of strings for choices.
   answer: string | string[]; // Single string or array for blank types.
   explanation: string;
