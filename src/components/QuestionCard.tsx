@@ -189,9 +189,13 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
       {question.image && (
         <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
           <img 
-            src={question.image} 
-            alt="Question Context" 
+            src={question.image.startsWith('/') ? `${import.meta.env.BASE_URL || '/'}${question.image.substring(1)}` : question.image} 
+            alt="패트와 매트 이미지" 
             style={{ maxWidth: '100%', maxHeight: '300px', objectFit: 'contain', borderRadius: '8px' }} 
+            onError={(e) => {
+              // Hide broken images to prevent ugly "Question Context" icons
+              e.currentTarget.style.display = 'none';
+            }}
           />
         </div>
       )}
