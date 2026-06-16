@@ -71,6 +71,7 @@ const Dashboard: React.FC = () => {
   const isSlowpokeTheme = selectedSubject === 'multiProcess';
   const isPatTheme = selectedSubject === 'finalmultiProcess';
   const isAllStarTheme = selectedSubject === 'finalKoreanGrammer';
+  const isMudoTheme = selectedSubject === 'finalKoreanhistory';
 
   // Pool of all Kirby assets for randomization
   const kirbyHeroPool = [
@@ -146,12 +147,29 @@ const Dashboard: React.FC = () => {
     return patHeroPool[Math.floor(Math.random() * patHeroPool.length)];
   }, [isPatTheme]);
 
+  const mudoHeroPool = [
+    "/assets/mudo_true1.jpg",
+    "/assets/mudo_true2.png",
+    "/assets/mudo_true3.png",
+    "/assets/mudo_true4.webp",
+    "/assets/mudo_true5.png",
+    "/assets/mudo_false1.png",
+    "/assets/mudo_false2.jpg",
+    "/assets/mudo_false3.jpg",
+    "/assets/mudo_false4.jpg"
+  ];
+
+  const randomMudoHero = React.useMemo(() => {
+    return mudoHeroPool[Math.floor(Math.random() * mudoHeroPool.length)];
+  }, [isMudoTheme]);
+
   // All-Star Pool
   const allStarHeroPool = React.useMemo(() => [
     ...kirbyHeroPool,
     ...pinguHeroPool,
     ...slowpokeHeroPool,
     ...patHeroPool,
+    ...mudoHeroPool,
     "/assets/hangyodong_full.png",
     "/assets/hangyodong_peek.png",
     "/assets/hangyodong_friend.png"
@@ -166,7 +184,7 @@ const Dashboard: React.FC = () => {
       <div className={styles.heroSection}>
         <div className={styles.heroContent}>
           <div className={styles.badge}>
-            {isKirbyTheme ? "💖 Kirby's Dream Land" : (isPinguTheme ? "🐧 Pingu's Ice Village" : (isSlowpokeTheme ? "🐚 Slowpoke's Lazy Beach" : (isPatTheme ? "🛠️ Pat & Mat's Workshop" : (isAllStarTheme ? "🌈 All-Star Festival" : "🦖 Hangyo's Learning Lab"))))}
+            {isKirbyTheme ? "💖 Kirby's Dream Land" : (isPinguTheme ? "🐧 Pingu's Ice Village" : (isSlowpokeTheme ? "🐚 Slowpoke's Lazy Beach" : (isPatTheme ? "🛠️ Pat & Mat's Workshop" : (isAllStarTheme ? "🌈 All-Star Festival" : (isMudoTheme ? "🔥 Mudo Infinite Challenge" : "🦖 Hangyo's Learning Lab")))))}
           </div>
           <h1 className={styles.title}>{pageTitle}</h1>
           <p className={styles.subtitle}>
@@ -180,9 +198,11 @@ const Dashboard: React.FC = () => {
                     ? "패트와 매트와 함께 뚝딱뚝딱 문제를 해결해봐요! 아자! 🛠️"
                     : (isAllStarTheme
                       ? "모든 캐릭터들이 총출동했어요! 신나는 올스타전과 함께 국어 문법을 마스터해봐요! 🌈✨"
-                      : (selectedSubject === 'cloud'
-                        ? "구름 위를 걷는 듯 가벼운 마음으로 클라우드 컴퓨팅을 마스터해볼까요? ☁️"
-                        : "한교동과 함께라면 어떤 과목이든 문제없어요! 지금 바로 시작하세요!")))))}
+                      : (isMudoTheme
+                        ? "무한~도전! 멤버들과 함께 포기하지 않고 끝까지 한국사를 파헤쳐 봅시다! 🔥🏃‍♂️"
+                        : (selectedSubject === 'cloud'
+                          ? "구름 위를 걷는 듯 가벼운 마음으로 클라우드 컴퓨팅을 마스터해볼까요? ☁️"
+                          : "한교동과 함께라면 어떤 과목이든 문제없어요! 지금 바로 시작하세요!"))))))}
           </p>
           <div className={styles.heroActions}>
             <button className="btn-primary" onClick={() => navigate(`/study?${selectedSubject ? `subject=${selectedSubject}&` : ''}random=${isRandom}`)}>
@@ -202,9 +222,11 @@ const Dashboard: React.FC = () => {
                 <span style={{ marginRight: '8px' }}>🔨</span>
               ) : (isAllStarTheme ? (
                 <span style={{ marginRight: '8px' }}>🌟</span>
+              ) : (isMudoTheme ? (
+                <span style={{ marginRight: '8px' }}>🔥</span>
               ) : (
                 <span style={{ marginRight: '8px' }}>🚀</span>
-              )))))}
+              ))))))}
               20문제 벼락치기
             </button>
             <label className={styles.shuffleToggle}>
@@ -241,7 +263,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
         <img 
-          src={isKirbyTheme ? randomKirbyHero : (isPinguTheme ? randomPinguHero : (isSlowpokeTheme ? randomSlowpokeHero : (isPatTheme ? randomPatHero : (isAllStarTheme ? randomAllStarHero : heroEmoji))))} 
+          src={isKirbyTheme ? randomKirbyHero : (isPinguTheme ? randomPinguHero : (isSlowpokeTheme ? randomSlowpokeHero : (isPatTheme ? randomPatHero : (isAllStarTheme ? randomAllStarHero : (isMudoTheme ? randomMudoHero : heroEmoji)))))} 
           alt="hero" 
           className={styles.heroCharacter} 
         />
@@ -253,21 +275,21 @@ const Dashboard: React.FC = () => {
             <span className={styles.statNumber}>{totalQuestions}</span>
             <span className={styles.statLabel}>전체 문제 수</span>
           </div>
-          <img src={isKirbyTheme ? "/assets/kirby_inhale.jpg" : (isPinguTheme ? "/assets/pingu_satisfied.png" : (isSlowpokeTheme ? "/assets/slowpoke_3.webp" : (isPatTheme ? "/assets/pat_3.jpg" : (isAllStarTheme ? "/assets/kirby_eat.jpg" : statEmoji1))))} alt="stat" />
+          <img src={isKirbyTheme ? "/assets/kirby_inhale.jpg" : (isPinguTheme ? "/assets/pingu_satisfied.png" : (isSlowpokeTheme ? "/assets/slowpoke_3.webp" : (isPatTheme ? "/assets/pat_3.jpg" : (isAllStarTheme ? "/assets/kirby_eat.jpg" : (isMudoTheme ? "/assets/mudo_true2.png" : statEmoji1)))))} alt="stat" />
         </div>
         <div className={styles.statCard}>
           <div className={styles.statInfo}>
             <span className={styles.statNumber}>{incorrectCount}</span>
             <span className={styles.statLabel}>오답 노트 개수</span>
           </div>
-          <img src={isKirbyTheme ? "/assets/enemy_waddle.png" : (isPinguTheme ? "/assets/pingu_angry.png" : (isSlowpokeTheme ? "/assets/slowpoke_4.jpg" : (isPatTheme ? "/assets/pat_8.jpg" : (isAllStarTheme ? "/assets/pingu_suprised.png" : statEmoji2))))} alt="stat" />
+          <img src={isKirbyTheme ? "/assets/enemy_waddle.png" : (isPinguTheme ? "/assets/pingu_angry.png" : (isSlowpokeTheme ? "/assets/slowpoke_4.jpg" : (isPatTheme ? "/assets/pat_8.jpg" : (isAllStarTheme ? "/assets/pingu_suprised.png" : (isMudoTheme ? "/assets/mudo_false2.jpg" : statEmoji2)))))} alt="stat" />
         </div>
         <div className={styles.statCard}>
           <div className={styles.statInfo}>
             <span className={styles.statNumber}>{state.examResults.length}</span>
             <span className={styles.statLabel}>완료한 테스트</span>
           </div>
-          <img src={isKirbyTheme ? "/assets/kirby_eat.jpg" : (isPinguTheme ? "/assets/pingu_tongue.jpg" : (isSlowpokeTheme ? "/assets/slowpoke_5.jpg" : (isPatTheme ? "/assets/pat_4.png" : (isAllStarTheme ? "/assets/slowpoke_1.jpeg" : statEmoji3))))} alt="stat" />
+          <img src={isKirbyTheme ? "/assets/kirby_eat.jpg" : (isPinguTheme ? "/assets/pingu_tongue.jpg" : (isSlowpokeTheme ? "/assets/slowpoke_5.jpg" : (isPatTheme ? "/assets/pat_4.png" : (isAllStarTheme ? "/assets/slowpoke_1.jpeg" : (isMudoTheme ? "/assets/mudo_true3.png" : statEmoji3)))))} alt="stat" />
         </div>
       </div>
 
@@ -278,6 +300,7 @@ const Dashboard: React.FC = () => {
           {isSlowpokeTheme && <span style={{ fontSize: '24px', marginRight: '10px' }}>🏖️</span>}
           {isPatTheme && <span style={{ fontSize: '24px', marginRight: '10px' }}>🛠️</span>}
           {isAllStarTheme && <span style={{ fontSize: '24px', marginRight: '10px' }}>🌟</span>}
+          {isMudoTheme && <span style={{ fontSize: '24px', marginRight: '10px' }}>🔥</span>}
           목차
         </h2>
         <div className={styles.chapterList}>
@@ -320,6 +343,11 @@ const Dashboard: React.FC = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <img src={randomAllStarHero} alt="empty" style={{ width: '180px', marginBottom: '16px', borderRadius: '12px' }} />
                   <p style={{ fontWeight: '600' }}>친구들이 모두 모여 공부할 준비 중이에요!</p>
+                </div>
+              ) : isMudoTheme ? (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <img src="/assets/mudo_true1.jpg" alt="empty" style={{ width: '180px', marginBottom: '16px', borderRadius: '12px' }} />
+                  <p style={{ fontWeight: '600' }}>무한도전 멤버들이 도전을 기다리고 있습니다!</p>
                 </div>
               ) : (
                 <Database size={40} />
