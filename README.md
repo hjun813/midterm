@@ -49,3 +49,24 @@ https://midterm-ten-sigma.vercel.app
 
 ---
 Created by Antigravity AI.
+
+## PDF 문제 생성 (Gemini)
+
+데이터 관리 화면에서 2MB 이하 PDF를 선택하고 문제 수와 유형을 지정합니다. 생성된 문제와 정답·해설을 확인하고 체크한 문제만 등록할 수 있습니다. 기존 JSON 등록도 계속 사용할 수 있습니다. PDF의 내용은 Google Gemini API로 전송되므로 공유할 수 있는 문서만 사용하세요. 이미지 기반 PDF의 결과는 보장하지 않습니다.
+
+이 구현은 PDF를 **Gemini API에 직접 전달**하며 NotebookLM에 업로드하거나 NotebookLM을 호출하지 않습니다. NotebookLM Enterprise API는 별도 라이선스와 사용자 인증이 필요합니다.
+
+### 로컬 실행
+
+```bash
+npm install
+npx vercel dev
+```
+
+Vercel CLI에 로그인하고 프로젝트를 연결한 후 로컬 환경 변수에 `GEMINI_API_KEY`를 설정하세요. 예를 들어 Vercel 프로젝트에 환경 변수를 등록한 경우 `vercel env pull .env.local`로 내려받을 수 있습니다. `.env.local`을 Git에 커밋하지 마세요. `npm run dev`는 Vite 화면만 실행하므로 `/api/generate-questions` 함수는 제공하지 않습니다.
+
+### Vercel 배포
+
+Vercel 프로젝트의 환경 변수에 `GEMINI_API_KEY`를 서버용으로 설정하고 재배포합니다. Vite 프레임워크의 기본 빌드 명령은 `npm run build`, 출력 디렉터리는 `dist`입니다. 키에 `VITE_` 접두사를 붙이지 마세요. 배포와 생성 API 사용에는 Vercel 및 Gemini 계정의 사용량과 비용이 적용될 수 있습니다.
+
+API는 PDF당 2MB, 인스턴스별 IP당 분당 3회로 제한합니다. 이 메모리 기반 제한은 인스턴스 간 공유되지 않고 재시작 시 초기화되므로 전역 쿼터나 악용 방지 수단은 아닙니다. 공개 서비스에는 Vercel 방화벽 등 공유된 외부 제한이 추가로 필요합니다. 생성 결과는 서버에서 Zod로 검사하지만 내용의 정확성은 보장하지 않으므로 등록 전 검토해야 합니다.

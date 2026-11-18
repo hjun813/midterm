@@ -183,3 +183,14 @@
   color: #a5b4fc; /* subtle indigo */
   line-height: 1.5;
 }
+
+.generator { margin-bottom: 32px; }
+.pdfControls { display: flex; flex-wrap: wrap; align-items: end; gap: 16px; }
+.pdfControls label { display: flex; flex-direction: column; gap: 8px; }
+.pdfControls select { padding: 8px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-color); color: var(--text-primary); }
+.generatorMessage { margin-top: 16px; }
+.preview { margin-top: 24px; }
+.previewItem { border-top: 1px solid var(--border-color); padding: 16px 0; overflow-wrap: anywhere; }
+.previewItem label { display: flex; align-items: baseline; gap: 8px; cursor: pointer; }
+.previewItem ol { margin: 8px 0 8px 32px; }
+.previewItem p { margin: 8px 0; color: var(--text-secondary); }

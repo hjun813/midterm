@@ -3,6 +3,7 @@ import { Upload, FileJson, CheckCircle, AlertCircle } from 'lucide-react';
 import { useQuizContext } from '../context/QuizContext';
 import { parseQuestionsJSON } from '../utils/jsonParser';
 import styles from './InputPage.module.css';
+import PdfGenerator from './PdfGenerator';
 
 const InputPage: React.FC = () => {
   const { addQuestions, state, resetAllData } = useQuizContext();
@@ -69,8 +70,8 @@ const InputPage: React.FC = () => {
   return (
     <div className="fade-in">
       <div className={styles.header}>
-        <h1 className={styles.title}>데이터 관리 (JSON 추가)</h1>
-        <p className={styles.subtitle}>PPT별로 정리된 예상 문제 JSON 파일을 업로드하거나 텍스트로 붙여넣으세요.</p>
+        <h1 className={styles.title}>데이터 관리 (문제 추가)</h1>
+        <p className={styles.subtitle}>PDF로 문제를 생성하거나 기존 JSON 파일을 추가하세요.</p>
       </div>
 
       <div className={styles.statsCard} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -95,6 +96,8 @@ const InputPage: React.FC = () => {
           데이터 전체 초기화
         </button>
       </div>
+
+      <PdfGenerator />
 
       <div className={styles.grid}>
         <div className={`${styles.card} card`}>
@@ -147,3 +150,4 @@ const InputPage: React.FC = () => {
 };
 
 export default InputPage;
+
